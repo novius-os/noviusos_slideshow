@@ -1,0 +1,33 @@
+li.ps_preview{
+	display:none;
+	/*width:85px;
+	height:91px;*/
+	top:-120px;
+	left:-34.5px; /*First item, next ones is leftDot - 0.5*wThis + 0.5*wDot, i.e. second one is (16 - 42.5 + 8) = -18.5 */
+	position:absolute;
+}
+li.ps_preview span{
+	background:transparent url(../img/triangle.png) no-repeat top center;
+	width:15px;
+	height:6px;
+	position:absolute;
+	top:109px;
+	left:50%;
+	margin-left:-5px;
+}
+.ps_preview_wrapper{
+	width:175px;
+	height:100px;
+	border:5px solid #fff;
+	overflow:hidden;
+	position:relative;
+	-moz-box-shadow:0px 0px 5px #999;
+	-webkit-box-shadow:0px 0px 5px #999;
+	box-shadow:0px 0px 5px #999;
+	background: white;
+}
+.ps_preview_wrapper img {
+	position:absolute;
+	top:0px;
+	left:0px;
+}
