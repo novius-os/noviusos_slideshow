@@ -11,29 +11,29 @@
 
 ?>
 <div id="<?= $id ?>">
-	<form method="POST" action="admin/diaporama/preview">
+	<form method="POST" action="admin/slideshow/preview">
 		<div class="line myBody">
 			<div class="unit col c1"></div>
 			<div class="unit col c10 ui-widget">
 				<div class="expander">
-					<h3>Diaporama</h3>
+					<h3>Slideshow</h3>
 					<div>
 
 <?php
-                    if ( !empty($diaporamas) )
+                    if ( !empty($slideshows) )
                     {
-                        echo '<select name="diaporama_id">';
-                        foreach ( $diaporamas as $diaporama )
+                        echo '<select name="slideshow_id">';
+                        foreach ( $slideshows as $slideshow )
                         {
-                            echo '<option value="', $diaporama->diaporama_id, '" ',
-                                ( \Fuel\Core\Input::get('diaporama_id', 0) === $diaporama->diaporama_id ? 'selected="selected"' : '' ), '>',
-                                $diaporama->diaporama_nom, '</option>';
+                            echo '<option value="', $slideshow->slideshow_id, '" ',
+                                ( \Fuel\Core\Input::get('slideshow_id', 0) === $slideshow->slideshow_id ? 'selected="selected"' : '' ), '>',
+                                $slideshow->slideshow_title, '</option>';
                         }
                         echo '</select>';
                     }
                     else
                     {
-                        echo '<p>Aucun diaporama disponible.</p>';
+                        echo '<p>Aucun slideshow disponible.</p>';
                     }
 
 ?>
@@ -60,7 +60,7 @@
                     }
                     else
                     {
-                        echo '<p>Le format d\'afficahge des diaporama n\est pas configuré, merci de contacter un adminisitrateur</p>';
+                        echo '<p>Le format d\'afficahge des slideshow n\est pas configuré, merci de contacter un adminisitrateur</p>';
                     }
 ?>
 			</div>
@@ -79,9 +79,9 @@
 <script type="text/javascript">
 require([
 	'jquery-nos'
-	], function($nos) {
-		$nos(function() {
-			var div = $nos('#<?= $id ?>')
+	], function($n) {
+		$(function() {
+			var div = $('#<?= $id ?>')
 				.find('a[data-id=close]')
 				.click(function(e) {
 					div.closest('.ui-dialog-content').wijdialog('close');
@@ -91,13 +91,13 @@ require([
 				.find('form')
 				.submit(function() {
 					var self = this;
-					$nos(self).ajaxSubmit({
+					$(self).ajaxSubmit({
 						dataType: 'json',
 						success: function(json) {
 							div.closest('.ui-dialog-content').trigger('save.enhancer', json);
 						},
 						error: function(error) {
-							$nos.notify('An error occured', 'error');
+							$.nosNotify('An error occured', 'error');
 						}
 					});
 					return false;

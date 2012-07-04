@@ -8,7 +8,7 @@
  * @link http://www.novius-os.org
  */
 
-namespace Arcom\Diaporama;
+namespace Arcom\Slideshow;
 
 class Controller_Admin_Preview extends \Nos\Controller {
 
@@ -21,8 +21,8 @@ class Controller_Admin_Preview extends \Nos\Controller {
     public function action_save() {
 
         $params = array();
-        $params['src'] = Model_Image::find()->where('diapimg_diaporama_id',$_POST['diaporama_id'])->get_one()->medias->image->get_public_path_resized(100, 40);
-        $params['title'] = Model_Diaporama::find($_POST['diaporama_id'])->diaporama_nom;
+        $params['src'] = Model_Image::find()->where('slidimg_slideshow_id',$_POST['slideshow_id'])->get_one()->medias->image->get_public_path_resized(100, 40);
+        $params['title'] = Model_Slideshow::find($_POST['slideshow_id'])->slideshow_title;
         $params['size'] = $_POST['size'];
         $body = array(
             'config'  => \Format::forge()->to_json($_POST),

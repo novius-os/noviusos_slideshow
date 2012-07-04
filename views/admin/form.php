@@ -1,10 +1,10 @@
 <?php
 
-echo $fieldset->open('/admin/diaporama/form/edit/'.$diaporama->diaporama_id);
+echo $fieldset->open('/admin/slideshow/form/edit/'.$slideshow->slideshow_id);
 $form_id = \Arr::get($fieldset->get_config('form_attributes'), 'id', '');
 
 // Retourne un "bloc" (une image avec ses infos)
-function diapimg($i, $image = null, $is_model = false, $show_link = false) {
+function slidimg($i, $image = null, $is_model = false, $show_link = false) {
     $media_id = 0;
     if ( !empty($image) && !empty($image->medias->image) && !empty($image->medias->image->media_id) )
     {
@@ -28,7 +28,7 @@ function diapimg($i, $image = null, $is_model = false, $show_link = false) {
         ));
     }
 
-    $view = \View::forge('diaporama::admin/_form_image', array(
+    $view = \View::forge('slideshow::admin/_form_image', array(
         'i'         => $i,
         'image'     => $image,
         'show_link' => $show_link,
@@ -41,38 +41,37 @@ function diapimg($i, $image = null, $is_model = false, $show_link = false) {
 
 $content = array();
 
-$content[] = '<style>.diaporama_model { display: none }</style>'; // TODO
-$content[] = '<div class="diaporama_imageslist">';
+$content[] = '<style>.slideshow_model { display: none }</style>'; // TODO
+$content[] = '<div class="slideshow_imageslist">';
 
 // Model pour ajouter une nouvelle image
-$content[] = diapimg(count($content), null, true);
+$content[] = slidimg(count($content), null, true);
 
 // Liste des images actuelles
 foreach ( $images as $img )
 {
-    $content[] = diapimg(count($content), $img,false,$show_link);
+    $content[] = slidimg(count($content), $img,false,$show_link);
 }
 
 // Ajouter une nouvelle image
-$content[] = diapimg(count($content),null,false,$show_link);
+$content[] = slidimg(count($content),null,false,$show_link);
 
 $content[] = '</div>';
 
 // Bouton "Nouvelle image"
-$content[] = '<div style="text-align: right;"><button data-icon="plus" class="diaporama_add_image">Ajouter une image</button></div>';
+$content[] = '<div style="text-align: right;"><button data-icon="plus" class="slideshow_add_image">Ajouter une image</button></div>';
 
 // Vue globale
 echo \View::forge('form/layout_standard', array(
     'fieldset'  => $fieldset,
-    'object' 	=> $diaporama,
+    'object' 	=> $slideshow,
     'medias' 	=> null,
-    'title' 	=> 'diaporama_nom',
-    'id' 		=> 'diaporama_id',
+    'title' 	=> 'slideshow_title',
+    'id' 		=> 'slideshow_id',
     'save' 		=> 'save',
-    'subtitle' 	=> array('diaporama_id'),
+    'subtitle' 	=> array('slideshow_id'),
     'content'   => $content,
     'menu'      => array(
-        //'toto' => array('diaporama_nom')
     ),
 ), false);
 
@@ -80,42 +79,42 @@ echo $fieldset->close();
 
 ?>
 <script type="text/javascript">
-require(['jquery-nos', 'jquery-ui.sortable'], function($nos) {
-    $nos(function() {
-        var $container      = $nos('#<?php echo $form_id; ?>'),
-            $diaporama_list = $container.find('div.diaporama_imageslist'),
-            media_options   = $diaporama_list.children(':last').find('input.media').data('media-options'),
-            field_index     = $diaporama_list.children().length + 1;
+require(['jquery-nos', 'jquery-ui.sortable'], function($) {
+    $(function() {
+        var $container      = $('#<?php echo $form_id; ?>'),
+            $slideshow_list = $container.find('div.slideshow_imageslist'),
+            media_options   = $slideshow_list.children(':last').find('input.media').data('media-options'),
+            field_index     = $slideshow_list.children().length + 1;
 
-        $diaporama_list.sortable({
+        $slideshow_list.sortable({
             axis    : 'y',
             handle  : '.handle'
         });
 
-        $container.on('click', 'div.diaporama_image button.close', function(e) {
+        $container.on('click', 'div.slideshow_image button.close', function(e) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
 
             var self        = this,
-                media_id    = $nos(self).closest('div.diaporama_image').find('input.media').val();
+                media_id    = $(self).closest('div.slideshow_image').find('input.media').val();
 
             var remove_image = function() {
                 // On en garde toujours au moins une image dans le dom
-                if ( $diaporama_list.children().length > 1 )
+                if ( $slideshow_list.children().length > 1 )
                 {
-                    $nos(self).closest('div.diaporama_image').remove();
+                    $(self).closest('div.slideshow_image').remove();
                 }
                 else
                 {
-                    $nos(self).closest('div.diaporama_image').find('textarea, input').val('');
+                    $(self).closest('div.slideshow_image').find('textarea, input').val('');
                 }
             };
 
             // On fait une confirmation que si on supprime une "vraie" image
             if ( media_id && media_id > 0 )
             {
-                $container.confirmationDialog({
+                $container.nosConfirmationDialog({
                     content     : 'Etes-vous certain de vouloir supprimer cette image ?',
                     title       : 'Delete an image',
                     confirmed   : remove_image
@@ -126,12 +125,12 @@ require(['jquery-nos', 'jquery-ui.sortable'], function($nos) {
                 remove_image();
             }
         })
-        .on('click', 'button.diaporama_add_image', function(e) {
+        .on('click', 'button.slideshow_add_image', function(e) {
             e.preventDefault();
 
-            var $form       = $nos(this).closest('form'),
-                $lastimg    = $diaporama_list.find('div.diaporama_model'),
-                $newimg     = $lastimg.clone(true).removeClass('diaporama_model').find('*').removeAttr('id').end();
+            var $form       = $(this).closest('form'),
+                $lastimg    = $slideshow_list.find('div.slideshow_model'),
+                $newimg     = $lastimg.clone(true).removeClass('slideshow_model').find('*').removeAttr('id').end();
 
             // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
             // L'idée est que les attr('name') de chaque input/textarea d'un même bloc aient le même index
@@ -158,19 +157,19 @@ require(['jquery-nos', 'jquery-ui.sortable'], function($nos) {
             // Fix : Passer le bouton Add en inline-block...
             $newimg.find('div.ui-inputfilethumb-fileactions').children(':first').css('display', 'inline-block');
 
-            $diaporama_list.append($newimg);
+            $slideshow_list.append($newimg);
         });
 
         // Changement titre du tab
         var tabInfos = {
-            label   : <?= \Format::forge()->to_json($diaporama->is_new()? __('Add a slideshow') : $diaporama->diaporama_nom) ?>,
-            iconUrl : 'static/apps/diaporama/img/diaporama-16.png',
+            label   : <?= \Format::forge()->to_json($slideshow->is_new()? __('Add a slideshow') : $slideshow->slideshow_title) ?>,
+            iconUrl : 'static/apps/slideshow/img/slideshow-16.png',
         };
         $container.nosOnShow('bind', function() {
             $container.nosTabs('update', tabInfos);
         });
         $('.toggle_link_to').bind('click',function(){
-            $target = $(this).parents('.diaporama_image').find('.link_to');
+            $target = $(this).parents('.slideshow_image').find('.link_to');
             if ($target.height()==0)
                 $target.height(150);
             else

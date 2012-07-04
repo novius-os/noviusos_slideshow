@@ -8,18 +8,18 @@
  */
 define([
     'jquery-nos'
-], function($nos) {
+], function($) {
     return function(appDesk) {
         return {
             tab : {
-                label : appDesk.i18n('Diaporamas'),
-                iconUrl : 'static/apps/diaporama/img/diaporama-32.png'
+                label : appDesk.i18n('slideshows'),
+                iconUrl : 'static/apps/slideshow/img/slideshow-32.png'
             },
             actions : {
                 update : {
                     action : function(item, ui) {
-                        $nos(ui).nosTabs({
-                            url     : "admin/diaporama/form/edit/" + item.id,
+                        $(ui).nosTabs({
+                            url     : "admin/slideshow/form/edit/" + item.id,
                             label   : appDesk.i18n('Edit')._()
                         });
                     },
@@ -30,16 +30,16 @@ define([
                 },
                 'delete' : {
                     action : function(item, ui) {
-                        $nos(ui).confirmationDialog({
-                            content     : appDesk.i18n('Delete this diaporama ?')._(),
-                            title       : appDesk.i18n('Delete a diaporama')._(),
+                        $(ui).nosConfirmationDialog({
+                            content     : appDesk.i18n('Delete this slideshow ?')._(),
+                            title       : appDesk.i18n('Delete a slideshow')._(),
                             confirmed   : function() {
-                                $nos(ui).xhr({
-                                    url : 'admin/diaporama/diaporama/delete_confirm/'+item.id,
+                                $(ui).xhr({
+                                    url : 'admin/slideshow/slideshow/delete_confirm/'+item.id,
                                     method : 'GET',
                                     success : function(json) {
-                                        $nos(ui).dialog('close');
-                                        $nos.dispatchEvent('reload.diaporama');
+                                        $(ui).nosDialog('close');
+                                        $.nosDispatchEvent('reload.slideshow');
                                     }
                                 });
                             }
@@ -55,19 +55,23 @@ define([
                     name : 'visualise',
                     primary : true,
                     iconClasses : 'nos-icon16 nos-icon16-eye',
-                    action : function(item) {
-                        window.open(item.url + '?_preview=1');
+                    action : function(item, ui) {
+                        $(ui).nosTabs({
+                            url     : "admin/slideshow/form/edit/" + item.id,
+                            label   : appDesk.i18n('Edit')._()
+                        });
+                        //window.open(item.url + '?_preview=1');
                     }
                 }
             },
-            reloadEvent : 'diaporama',
+            reloadEvent : 'slideshow',
             appdesk : {
                 adds : {
                     post : {
                         label : appDesk.i18n('Add a slideshow'),
                         action : function(ui, appdesk) {
-                            $nos(ui).nosTabs('add', {
-                                url     : 'admin/diaporama/form/add?lang=' + appdesk.lang,
+                            $(ui).nosTabs('add', {
+                                url     : 'admin/slideshow/form/add?lang=' + appdesk.lang,
                                 label   : appDesk.i18n('Add a new post')._()
                             });
                         }
@@ -75,11 +79,11 @@ define([
                 },
                 splittersVertical :  250,
                 grid : {
-                    proxyUrl : 'admin/diaporama/index/json',
+                    proxyUrl : 'admin/slideshow/index/json',
                     columns : {
-                        nom : {
-                            headerText : appDesk.i18n('Nom'),
-                            dataKey : 'nom'
+                        title : {
+                            headerText : appDesk.i18n('Title'),
+                            dataKey : 'title'
                         },
                         actions : {
                             actions : ['update', 'delete', 'visualise']

@@ -2,42 +2,42 @@
 
 use Nos\I18n;
 
-I18n::load('local::diaporama');
+I18n::load('local::slideshow');
 
 return array(
 	'query' => array(
-		'model'     => 'Arcom\Diaporama\Model_Diaporama',
-        'order_by'  => array('diaporama_created_at' => 'ASC'),
+		'model'     => 'Arcom\Slideshow\Model_Slideshow',
+        'order_by'  => array('slideshow_created_at' => 'ASC'),
 		'limit'     => 20,
 	),
-	'search_text'   => 'diaporama_nom',
+	'search_text'   => 'slideshow_title',
 	'selectedView'  => 'default',
 	'views' => array(
 		'default' => array(
 			'name' => __('Default view'),
-			'json' => array('static/apps/diaporama/js/admin/diaporama.js'),
+			'json' => array('static/apps/slideshow/js/admin/slideshow.js'),
 		),
 	),
 	'i18n' => array(
 	),
 	'dataset' => array(
-		'id' 		=> 'diaporama_id',
-		'nom' 		=> 'diaporama_nom',
-		'actions' => array(
+		'id' 		=> 'slideshow_id',
+		'title' 	=> 'slideshow_title',
+		'actions' 	=> array(
 
 		),
 	),
 	'inputs' => array(
-		'diaporama_created_at' => function($value, $query) {
+		'slideshow_created_at' => function($value, $query) {
 			list($begin, $end) = explode('|', $value.'|');
 			if ($begin) {
 				if ($begin = Date::create_from_string($begin, '%Y-%m-%d')) {
-					$query->where(array('diaporama_created_at', '>=', $begin->format('mysql')));
+					$query->where(array('slideshow_created_at', '>=', $begin->format('mysql')));
 				}
 			}
 			if ($end) {
 				if ($end = Date::create_from_string($end, '%Y-%m-%d')) {
-					$query->where(array('diaporama_created_at', '<=', $end->format('mysql')));
+					$query->where(array('slideshow_created_at', '<=', $end->format('mysql')));
 				}
 			}
 			return $query;

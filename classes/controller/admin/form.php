@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Application Diaporama
+ * Application Slideshow
  * @author Julien
  */
 
 // TODO
 // nos_media_link
 
-namespace Arcom\Diaporama;
+namespace Arcom\Slideshow;
 
 class Controller_Admin_Form extends \Nos\Controller_Admin_Application {
 
@@ -16,27 +16,27 @@ class Controller_Admin_Form extends \Nos\Controller_Admin_Application {
         return $this->action_edit(0);
      }
 
-     public function action_edit($diaporama_id = 0) {
+     public function action_edit($slideshow_id = 0) {
 
-        // Diaporamas + images
-        if ( $diaporama_id > 0 )
+        // Slideshows + images
+        if ( $slideshow_id > 0 )
         {
-            $diaporama  = Model_Diaporama::find($diaporama_id, array(
+            $slideshow  = Model_Slideshow::find($slideshow_id, array(
                 'related' => array(
                     'images' => array(
-                        'order_by' => array('diapimg_position' => 'asc'),
+                        'order_by' => array('slidimg_position' => 'asc'),
                     ),
                 ),
             ));
         }
 
-        if ( !empty($diaporama) )
+        if ( !empty($slideshow) )
         {
-             $images        = $diaporama->images;
+             $images        = $slideshow->images;
         }
         else
         {
-            $diaporama      = Model_Diaporama::forge();
+            $slideshow      = Model_Slideshow::forge();
             $images         = array();
         }
 
@@ -44,13 +44,13 @@ class Controller_Admin_Form extends \Nos\Controller_Admin_Application {
 
         // Vue
         $config = array(
-            'diaporama_id' => array (
+            'slideshow_id' => array (
                 'label' => 'ID: ',
                 'form' => array(
                     'type' => 'hidden',
                 ),
             ),
-            'diaporama_nom' => array(
+            'slideshow_title' => array(
                 'label' => 'Titre',
                 'form' => array(
                     'type' => 'text',
@@ -73,9 +73,9 @@ class Controller_Admin_Form extends \Nos\Controller_Admin_Application {
             ),
         );
 
-        $is_new = $diaporama->is_new();
-        $fieldset = \Fieldset::build_from_config($config, $diaporama, array(
-	        'success' => function($diaporama) use ($is_new, $images) {
+        $is_new = $slideshow->is_new();
+        $fieldset = \Fieldset::build_from_config($config, $slideshow, array(
+	        'success' => function($slideshow) use ($is_new, $images) {
 
 	            // Sauvegarde des images
                 if ( !empty($_POST['images']) )
@@ -95,40 +95,40 @@ class Controller_Admin_Form extends \Nos\Controller_Admin_Application {
                         unset($image['media_id']);
 
                         // Update
-                        if ( !empty($image['diapimg_id']) && !empty($images[$image['diapimg_id']]) )
+                        if ( !empty($image['slidimg_id']) && !empty($images[$image['slidimg_id']]) )
                         {
                             $values = array_diff_key($image, array(
-                                'diapimg_id' => true
+                                'slidimg_id' => true
                             ));
                             $values = array_merge($values, array(
-                                'diapimg_position'      => $position,
+                                'slidimg_position'      => $position,
                             ));
-                            $images[$image['diapimg_id']]->values($values);
-                            $images[$image['diapimg_id']]->medias->image = $media_id;
-                            $images[$image['diapimg_id']]->save();
+                            $images[$image['slidimg_id']]->values($values);
+                            $images[$image['slidimg_id']]->medias->image = $media_id;
+                            $images[$image['slidimg_id']]->save();
 
-                            $form_images_ids[] = $image['diapimg_id'];
+                            $form_images_ids[] = $image['slidimg_id'];
                         }
 
                         // Insert
                         else
                         {
-                            if ( isset($image['diapimg_id']) )
+                            if ( isset($image['slidimg_id']) )
                             {
-                                unset($image['diapimg_id']);
+                                unset($image['slidimg_id']);
                             }
                             $values = array_merge($image, array(
-                                'diapimg_position'      => $position,
+                                'slidimg_position'      => $position,
                             ));
                             $image_model = Model_Image::forge($values);
 
-                            $diaporama->images[] = $image_model;
-                            //$diaporama->save();
+                            $slideshow->images[] = $image_model;
+                            //$slideshow->save();
                             //$image_model->save();
 
                             $image_model->medias->image = $media_id;
 
-                            $form_images_ids[] = $image_model->diapimg_id;
+                            $form_images_ids[] = $image_model->slidimg_id;
                         }
 
                         $position++;
@@ -138,33 +138,33 @@ class Controller_Admin_Form extends \Nos\Controller_Admin_Application {
                     //\Debug::dump(array_keys($images), $form_images_ids);
                     $images_to_be_deleted = array_diff(array_keys($images), $form_images_ids);
                     if ( !empty($images_to_be_deleted) ) {
-                        \DB::delete('diaporama_image')->where('diapimg_id', 'IN', $images_to_be_deleted)->execute();
+                        \DB::delete('slideshow_image')->where('slidimg_id', 'IN', $images_to_be_deleted)->execute();
                         \DB::delete('nos_media_link')->where(array(
-                            array('medil_from_table', '=', 'diaporama_image'),
+                            array('medil_from_table', '=', 'slideshow_image'),
                             array('medil_foreign_id', 'IN', $images_to_be_deleted),
                         ))->execute();
                     }
 
-                    $diaporama->save();
+                    $slideshow->save();
                 }
 
 		        return array(
-			        'notify' => ( $is_new ? 'Diaporama sucessfully added.' : 'Diaporama sucessfully updated.' ),
+			        'notify' => ( $is_new ? 'Slideshow sucessfully added.' : 'Slideshow sucessfully updated.' ),
 			        'dispatchEvent' => array(
-                        //'reload.diaporama_edit',
-                        'reload.diaporama'
+                        //'reload.slideshow_edit',
+                        'reload.slideshow'
                     ),
-			        'replaceTab' => $is_new ? 'admin/diaporama/form/edit/'.$diaporama->diaporama_id : '',
+			        'replaceTab' => $is_new ? 'admin/slideshow/form/edit/'.$slideshow->slideshow_id : '',
 		        );
 	        }
         ));
 
-        \Config::load('diaporama::diaporama', 'diaporama');
+        \Config::load('slideshow::slideshow', 'slideshow');
 
-        return \View::forge('diaporama::admin/form', array(
+        return \View::forge('slideshow::admin/form', array(
             'fieldset'  => $fieldset,
-            'diaporama' => $diaporama,
-            'show_link' => \Config::get('diaporama.slides_with_link'),
+            'slideshow' => $slideshow,
+            'show_link' => \Config::get('slideshow.slides_with_link'),
             'images'    => $images,
         ), false);
 	}

@@ -8,25 +8,25 @@
  * @link http://www.novius-os.org
  */
 
-namespace Arcom\Diaporama;
+namespace Arcom\Slideshow;
 
 use Nos\Controller;
 use Fuel\Core\View;
 
-class Controller_Admin_Diaporama extends Controller {
+class Controller_Admin_Slideshow extends Controller {
 
     public function action_delete_confirm($id) {
 
         $success = false;
 
-        $diaporama = Model_Diaporama::find($id);
-        if ($diaporama && $diaporama instanceof Model_Diaporama) {
-            $diaporama->delete();
+        $slideshow = Model_Slideshow::find($id);
+        if ($slideshow && $slideshow instanceof Model_Slideshow) {
+            $slideshow->delete();
             $success = true;
         }
 
         $this->response(array(
-            'notify'    => __('The diaporama has successfully been deleted !'),
+            'notify'    => __('The slideshow has successfully been deleted !'),
             'success'   => $success,
         ));
     }

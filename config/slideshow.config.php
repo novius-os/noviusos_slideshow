@@ -7,12 +7,12 @@ return array(
 		'grand' => array(
 			'img_width' 	=> '800',
 			'img_height'	=> '600',
-			'class'			=> 'diapo-home'
+			'class'			=> 'slide-home'
 		),
 		'petit' => array(
 			'img_width' 	=> '414',
 			'img_height'	=> '300',
-			'class'			=> 'diapo-small'
+			'class'			=> 'slide-small'
 		)
 	)
 );

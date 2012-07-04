@@ -1,24 +1,24 @@
 <?php
 
-namespace Arcom\Diaporama;
+namespace Arcom\Slideshow;
 use Nos\Controller_Front_Application;
 
-class Controller_Diaporama extends Controller_Front_Application
+class Controller_Slideshow extends Controller_Front_Application
 {
 	/**
-	 * méthode qui gère l'affichage en front du diaporama
+	 * méthode qui gère l'affichage en front du slideshow
 	 * @param  array  $args tableau de paramètres, récupérés depuis le wysywig, en provenance de
-	 * la popup de config. dans notre cas, on attend diaporama_id et $size
+	 * la popup de config. dans notre cas, on attend slideshow_id et $size
 	 */
 	public function action_main($args = array())
 	{
-	    if ( empty($args) || empty($args['diaporama_id']) )
+	    if ( empty($args) || empty($args['slideshow_id']) )
 	    {
 	        return false;
 	    }
 
-	    \Config::load('diaporama::diaporama', 'diaporama');
-		$config = \Config::get('diaporama');
+	    \Config::load('slideshow::slideshow', 'slideshow');
+		$config = \Config::get('slideshow');
 
 	    if (empty($args['size']))
 	    {
@@ -26,16 +26,16 @@ class Controller_Diaporama extends Controller_Front_Application
 	    } else {
 	    	$size = $config['sizes'][$args['size']];
 	    }
-	    $diaporama = Model_Diaporama::find($args['diaporama_id'], array(
+	    $slideshow = Model_Slideshow::find($args['slideshow_id'], array(
 		'related' => array(
 		    'images' => array(
-			'order_by' => array('diapimg_position' => 'asc'),
+			'order_by' => array('slidimg_position' => 'asc'),
 		    ),
 		),
 	    ));
 
 	    return \View::forge($this->config['views']['index'], array(
-		    'diaporama' => $diaporama,
+		    'slideshow' => $slideshow,
 		    'class'		=> $size['class'],
 		    'height'	=> $size['img_height'],
 		    'width'		=> $size['img_width'],

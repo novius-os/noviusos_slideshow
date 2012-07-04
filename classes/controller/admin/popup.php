@@ -8,7 +8,7 @@
  * @link http://www.novius-os.org
  */
 
-namespace Arcom\Diaporama;
+namespace Arcom\Slideshow;
 
 use Nos\Controller;
 use Fuel\Core\View;
@@ -16,15 +16,15 @@ use Fuel\Core\View;
 class Controller_Admin_Popup extends \Nos\Controller {
 
     public function action_index() {
-        $diaporamas = Model_Diaporama::find('all', array(
-            'order_by' => array('diaporama_nom' => 'asc'),
+        $slideshows = Model_Slideshow::find('all', array(
+            'order_by' => array('slideshow_title' => 'asc'),
         ));
 
-        \Config::load('diaporama::diaporama', 'diaporama');
-        $sizes = \Config::get('diaporama.sizes');
+        \Config::load('slideshow::slideshow', 'slideshow');
+        $sizes = \Config::get('slideshow.sizes');
 
-        return View::forge('diaporama::admin/popup', array(
-            'diaporamas' => $diaporamas,
+        return View::forge('slideshow::admin/popup', array(
+            'slideshows' => $slideshows,
             'sizes' => $sizes
         ));
     }
