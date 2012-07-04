@@ -79,7 +79,7 @@ define([
                 },
                 splittersVertical :  250,
                 grid : {
-                    proxyUrl : 'admin/slideshow/index/json',
+                    proxyUrl : 'admin/slideshow/appdesk/json',
                     columns : {
                         title : {
                             headerText : appDesk.i18n('Title'),

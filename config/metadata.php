@@ -9,7 +9,7 @@ return array(
     'launchers' => array( // = item ajouté dans l'admin
         'slideshow' => array(
             'name'    => 'Slideshow',
-            'url'     => 'admin/slideshow/index',
+            'url'     => 'admin/slideshow/appdesk',
             'iconUrl' => 'static/apps/slideshow/img/slideshow-32.png',
             'icon64'  => 'static/apps/slideshow/img/slideshow-64.png',
         ),
