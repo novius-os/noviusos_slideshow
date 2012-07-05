@@ -1,4 +1,6 @@
 <?php
+
+\Nos\Nos::main_controller()->addJavascriptInline('typeof jQuery != "undefined" || document.write(\'<scr\'+\'ipt type="text/javascript" src="static/apps/slideshow/js/jquery.min.js"></scr\'+\'ipt>\');', false);
 \Nos\Nos::main_controller()->addJavascript('static/apps/slideshow/js/jquery.flexslider.js');
 \Nos\Nos::main_controller()->addCss('static/apps/slideshow/css/flexslider.css');
 if ($slides_preview)
