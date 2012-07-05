@@ -152,7 +152,7 @@ require(['jquery-nos', 'jquery-ui.sortable'], function($) {
             $media_input.closest('.ui-widget').replaceWith($media_input);
             $media_input.media(media_options);
             */
-            $newimg.find('input.media').media(media_options);
+            $newimg.find('input.media').nosMedia(media_options);
 
             // Fix : Passer le bouton Add en inline-block...
             $newimg.find('div.ui-inputfilethumb-fileactions').children(':first').css('display', 'inline-block');
