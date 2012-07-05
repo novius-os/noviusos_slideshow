@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'slides_with_link' => true,
+	'slides_with_link' => false,
 	'slides_preview'   => false,
 	'sizes' => array(
 		'grand' => array(

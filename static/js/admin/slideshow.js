@@ -34,7 +34,7 @@ define([
                             content     : appDesk.i18n('Delete this slideshow ?')._(),
                             title       : appDesk.i18n('Delete a slideshow')._(),
                             confirmed   : function() {
-                                $(ui).xhr({
+                                $(ui).nosAjax({
                                     url : 'admin/slideshow/slideshow/delete_confirm/'+item.id,
                                     method : 'GET',
                                     success : function(json) {

@@ -17,13 +17,14 @@ class Controller_Slideshow extends Controller_Front_Application
 	        return false;
 	    }
 
-	    \Config::load('slideshow::slideshow', 'slideshow');
-		$config = \Config::get('slideshow');
+	    $config = \Config::load('slideshow::slideshow', true);
 
 	    if (empty($args['size']))
 	    {
 	    	$size = current($config['sizes']);
-	    } else {
+	    } 
+		else 
+		{
 	    	$size = $config['sizes'][$args['size']];
 	    }
 	    $slideshow = Model_Slideshow::find($args['slideshow_id'], array(

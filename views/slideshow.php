@@ -9,8 +9,7 @@ if ($slides_preview)
  ?>
 <script type="text/javascript" charset="utf-8">
 <?php
-    \Config::load('slideshow::flexslider', 'flexslider');
-    $config = \Config::get('flexslider');
+    $config = \Config::load('slideshow::flexslider', true);
 ?>
     $(window).load(function()
     {
@@ -30,11 +29,24 @@ if ($slides_preview)
         }
 
         echo '<li ';
-        if ($slides_preview) echo 'data-thumb="', $image->medias->image->get_public_path_resized(300, 100), '"';
+        if ($slides_preview) 
+		{
+			echo 'data-thumb="', $image->medias->image->get_public_path_resized(300, 100), '"';
+        }
         echo '>';
-        if ($show_link && $image->slidimg_link_to_page_id) echo '<a href="'. $image->page->get_href().'">';
+
+		// Image, avec ou sans lien
+        if ( $show_link && !empty($image->slidimg_link_to_page_id) ) 
+		{
+			echo '<a href="'. $image->page->get_href().'">';
+		}
         echo '<img style="margin: 0 auto;" src="', $image->medias->image->get_public_path_resized($width,$height), '" alt="', htmlspecialchars($image->slidimg_title), '" title="', htmlspecialchars($image->slidimg_title), '" />';
-        if ($show_link && $image->slidimg_link_to_page_id) echo '</a>';
+        if ( $show_link && !empty($image->slidimg_link_to_page_id) )
+		{
+			echo '</a>';
+		}
+
+		// Caption
         if ( !empty($image->slidimg_title) || !empty($image->slidimg_description) )
         {
             echo '<p class="flex-caption">';

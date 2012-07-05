@@ -20,6 +20,6 @@ return array(
     //'animationLoop'     => true,                //Boolean: Should the animation loop? If false, directionNav will received "disable" classes at either end
     //'pauseOnAction'     => true,                //Boolean: Pause the slideshow when interacting with control elements, highly recommended.
     //'pauseOnHover'      => false,               //Boolean: Pause the slideshow when hovering over slider, then resume when no longer hovering
-    'controlsContainer'   => ".flex-nav-container"                  //Selector: Declare which container the navigation elements should be appended too. Default container is the flexSlider element. Example use would be ".flexslider-container", "#container", etc. If the given element is not found, the default action will be taken.
+    //'controlsContainer' => ".flex-nav-container"                  //Selector: Declare which container the navigation elements should be appended too. Default container is the flexSlider element. Example use would be ".flexslider-container", "#container", etc. If the given element is not found, the default action will be taken.
     //'manualControls'    => "",                  //Selector: Declare custom control navigation. Example would be ".flex-control-nav li" or "#tabs-nav li img", etc. The number of elements in your controlNav should match the number of slides/tabs.
 );

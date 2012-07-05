@@ -79,7 +79,7 @@
 <script type="text/javascript">
 require([
 	'jquery-nos'
-	], function($n) {
+	], function($) {
 		$(function() {
 			var div = $('#<?= $id ?>')
 				.find('a[data-id=close]')
@@ -102,7 +102,7 @@ require([
 					});
 					return false;
 				})
-				.form();
+				.nosFormUI();
 		});
 	});
 </script>
