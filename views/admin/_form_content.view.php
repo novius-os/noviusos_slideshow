@@ -1,7 +1,12 @@
 <?php
 
-echo $fieldset->open('/admin/slideshow/form/edit/'.$slideshow->slideshow_id);
-$form_id = \Arr::get($fieldset->get_config('form_attributes'), 'id', '');
+\Config::load('slideshow::slideshow', 'slideshow');
+$show_link = \Config::get('slideshow.slides_with_link');
+
+$form_id = 'slideshow_'.uniqid(true);
+$content = array('<div id="'.$form_id.'">');
+
+$content[] = '<style>.slideshow_model { display: none }</style>'; // TODO
 
 // Retourne un "bloc" (une image avec ses infos)
 function slidimg($i, $image = null, $is_model = false, $show_link = false) {
@@ -39,53 +44,39 @@ function slidimg($i, $image = null, $is_model = false, $show_link = false) {
     return $view;
 }
 
-$content = array();
-
-$content[] = '<style>.slideshow_model { display: none }</style>'; // TODO
 $content[] = '<div class="slideshow_imageslist">';
 
 // Model pour ajouter une nouvelle image
-$content[] = slidimg(count($content), null, true);
+$field_index    = 1;
+$content[]      = slidimg($field_index++, null, true);
 
 // Liste des images actuelles
-foreach ( $images as $img )
+foreach ( $item->images as $img )
 {
-    $content[] = slidimg(count($content), $img,false,$show_link);
+    $content[] = slidimg($field_index++, $img, false, $show_link);
 }
 
-// Ajouter une nouvelle image
-$content[] = slidimg(count($content),null,false,$show_link);
+// Ajouter une nouvelle image (champ vide)
+$content[] = slidimg($field_index++, null, false, $show_link);
 
 $content[] = '</div>';
 
 // Bouton "Nouvelle image"
 $content[] = '<div style="text-align: right;"><button data-icon="plus" class="slideshow_add_image">Ajouter une image</button></div>';
+$content[] = '</div>';
 
-// Vue globale
-echo \View::forge('form/layout_standard', array(
-    'fieldset'  => $fieldset,
-    'object' 	=> $slideshow,
-    'medias' 	=> null,
-    'title' 	=> 'slideshow_title',
-    'id' 		=> 'slideshow_id',
-    'save' 		=> 'save',
-    'subtitle' 	=> array('slideshow_id'),
-    'content'   => $content,
-    'menu'      => array(
-    ),
-), false);
-
-echo $fieldset->close();
+echo implode("\n", $content);
 
 ?>
 <script type="text/javascript">
 require(['jquery-nos', 'jquery-ui.sortable'], function($) {
     $(function() {
+
         var $container      = $('#<?php echo $form_id; ?>'),
             $slideshow_list = $container.find('div.slideshow_imageslist'),
             media_options   = $slideshow_list.children(':last').find('input.media').data('media-options'),
             field_index     = $slideshow_list.children().length + 1;
-
+console.log('#<?php echo $form_id; ?>');
         $slideshow_list.sortable({
             axis    : 'y',
             handle  : '.handle'
@@ -162,7 +153,7 @@ require(['jquery-nos', 'jquery-ui.sortable'], function($) {
 
         // Changement titre du tab
         var tabInfos = {
-            label   : <?= \Format::forge()->to_json($slideshow->is_new()? __('Add a slideshow') : $slideshow->slideshow_title) ?>,
+            label   : <?= \Format::forge()->to_json($item->is_new() ? __('Add a slideshow') : $item->slideshow_title) ?>,
             iconUrl : 'static/apps/slideshow/img/slideshow-16.png',
         };
         $container.nosOnShow('bind', function() {

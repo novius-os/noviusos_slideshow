@@ -10,24 +10,79 @@
 
 namespace Arcom\Slideshow;
 
-use Nos\Controller;
-use Fuel\Core\View;
+class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
+{
+    public function save($item, $data)
+    {
+        // Sauvegarde des images
+        if ( !empty($_POST['images']) )
+        {
+            $images = $item->images;
+            $form_images_ids = array();
 
-class Controller_Admin_Slideshow extends Controller {
+            $position = 1;
+            foreach ( $_POST['images'] as $image )
+            {
+                // Pas de media, pas de chocolat.
+                if ( empty($image['media_id']) )
+                {
+                    continue;
+                }
 
-    public function action_delete_confirm($id) {
+                $media_id = $image['media_id'];
+                unset($image['media_id']);
 
-        $success = false;
+                // Update
+                if ( !empty($image['slidimg_id']) && !empty($images[$image['slidimg_id']]) )
+                {
+                    $values = array_diff_key($image, array(
+                        'slidimg_id' => true
+                    ));
+                    $values = array_merge($values, array(
+                        'slidimg_position'      => $position,
+                    ));
+                    $images[$image['slidimg_id']]->values($values);
+                    $images[$image['slidimg_id']]->medias->image = $media_id;
+                    $images[$image['slidimg_id']]->save();
 
-        $slideshow = Model_Slideshow::find($id);
-        if ($slideshow && $slideshow instanceof Model_Slideshow) {
-            $slideshow->delete();
-            $success = true;
+                    $form_images_ids[] = $image['slidimg_id'];
+                }
+
+                // Insert
+                else
+                {
+                    if ( isset($image['slidimg_id']) )
+                    {
+                        unset($image['slidimg_id']);
+                    }
+                    $values = array_merge($image, array(
+                        'slidimg_position'      => $position,
+                    ));
+                    $image_model = Model_Image::forge($values);
+                    $item->images[] = $image_model;
+                    $image_model->medias->image = $media_id;
+
+                    $form_images_ids[] = $image_model->slidimg_id;
+                }
+
+                $position++;
+            }
+
+            // Images a supprimer
+            $images_to_be_deleted = array_diff(array_keys($images), $form_images_ids);
+            if ( !empty($images_to_be_deleted) )
+            {
+                \DB::delete('slideshow_image')->where('slidimg_id', 'IN', $images_to_be_deleted)->execute();
+                \DB::delete('nos_media_link')->where(array(
+                    array('medil_from_table', '=', 'slideshow_image'),
+                    array('medil_foreign_id', 'IN', $images_to_be_deleted),
+                ))->execute();
+            }
+
+            $item->save();
         }
 
-        $this->response(array(
-            'notify'    => __('The slideshow has successfully been deleted !'),
-            'success'   => $success,
-        ));
+        return parent::save($item, $data);
     }
+
 }

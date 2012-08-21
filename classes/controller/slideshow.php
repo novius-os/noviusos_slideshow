@@ -22,17 +22,17 @@ class Controller_Slideshow extends Controller_Front_Application
 	    if (empty($args['size']))
 	    {
 	    	$size = current($config['sizes']);
-	    } 
-		else 
+	    }
+		else
 		{
 	    	$size = $config['sizes'][$args['size']];
 	    }
 	    $slideshow = Model_Slideshow::find($args['slideshow_id'], array(
-		'related' => array(
-		    'images' => array(
-			'order_by' => array('slidimg_position' => 'asc'),
-		    ),
-		),
+			'related' => array(
+			    'images' => array(
+				'order_by' => array('slidimg_position' => 'asc'),
+			    ),
+			),
 	    ));
 
 	    return \View::forge($this->config['views']['index'], array(
