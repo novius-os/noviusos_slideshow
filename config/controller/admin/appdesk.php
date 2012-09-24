@@ -84,9 +84,9 @@ return array(
                 ),
             ),
         ),
-		'reloadEvent' => 'Arcom\\Slideshow\\Model_Slideshow',
-		'appdesk' => array(
-            'adds' => array(
+	'reloadEvent' => 'Arcom\\Slideshow\\Model_Slideshow',
+	'appdesk' => array(
+	    'buttons' => array(
                 'slideshow' => array(
                     'label' => __('Add a slideshow'),
                     'action' => array(
@@ -101,7 +101,7 @@ return array(
             ),
             'splittersVertical' => 250,
             'grid' => array(
-                'proxyUrl' => 'admin/slideshow/appdesk/json',
+                'urlJson' => 'admin/slideshow/appdesk/json',
                 'columns' => array(
                     'title' => array(
                         'headerText' => __('Title'),
