@@ -6,12 +6,16 @@ return array(
     'provider'  => array(
         'name'  => 'Novius OS',
     ),
+    'permission' => array(
+        'icon64'  => 'static/apps/slideshow/img/slideshow-64.png',
+    ),
     'launchers' => array( // = item ajouté dans l'admin
         'slideshow' => array(
             'name'    => 'Slideshow',
             'url'     => 'admin/slideshow/appdesk',
             'iconUrl' => 'static/apps/slideshow/img/slideshow-32.png',
             'icon64'  => 'static/apps/slideshow/img/slideshow-64.png',
+            'application'   => 'slideshow'
         ),
     ),
     'enhancers' => array(
