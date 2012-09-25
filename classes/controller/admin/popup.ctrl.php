@@ -8,14 +8,16 @@
  * @link http://www.novius-os.org
  */
 
-namespace Arcom\Slideshow;
+namespace Nos\Slideshow;
 
 use Nos\Controller;
 use Fuel\Core\View;
 
-class Controller_Admin_Popup extends \Nos\Controller {
+class Controller_Admin_Popup extends \Nos\Controller
+{
 
-    public function action_index() {
+    public function action_index()
+    {
         $slideshows = Model_Slideshow::find('all', array(
             'order_by' => array('slideshow_title' => 'asc'),
         ));

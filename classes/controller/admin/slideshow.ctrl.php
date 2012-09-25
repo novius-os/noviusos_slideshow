@@ -8,24 +8,21 @@
  * @link http://www.novius-os.org
  */
 
-namespace Arcom\Slideshow;
+namespace Nos\Slideshow;
 
 class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 {
     public function save($item, $data)
     {
         // Sauvegarde des images
-        if ( !empty($_POST['images']) )
-        {
+        if ( !empty($_POST['images']) ) {
             $images = $item->images;
             $form_images_ids = array();
 
             $position = 1;
-            foreach ( $_POST['images'] as $image )
-            {
+            foreach ( $_POST['images'] as $image ) {
                 // Pas de media, pas de chocolat.
-                if ( empty($image['media_id']) )
-                {
+                if ( empty($image['media_id']) ) {
                     continue;
                 }
 
@@ -33,8 +30,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
                 unset($image['media_id']);
 
                 // Update
-                if ( !empty($image['slidimg_id']) && !empty($images[$image['slidimg_id']]) )
-                {
+                if ( !empty($image['slidimg_id']) && !empty($images[$image['slidimg_id']]) ) {
                     $values = array_diff_key($image, array(
                         'slidimg_id' => true
                     ));
@@ -49,10 +45,8 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
                 }
 
                 // Insert
-                else
-                {
-                    if ( isset($image['slidimg_id']) )
-                    {
+                else {
+                    if ( isset($image['slidimg_id']) ) {
                         unset($image['slidimg_id']);
                     }
                     $values = array_merge($image, array(
@@ -70,8 +64,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 
             // Images a supprimer
             $images_to_be_deleted = array_diff(array_keys($images), $form_images_ids);
-            if ( !empty($images_to_be_deleted) )
-            {
+            if ( !empty($images_to_be_deleted) ) {
                 \DB::delete('slideshow_image')->where('slidimg_id', 'IN', $images_to_be_deleted)->execute();
                 \DB::delete('nos_media_link')->where(array(
                     array('medil_from_table', '=', 'slideshow_image'),

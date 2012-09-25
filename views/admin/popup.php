@@ -7,7 +7,7 @@
  *             http://www.gnu.org/licenses/agpl-3.0.html
  * @link http://www.novius-os.org
  */
-	$id = uniqid('temp_');
+$id = uniqid('temp_');
 
 ?>
 <div id="<?= $id ?>">
@@ -20,48 +20,37 @@
 					<div>
 
 <?php
-                    if ( !empty($slideshows) )
-                    {
-                        echo '<select name="slideshow_id">';
-                        foreach ( $slideshows as $slideshow )
-                        {
-                            echo '<option value="', $slideshow->slideshow_id, '" ',
-                                ( \Fuel\Core\Input::get('slideshow_id', 0) === $slideshow->slideshow_id ? 'selected="selected"' : '' ), '>',
-                                $slideshow->slideshow_title, '</option>';
-                        }
-                        echo '</select>';
-                    }
-                    else
-                    {
-                        echo '<p>Aucun slideshow disponible.</p>';
-                    }
-
+if ( !empty($slideshows) ) {
+    echo '<select name="slideshow_id">';
+    foreach ($slideshows as $slideshow) {
+        echo '<option value="', $slideshow->slideshow_id, '" ',
+            ( \Fuel\Core\Input::get('slideshow_id', 0) === $slideshow->slideshow_id ? 'selected="selected"' : '' ), '>',
+            $slideshow->slideshow_title, '</option>';
+    }
+    echo '</select>';
+} else {
+    echo '<p>Aucun slideshow disponible.</p>';
+}
 ?>
 					</div>
 				</div>
 <?php
-                    if ( !empty($sizes) )
-                    {
-                    	if (count($sizes) === 1)
-                    	{
-                    		echo '<input type="hidden" name="size" value="'.current(array_keys($sizes)).'" />';
-                    	} else
-                    	{
-                    		echo '<div class="expander"><h3>Format</h3><div>';
-                    		echo '<select name="size">';
-                    		foreach ( $sizes as $key=>$s )
-                    		{
-                    		    echo '<option value="', $key, '" ',
-                    		        ( \Fuel\Core\Input::get('size', 0) === $key ? 'selected="selected"' : '' ), '>',
-                    		        $key, '</option>';
-                    		}
-                    		echo '</select></div>';
-                    	}
-                    }
-                    else
-                    {
-                        echo '<p>Le format d\'afficahge des slideshow n\est pas configuré, merci de contacter un adminisitrateur</p>';
-                    }
+if ( !empty($sizes) ) {
+    if (count($sizes) === 1) {
+        echo '<input type="hidden" name="size" value="'.current(array_keys($sizes)).'" />';
+    } else {
+        echo '<div class="expander"><h3>Format</h3><div>';
+        echo '<select name="size">';
+        foreach ($sizes as $key => $s) {
+            echo '<option value="', $key, '" ',
+                ( \Fuel\Core\Input::get('size', 0) === $key ? 'selected="selected"' : '' ), '>',
+                $key, '</option>';
+        }
+        echo '</select></div>';
+    }
+} else {
+    echo '<p>Le format d\'afficahge des slideshow n\est pas configuré, merci de contacter un adminisitrateur</p>';
+}
 ?>
 			</div>
 			<div class="unit lastUnit"></div>
