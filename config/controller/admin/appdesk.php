@@ -100,7 +100,7 @@ return array(
                         'action' => 'nosTabs',
                         'method' => 'add',
                         'tab' => array(
-                            'url' => 'admin/slideshow/slideshow/insert_update?lang={{lang}}',
+                            'url' => 'admin/slideshow/slideshow/insert_update?site={{site}}',
                             'label' => __('Add a new slideshow'),
                         ),
                     ),
