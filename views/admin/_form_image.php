@@ -52,7 +52,7 @@ if ($show_link) {
                 'model' => 'Nos\\Model_Page',
             ),
             'treeOptions' => array(
-                'site' => 'fr_FR'
+                'context' => 'fr_FR'
             ),
         )
     );?>
