@@ -41,7 +41,7 @@ foreach ($slideshow->images as $image) {
 
     // Image, avec ou sans lien
     if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
-        echo '<a href="'. $image->page->get_href().'">';
+        echo '<a href="'. $image->page->url().'">';
     }
     echo '<img style="margin: 0 auto;" src="', $image->medias->image->get_public_path_resized($width, $height), '" alt="', htmlspecialchars($image->slidimg_title), '" title="', htmlspecialchars($image->slidimg_title), '" />';
     if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
