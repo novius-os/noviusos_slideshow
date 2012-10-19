@@ -11,7 +11,9 @@
 return array(
     'name'      => 'Slideshow',
     'namespace' => 'Nos\Slideshow',
-    'version'   => '0.1',
+    'version'   => '0.2',
+    'icon16'  => 'static/apps/noviusos_slideshow/img/slideshow-16.png',
+    'icon64'  => 'static/apps/noviusos_slideshow/img/slideshow-64.png',
     'provider'  => array(
         'name'  => 'Novius OS',
     ),
