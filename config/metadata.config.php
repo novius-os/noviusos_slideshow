@@ -18,31 +18,37 @@ return array(
         'name'  => 'Novius OS',
     ),
     'permission' => array(
-        'icon64'  => 'static/apps/slideshow/img/slideshow-64.png',
     ),
     'launchers' => array( // = item ajouté dans l'admin
-        'slideshow' => array(
+        'noviusos_slideshow' => array(
             'name'    => 'Slideshow',
-            'url'     => 'admin/slideshow/appdesk',
-            'iconUrl' => 'static/apps/slideshow/img/slideshow-32.png',
-            'icon64'  => 'static/apps/slideshow/img/slideshow-64.png',
-            'application'   => 'slideshow'
+            'action' => array(
+                'action' => 'nosTabs',
+                'tab' => array(
+                    'url' => 'admin/noviusos_slideshow/appdesk',
+                ),
+            ),
         ),
     ),
     'enhancers' => array(
-        'slideshow' => array( // = bloc insérable dans un wyysiwig
+        'noviusos_slideshow' => array( // = bloc insérable dans un wyysiwig
             'title' => 'Slideshow',
             'id'    => 'slideshow',
             'desc'  => '',
-            'enhancer' => 'slideshow/slideshow/main', // pour l'affichage en front
+            'enhancer' => 'noviusos_slideshow/slideshow/main', // pour l'affichage en front
             'iconUrl' => 'static/apps/contact/img/slideshow-16.png', // icon du wysiwig
-            'previewUrl' => 'admin/slideshow/preview', // preview pour le wysiwig
+            'previewUrl' => 'admin/noviusos_slideshow/preview', // preview pour le wysiwig
             'dialog' => array(
-                'contentUrl'    => 'admin/slideshow/popup',
+                'contentUrl'    => 'admin/noviusos_slideshow/popup',
                 'width'         => 450,
                 'height'        => 180,
                 'ajax'          => true,
             ),
         ),
-    )
+    ),
+    'icons' => array(
+        64 => '/static/apps/noviusos_slideshow/img/slideshow-64.png',
+        32 => '/static/apps/noviusos_slideshow/img/slideshow-32.png',
+        16 => '/static/apps/noviusos_slideshow/img/slideshow-16.png',
+    ),
 );

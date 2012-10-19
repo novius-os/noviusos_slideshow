@@ -10,6 +10,6 @@
 
 return array(
     'views' => array(
-        'index' => 'slideshow::slideshow'
+        'index' => 'noviusos_slideshow::slideshow'
     )
 );

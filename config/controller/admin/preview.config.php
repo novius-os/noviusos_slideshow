@@ -10,7 +10,7 @@
 
 return array(
     'views' => array(
-        'index' => 'slideshow::admin/preview'
+        'index' => 'noviusos_slideshow::admin/preview'
     )
 );
 

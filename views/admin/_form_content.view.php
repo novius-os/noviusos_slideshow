@@ -8,7 +8,7 @@
  * @link http://www.novius-os.org
  */
 
-\Config::load('slideshow::slideshow', 'slideshow');
+\Config::load('noviusos_slideshow::slideshow', 'slideshow');
 $show_link = \Config::get('slideshow.slides_with_link');
 
 $form_id = 'slideshow_'.uniqid(true);
@@ -41,7 +41,7 @@ function slidimg($i, $image = null, $is_model = false, $show_link = false)
     }
 
     $view = \View::forge(
-        'slideshow::admin/_form_image',
+        'noviusos_slideshow::admin/_form_image',
         array(
             'i' => $i,
             'image' => $image,
@@ -157,7 +157,7 @@ echo implode("\n", $content);
             // Changement titre du tab
             var tabInfos = {
                 label: <?= \Format::forge()->to_json($item->is_new() ? __('Add a slideshow') : $item->slideshow_title) ?>,
-                iconUrl:'static/apps/slideshow/img/slideshow-16.png',
+                iconUrl:'static/apps/noviusos_slideshow/img/slideshow-16.png',
             };
             $container.nosOnShow('bind', function () {
                 $container.nosTabs('update', tabInfos);

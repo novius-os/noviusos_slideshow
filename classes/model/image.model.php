@@ -14,7 +14,7 @@ use Nos\Orm\Model;
 
 class Model_Image extends Model
 {
-    protected static $_table_name = 'slideshow_image';
+    protected static $_table_name = 'nos_slideshow_image';
     protected static $_primary_key = array('slidimg_id');
 
     protected static $_has_one = array(

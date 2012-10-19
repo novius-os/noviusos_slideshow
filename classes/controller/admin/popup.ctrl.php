@@ -22,10 +22,10 @@ class Controller_Admin_Popup extends \Nos\Controller
             'order_by' => array('slideshow_title' => 'asc'),
         ));
 
-        \Config::load('slideshow::slideshow', 'slideshow');
+        \Config::load('noviusos_slideshow::slideshow', 'slideshow');
         $sizes = \Config::get('slideshow.sizes');
 
-        return View::forge('slideshow::admin/popup', array(
+        return View::forge('noviusos_slideshow::admin/popup', array(
             'slideshows' => $slideshows,
             'sizes' => $sizes
         ));

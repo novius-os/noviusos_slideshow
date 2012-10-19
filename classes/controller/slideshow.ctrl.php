@@ -25,7 +25,7 @@ class Controller_Slideshow extends Controller_Front_Application
             return false;
         }
 
-        $config = \Config::load('slideshow::slideshow', true);
+        $config = \Config::load('noviusos_slideshow::slideshow', true);
 
         if (empty($args['size'])) {
             $size = current($config['sizes']);

@@ -20,15 +20,15 @@ SET time_zone = "+00:00";
 -- Structure de la table `slideshow`
 --
 
-CREATE TABLE IF NOT EXISTS `slideshow` (
+CREATE TABLE IF NOT EXISTS `nos_slideshow` (
   `slideshow_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `slideshow_title` varchar(255) NOT NULL,
-  `slideshow_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `slideshow_updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `slideshow_created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `slideshow_updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`slideshow_id`),
   KEY `slideshow_created_at` (`slideshow_created_at`),
   KEY `slideshow_updated_at` (`slideshow_updated_at`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `slideshow` (
 -- Structure de la table `slideshow_image`
 --
 
-CREATE TABLE IF NOT EXISTS `slideshow_image` (
+CREATE TABLE IF NOT EXISTS `nos_slideshow_image` (
   `slidimg_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `slidimg_slideshow_id` varchar(255) NOT NULL,
   `slidimg_position` int(10) NOT NULL,
@@ -45,4 +45,4 @@ CREATE TABLE IF NOT EXISTS `slideshow_image` (
   `slidimg_link_to_page_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`slidimg_id`),
   KEY `slidimg_slideshow_id` (`slidimg_slideshow_id`,`slidimg_position`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) DEFAULT CHARSET=utf8;

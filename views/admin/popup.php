@@ -11,7 +11,7 @@ $id = uniqid('temp_');
 
 ?>
 <div id="<?= $id ?>">
-	<form method="POST" action="admin/slideshow/preview">
+	<form method="POST" action="admin/noviusos_slideshow/preview">
 		<div class="line myBody">
 			<div class="unit col c1"></div>
 			<div class="unit col c10 ui-widget">

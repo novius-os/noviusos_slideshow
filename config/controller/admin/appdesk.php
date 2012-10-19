@@ -51,14 +51,14 @@ return array(
     'appdesk' => array(
         'tab' => array(
             'label' => __('slideshows'),
-            'iconUrl' => 'static/apps/slideshow/img/slideshow-32.png'
+            'iconUrl' => 'static/apps/noviusos_slideshow/img/slideshow-32.png'
         ),
         'actions' => array(
             'update' => array(
                 'action' => array(
                     'action' => 'nosTabs',
                     'tab' => array(
-                        'url' => "admin/slideshow/slideshow/insert_update/{{id}}",
+                        'url' => "admin/noviusos_slideshow/slideshow/insert_update/{{id}}",
                         'label' => __('Edit'),
                     ),
                 ),
@@ -71,7 +71,7 @@ return array(
                 'action' => array(
                     'action' => 'confirmationDialog',
                     'dialog' => array(
-                        'contentUrl' => 'admin/slideshow/slideshow/delete/{{id}}',
+                        'contentUrl' => 'admin/noviusos_slideshow/slideshow/delete/{{id}}',
                         'title' => __('Delete a slideshow'),
                     ),
                 ),
@@ -100,7 +100,7 @@ return array(
                         'action' => 'nosTabs',
                         'method' => 'add',
                         'tab' => array(
-                            'url' => 'admin/slideshow/slideshow/insert_update?context={{context}}',
+                            'url' => 'admin/noviusos_slideshow/slideshow/insert_update?context={{context}}',
                             'label' => __('Add a new slideshow'),
                         ),
                     ),
@@ -108,7 +108,7 @@ return array(
             ),
             'splittersVertical' => 250,
             'grid' => array(
-                'urlJson' => 'admin/slideshow/appdesk/json',
+                'urlJson' => 'admin/noviusos_slideshow/appdesk/json',
                 'columns' => array(
                     'title' => array(
                         'headerText' => __('Title'),

@@ -14,7 +14,7 @@ use Nos\Orm\Model;
 
 class Model_Slideshow extends Model
 {
-    protected static $_table_name = 'slideshow';
+    protected static $_table_name = 'nos_slideshow';
     protected static $_primary_key = array('slideshow_id');
 
     protected static $_has_many = array(

@@ -9,7 +9,7 @@
  */
 
 return array(
-    'controller_url'  => 'admin/slideshow/slideshow',
+    'controller_url'  => 'admin/noviusos_slideshow/slideshow',
     'model' => 'Nos\\Slideshow\\Model_Slideshow',
     'messages' => array(
         'successfully added' => __('Slideshow successfully added.'),
@@ -24,7 +24,7 @@ return array(
         'blank_state_item_text' => __('slideshow'),
     ),
     'tab' => array(
-        'iconUrl' => 'static/apps/slideshow/img/slideshow-16.png',
+        'iconUrl' => 'static/apps/noviusos_slideshow/img/slideshow-16.png',
         'labels' => array(
             'insert' => __('Add a slideshow'),
             'blankSlate' => __('Translate a slideshow'),
@@ -35,7 +35,7 @@ return array(
         'large' => true,
         'content' => array(
             'images' => array(
-                'view' => 'slideshow::admin/_form_content',
+                'view' => 'noviusos_slideshow::admin/_form_content',
                 'params' => array(
 
                 ),
