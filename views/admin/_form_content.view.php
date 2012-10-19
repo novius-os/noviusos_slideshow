@@ -85,7 +85,6 @@ echo implode("\n", $content);
                     $slideshow_list = $container.find('div.slideshow_imageslist'),
                     media_options = $slideshow_list.children(':last').find('input.media').data('media-options'),
                     field_index = $slideshow_list.children().length + 1;
-            console.log('#<?php echo $form_id; ?>');
             $slideshow_list.sortable({
                 axis:'y',
                 handle:'.handle'

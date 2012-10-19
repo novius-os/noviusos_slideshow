@@ -27,6 +27,13 @@ class Model_Slideshow extends Model
         ),
     );
 
+    protected static $_behaviours = array(
+        'Nos\Orm_Behaviour_Contextable' => array(
+            'events' => array('before_insert'),
+            'context_property'      => 'slideshow_context',
+        ),
+    );
+
     protected static $_observers = array(
         'Orm\Observer_CreatedAt' => array(
             'events' => array('before_insert'),

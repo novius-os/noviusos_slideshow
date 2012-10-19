@@ -23,9 +23,11 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `nos_slideshow` (
   `slideshow_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `slideshow_title` varchar(255) NOT NULL,
+  `slideshow_context` varchar(25) NOT NULL,
   `slideshow_created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `slideshow_updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`slideshow_id`),
+  KEY `slideshow_context` (`slideshow_context`),
   KEY `slideshow_created_at` (`slideshow_created_at`),
   KEY `slideshow_updated_at` (`slideshow_updated_at`)
 ) DEFAULT CHARSET=utf8;

@@ -114,6 +114,9 @@ return array(
                         'headerText' => __('Title'),
                         'dataKey' => 'title'
                     ),
+                    'context' => array(
+                        'context' => true
+                    ),
                     'actions' => array(
                         'actions' => array('update', 'delete')
                     ),
