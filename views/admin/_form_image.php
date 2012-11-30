@@ -43,7 +43,7 @@ if ($show_link) {
 if ($show_link) {
     ?>
     <div class="link_to" style="overflow:hidden;height:0;margin-left:70px">
-        <?= Nos\Widget_Page_Selector::widget(
+        <?= Nos\Renderer_Page_Selector::renderer(
         array(
             'input_name' => 'images['.$i.'][slidimg_link_to_page_id]',
             'width' => 510,

@@ -27,11 +27,11 @@ function slidimg($i, $image = null, $is_model = false, $show_link = false)
     if ($is_model) {
         $media = '';
     } else {
-        $media = \Nos\Widget_Media::widget(
+        $media = \Nos\Renderer_Media::renderer(
             array(
                 'name' => 'images['.$i.'][media_id]',
                 'value' => $media_id,
-                'widget_options' => array(
+                'renderer_options' => array(
                     'inputFileThumb' => array(
                         'title' => 'Image',
                     ),
