@@ -58,7 +58,7 @@ return array(
                 'action' => array(
                     'action' => 'nosTabs',
                     'tab' => array(
-                        'url' => "admin/noviusos_slideshow/slideshow/insert_update/{{id}}",
+                        'url' => "admin/noviusos_slideshow/slideshow/insert_update/{{_id}}",
                         'label' => __('Edit'),
                     ),
                 ),
@@ -71,7 +71,7 @@ return array(
                 'action' => array(
                     'action' => 'confirmationDialog',
                     'dialog' => array(
-                        'contentUrl' => 'admin/noviusos_slideshow/slideshow/delete/{{id}}',
+                        'contentUrl' => 'admin/noviusos_slideshow/slideshow/delete/{{_id}}',
                         'title' => __('Delete a slideshow'),
                     ),
                 ),
