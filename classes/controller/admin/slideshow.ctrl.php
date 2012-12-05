@@ -20,7 +20,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             $form_images_ids = array();
 
             $position = 1;
-            foreach ( $_POST['images'] as $image ) {
+            foreach ($_POST['images'] as $image) {
                 // Pas de media, pas de chocolat.
                 if ( empty($image['media_id']) ) {
                     continue;
