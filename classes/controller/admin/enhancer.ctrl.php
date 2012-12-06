@@ -10,24 +10,35 @@
 
 namespace Nos\Slideshow;
 
-use Nos\Controller;
-use Fuel\Core\View;
-
-class Controller_Admin_Popup extends \Nos\Controller
+class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
 {
 
-    public function action_index()
+    public function action_popup()
     {
-        $slideshows = Model_Slideshow::find('all', array(
+        $this->config['popup']['params']['slideshows'] = Model_Slideshow::find('all', array(
             'order_by' => array('slideshow_title' => 'asc'),
         ));
 
         \Config::load('noviusos_slideshow::slideshow', 'slideshow');
+        $this->config['popup']['params']['sizes'] = \Config::get('slideshow.sizes');
+
+        return parent::action_popup();
+    }
+
+    public function action_save(array $args = null)
+    {
+        \Config::load('noviusos_slideshow::slideshow', 'slideshow');
         $sizes = \Config::get('slideshow.sizes');
 
-        return View::forge('noviusos_slideshow::admin/popup', array(
-            'slideshows' => $slideshows,
-            'sizes' => $sizes
-        ));
+        $params = array();
+        $params['src'] = Model_Image::find()->where('slidimg_slideshow_id', $_POST['slideshow_id'])->get_one()->medias->image->get_public_path_resized(100, 40);
+        $params['title'] = Model_Slideshow::find($_POST['slideshow_id'])->slideshow_title;
+        $params['size'] = !empty($_POST['size']) ? $_POST['size'] : current(array_keys($sizes));
+        $body = array(
+            'config'  => \Format::forge()->to_json($_POST),
+            'preview' => \View::forge($this->config['preview']['view'], $params)->render(),
+        );
+        \Response::json($body);
     }
+
 }

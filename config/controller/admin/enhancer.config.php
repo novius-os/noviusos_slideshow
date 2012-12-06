@@ -8,8 +8,13 @@
  * @link http://www.novius-os.org
  */
 
-namespace Nos\Slideshow;
-
-class Controller_Admin_Appdesk extends \Nos\Controller_Admin_Appdesk
-{
-}
+return array(
+    'popup' => array(
+        'layout' => array(
+            'view' => 'noviusos_slideshow::admin/popup',
+        ),
+    ),
+    'preview' => array(
+        'view' => 'noviusos_slideshow::admin/preview',
+    ),
+);
