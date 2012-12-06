@@ -33,7 +33,7 @@ function slidimg($i, $image = null, $is_model = false, $show_link = false)
                 'value' => $media_id,
                 'renderer_options' => array(
                     'inputFileThumb' => array(
-                        'title' => 'Image',
+                        'title' => __('Image'),
                     ),
                 ),
             )
@@ -71,7 +71,7 @@ $content[] = slidimg($field_index++, null, false, $show_link);
 $content[] = '</div>';
 
 // Bouton "Nouvelle image"
-$content[] = '<div style="text-align: right;"><button data-icon="plus" class="slideshow_add_image">Ajouter une image</button></div>';
+$content[] = '<div style="text-align: right;"><button data-icon="plus" class="slideshow_add_image">'.__('Add an image').'</button></div>';
 $content[] = '</div>';
 
 echo implode("\n", $content);
@@ -110,10 +110,12 @@ echo implode("\n", $content);
 
                 // On fait une confirmation que si on supprime une "vraie" image
                 if (media_id && media_id > 0) {
-                    $container.nosConfirmationDialog({
-                        content:'Etes-vous certain de vouloir supprimer cette image ?',
-                        title:'Delete an image',
-                        confirmed:remove_image
+                    $container.nosAction('confirmationDialog', {
+                        dialog : {
+                            content:<?= Format::forge()->to_json('Are you sure you want to delete this image?') ?>,
+                            title:<?= Format::forge()->to_json('Delete an image') ?>,
+                            confirmed:remove_image
+                        }
                     });
                 }
                 else {

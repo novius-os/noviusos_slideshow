@@ -11,5 +11,5 @@
 return array(
     'views' => array(
         'index' => 'noviusos_slideshow::slideshow'
-    )
+    ),
 );

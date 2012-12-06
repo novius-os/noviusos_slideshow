@@ -11,23 +11,10 @@
 return array(
     'controller_url'  => 'admin/noviusos_slideshow/slideshow',
     'model' => 'Nos\\Slideshow\\Model_Slideshow',
-    'messages' => array(
-        'successfully added' => __('Slideshow successfully added.'),
-        'successfully saved' => __('Slideshow successfully saved.'),
-        'successfully deleted' => __('The Slideshow has successfully been deleted!'),
-        'you are about to delete, confim' => __('You are about to delete the slideshow <span style="font-weight: bold;">":title"</span>. Are you sure you want to continue?'),
-        'you are about to delete' => __('You are about to delete the slideshow <span style="font-weight: bold;">":title"</span>.'),
-        'exists in multiple context' => __('This slideshow exists in <strong>{count} contexts</strong>.'),
-        'delete in the following contexts' => __('Delete this slideshow in the following contexts:'),
-        'item deleted' => __('This slideshow has been deleted.'),
-        'not found' => __('Slideshow not found'),
-        'blank_state_item_text' => __('slideshow'),
-    ),
     'tab' => array(
         'iconUrl' => 'static/apps/noviusos_slideshow/img/slideshow-16.png',
         'labels' => array(
             'insert' => __('Add a slideshow'),
-            'blankSlate' => __('Translate a slideshow'),
         ),
     ),
     'layout' => array(
@@ -54,24 +41,13 @@ return array(
             ),
         ),
         'slideshow_title' => array(
-            'label' => 'Titre',
+            'label' => __('Title'),
             'form' => array(
                 'type' => 'text',
             ),
             'validation' => array(
                 'required',
                 'min_length' => array(2),
-            ),
-        ),
-        'save' => array(
-            'label' => 'Ajouter',
-            'form' => array(
-                'type' => 'submit',
-                'tag'   => 'button',
-
-                'value' => 'Save',
-                'class' => 'primary',
-                'data-icon' => 'check',
             ),
         ),
         'save' => array(

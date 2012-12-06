@@ -26,13 +26,13 @@ if (!empty($media)) {
 ?>
     </div>
     <div style="float:left;width:500px">
-        <input type="text" placeholder="Nom du slide" style="width: 500px;" title="Nom" name="images[<?= $i ?>][slidimg_title]" value="<?= (!empty($image) ? ($image->slidimg_title) : '') ?>"/>
+        <input type="text" placeholder="<?= e(__('Slide name')) ?>" style="width: 500px;" title="<?= e(__('Slide name')) ?>" name="images[<?= $i ?>][slidimg_title]" value="<?= (!empty($image) ? ($image->slidimg_title) : '') ?>"/>
         <br/>
 <?php
 if ($show_link) {
     ?>
         <p style="margin-top:5px">
-            <a href="#" class="toggle_link_to"><?php echo ((!empty($image) && $image->slidimg_link_to_page_id) ? ('Cette slide pointe vers &laquo; '.$image->page->page_title.' &raquo;') : 'Faire un lien'); ?></a>
+            <a href="#" class="toggle_link_to"><?php echo ((!empty($image) && $image->slidimg_link_to_page_id) ? (strtr(__('This slide links to "{title}"'), array('{title}' => $image->page->page_title))) : __('Make a link')); ?></a>
         </p>
     <?php
 }
@@ -43,24 +43,24 @@ if ($show_link) {
 if ($show_link) {
     ?>
     <div class="link_to" style="overflow:hidden;height:0;margin-left:70px">
-        <?= Nos\Renderer_Page_Selector::renderer(
+        <?= Nos\Page\Renderer_Selector::renderer(
         array(
             'input_name' => 'images['.$i.'][slidimg_link_to_page_id]',
             'width' => 510,
             'selected' => array(
                 'id' => !empty($image) ? ($image->slidimg_link_to_page_id) : null,
-                'model' => 'Nos\\Model_Page',
+                'model' => 'Nos\\Page\\Model_Page',
             ),
             'treeOptions' => array(
-                'context' => 'fr_FR'
+                'context' => \Input::get('context_main', Nos\Tools_Context::default_context()),
             ),
         )
-    );?>
+    ); ?>
     </div>
     <?php
 }
 ?>
-    <textarea name="images[<?php echo $i; ?>][slidimg_description]" placeholder="Description" style="width: 700px; margin-top: 10px"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
+    <textarea name="images[<?php echo $i; ?>][slidimg_description]" placeholder="<?= e(__('Description')) ?>" style="width: 700px; margin-top: 10px"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
 
     <button data-icon="trash" class="close" style="padding-right: 0; position: absolute; top: 10px; right: 10px;">&nbsp;</button>
 </div>
