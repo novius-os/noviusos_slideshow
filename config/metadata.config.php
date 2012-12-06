@@ -19,7 +19,7 @@ return array(
     ),
     'permission' => array(
     ),
-    'launchers' => array( // = item ajouté dans l'admin
+    'launchers' => array(
         'noviusos_slideshow' => array(
             'name'    => 'Slideshow',
             'action' => array(
@@ -28,20 +28,21 @@ return array(
                     'url' => 'admin/noviusos_slideshow/appdesk',
                 ),
             ),
+            'icon64'  => 'static/apps/noviusos_slideshow/img/slideshow-64.png',
         ),
     ),
     'enhancers' => array(
-        'noviusos_slideshow' => array( // = bloc insérable dans un wyysiwig
+        'noviusos_slideshow' => array(
             'title' => 'Slideshow',
             'id'    => 'slideshow',
             'desc'  => '',
-            'enhancer' => 'noviusos_slideshow/slideshow/main', // pour l'affichage en front
-            'iconUrl' => 'static/apps/contact/img/slideshow-16.png', // icon du wysiwig
-            'previewUrl' => 'admin/noviusos_slideshow/preview', // preview pour le wysiwig
+            'enhancer' => 'noviusos_slideshow/slideshow/main',
+            'iconUrl' => '/static/apps/noviusos_slideshow/img/slideshow-16.png',
+            'previewUrl' => 'admin/noviusos_slideshow/enhancer/preview',
             'dialog' => array(
-                'contentUrl'    => 'admin/noviusos_slideshow/popup',
+                'contentUrl'    => 'admin/noviusos_slideshow/enhancer/popup',
                 'width'         => 450,
-                'height'        => 180,
+                'height'        => 300,
                 'ajax'          => true,
             ),
         ),
