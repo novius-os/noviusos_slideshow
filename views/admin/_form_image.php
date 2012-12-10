@@ -52,7 +52,7 @@ if ($show_link) {
                 'model' => 'Nos\\Page\\Model_Page',
             ),
             'treeOptions' => array(
-                'context' => \Input::get('context_main', Nos\Tools_Context::default_context()),
+                'context' => \Input::get('context_main', Nos\Tools_Context::defaultContext()),
             ),
         )
     ); ?>
