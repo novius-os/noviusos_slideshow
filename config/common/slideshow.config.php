@@ -6,7 +6,7 @@ return array(
     'data_mapping' => array(
         'id' => 'slideshow_id',
         'title' => array(
-            'headerText' => __('Title'),
+            'title' => __('Title'),
             'column' => 'slideshow_title',
         ),
     ),
