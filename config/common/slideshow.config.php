@@ -12,18 +12,16 @@ return array(
     ),
     'i18n' => array(
         // Crud
-        'successfully added' => __('Slideshow successfully added.'),
-        'successfully saved' => __('Slideshow successfully saved.'),
-        'successfully deleted' => __('The slideshow has successfully been deleted!'),
+        'successfully added' => __('Done! The slideshow has been added.'),
+        'successfully deleted' => __('The slideshow has been deleted.'),
 
         // General errors
-        'item deleted' => __('This slideshow has been deleted.'),
-        'not found' => __('Slideshow not found'),
+        'item deleted' => __('This slideshow doesn’t exist any more. It has been deleted.'),
+        'not found' => __('We cannot find this slideshow.'),
 
         // Deletion popup
-        'delete an item' => __('Delete a slideshow'),
-        'you are about to delete, confim' => __('You are about to delete the slideshow <span style="font-weight: bold;">":title"</span>. Are you sure you want to continue?'),
-        'you are about to delete' => __('You are about to delete the slideshow <span style="font-weight: bold;">":title"</span>.'),
+        'delete an item' => __('Deleting the news slideshow ‘{{title}}’'),
+        'you are about to delete, confim' => __('Last chance, there’s no undo. Do you really want to delete this slideshow?'),
     ),
     'actions' => array(
         'Nos\Slideshow\Model_Slideshow.add' => array(
