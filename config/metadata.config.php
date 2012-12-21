@@ -12,8 +12,6 @@ return array(
     'name'      => 'Slideshow',
     'namespace' => 'Nos\Slideshow',
     'version'   => '0.2',
-    'icon16'  => 'static/apps/noviusos_slideshow/img/slideshow-16.png',
-    'icon64'  => 'static/apps/noviusos_slideshow/img/slideshow-64.png',
     'provider'  => array(
         'name'  => 'Novius OS',
     ),
@@ -28,7 +26,6 @@ return array(
                     'url' => 'admin/noviusos_slideshow/appdesk',
                 ),
             ),
-            'icon64'  => 'static/apps/noviusos_slideshow/img/slideshow-64.png',
         ),
     ),
     'enhancers' => array(
@@ -48,8 +45,8 @@ return array(
         ),
     ),
     'icons' => array(
-        64 => '/static/apps/noviusos_slideshow/img/slideshow-64.png',
-        32 => '/static/apps/noviusos_slideshow/img/slideshow-32.png',
         16 => '/static/apps/noviusos_slideshow/img/slideshow-16.png',
+        32 => '/static/apps/noviusos_slideshow/img/slideshow-32.png',
+        64 => '/static/apps/noviusos_slideshow/img/slideshow-64.png',
     ),
 );
