@@ -62,5 +62,5 @@ if ($show_link) {
 ?>
     <textarea name="images[<?php echo $i; ?>][slidimg_description]" placeholder="<?= e(__('Description')) ?>" style="width: 700px; margin-top: 10px"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
 
-    <button data-icon="trash" class="close" style="padding-right: 0; position: absolute; top: 10px; right: 10px;">&nbsp;</button>
+    <button data-icon="trash" class="close without-text" style="padding-right: 0; position: absolute; top: 10px; right: 10px;">&nbsp;</button>
 </div>
