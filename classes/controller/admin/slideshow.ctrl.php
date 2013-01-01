@@ -37,7 +37,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
                     $values = array_merge($values, array(
                         'slidimg_position'      => $position,
                     ));
-                    $images[$image['slidimg_id']]->values($values);
+                    $images[$image['slidimg_id']]->set($values);
                     $images[$image['slidimg_id']]->medias->image = $media_id;
                     $images[$image['slidimg_id']]->save();
 
