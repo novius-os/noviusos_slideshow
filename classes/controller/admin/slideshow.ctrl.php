@@ -65,7 +65,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             // Images a supprimer
             $images_to_be_deleted = array_diff(array_keys($images), $form_images_ids);
             if ( !empty($images_to_be_deleted) ) {
-                \DB::delete('slideshow_image')->where('slidimg_id', 'IN', $images_to_be_deleted)->execute();
+                \DB::delete(Model_Image::table())->where('slidimg_id', 'IN', $images_to_be_deleted)->execute();
                 \DB::delete('nos_media_link')->where(array(
                     array('medil_from_table', '=', 'slideshow_image'),
                     array('medil_foreign_id', 'IN', $images_to_be_deleted),
