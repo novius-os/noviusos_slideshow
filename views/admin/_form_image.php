@@ -8,15 +8,23 @@
  * @link http://www.novius-os.org
  */
 ?>
-<div class="<?php if (!empty($is_model)) {
-    echo 'slideshow_model ';
-} ?>slideshow_image" style="position: relative; border:1px solid #ccc; padding: 10px 10px 10px 20px; margin: 10px 0">
-    <div class="handle" style="position: absolute; top: 0px; left: 0px; width: 10px; height: 100%; background: #ccc; cursor: move"></div>
+<div class="slideshow_image accordion fieldset field_enclosure <?= !empty($is_model) ? 'slideshow_model ' : '' ?>">
+    <h3><a href="#"><?= __('Required information') ?></a></h3>
+    <div style="overflow:visible;">
+
 
     <input type="hidden" name="images[<?php echo $i; ?>][slidimg_id]" value="<?= (!empty($image) ? $image->slidimg_id : '') ?>"/>
 
-    <div style="float:left">
+    <p>
+        <span><label>
+            <?= e(__('Image:')) ?>
+            <br />
 <?php
+
+$thumbnail = !empty($image->medias->image) ? $image->medias->image->get_public_path_resized(160, 160) : '';
+
+echo '<input type="hidden" name="images['.$i.'][thumb]" value="'.(!empty($thumbnail) ? $thumbnail : 'static/novius-os/admin/vendor/jquery/jquery-ui-input-file-thumb/css/images/apn.png').'" />';
+
 if ($is_model) {
     $media = '<input type="text" class="media" name="images['.$i.'][media_id]" value="0" />';
 }
@@ -24,29 +32,36 @@ if (!empty($media)) {
     echo $media;
 }
 ?>
-    </div>
-    <div style="float:left;width:500px">
-        <input type="text" placeholder="<?= e(__('Slide name')) ?>" style="width: 500px;" title="<?= e(__('Slide name')) ?>" name="images[<?= $i ?>][slidimg_title]" value="<?= (!empty($image) ? ($image->slidimg_title) : '') ?>"/>
-        <br/>
+        </label></span>
+    </p>
+    <p>
+        <span><label>
+            <?= e(__('Slide name:')) ?>
+            <br />
+            <input type="text" placeholder="<?= e(__('Slide name')) ?>" title="<?= e(__('Slide name')) ?>" name="images[<?= $i ?>][slidimg_title]" value="<?= (!empty($image) ? ($image->slidimg_title) : '') ?>" />
+        </label></span>
+    </p>
+    <p>
+        <span><label>
+            <?= e(__('Description:')) ?>
+            <br />
+            <textarea name="images[<?php echo $i; ?>][slidimg_description]" rows="4" placeholder="<?= e(__('Description')) ?>"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
+            <label></span>
+    </p>
 <?php
 if ($show_link) {
     ?>
-        <p style="margin-top:5px">
-            <a href="#" class="toggle_link_to"><?php echo ((!empty($image) && $image->slidimg_link_to_page_id) ? (strtr(__('This slide links to "{title}"'), array('{title}' => $image->page->page_title))) : __('Make a link')); ?></a>
-        </p>
+    <p>
+        <label><?= e(__('Links to:')) ?></label>
+        <br />
     <?php
-}
-?>
-    </div>
-    <br style="clear:both"/>
-<?php
-if ($show_link) {
+    $has_link = !empty($image) && $image->slidimg_link_to_page_id;
     ?>
-    <div class="link_to" style="overflow:hidden;height:0;margin-left:70px">
+        <a href="#" class="add_link_to" style="<?= $has_link ? 'display:none;' : '' ?>"><?= __('Add a link'); ?></a>
+        <div class="link_to" style="<?= $has_link ? '' : 'display:none;' ?>">
         <?= Nos\Page\Renderer_Selector::renderer(
         array(
             'input_name' => 'images['.$i.'][slidimg_link_to_page_id]',
-            'width' => 510,
             'selected' => array(
                 'id' => !empty($image) ? ($image->slidimg_link_to_page_id) : null,
                 'model' => 'Nos\\Page\\Model_Page',
@@ -56,11 +71,11 @@ if ($show_link) {
             ),
         )
     ); ?>
-    </div>
+        </div>
+        <a href="#" class="remove_link_to link_to" style="<?= $has_link ? '' : 'display:none;' ?>"><?= __('Remove the link'); ?></a>
+    </p>
     <?php
 }
 ?>
-    <textarea name="images[<?php echo $i; ?>][slidimg_description]" placeholder="<?= e(__('Description')) ?>" style="width: 700px; margin-top: 10px"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
-
-    <button data-icon="trash" class="close without-text" style="padding-right: 0; position: absolute; top: 10px; right: 10px;">&nbsp;</button>
+    </div>
 </div>

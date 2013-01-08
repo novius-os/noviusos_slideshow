@@ -9,8 +9,8 @@
  */
 
 return array(
-    'slides_with_link' => false,
-    'slides_preview' => false,
+    'slides_with_link' => true,
+    'slides_preview' => true,
     'sizes' => array(
         'grand' => array(
             'img_width' => '800',
