@@ -13,7 +13,7 @@ define(
             var $slides_container = $container.find('.slides_container');
             var media_options = $.extend(true, options.mediaSelector, $slides_container.children(':last').find('input.media').data('media-options') || {});
             media_options.inputFileThumb.file = null;
-            var field_index = $slides_container.children().length + 1
+            var field_index = $slides_container.children('.field_enclosure').length ;
             var $slide_model =  $slides_container.find('div.slideshow_model');
             $slides_container.show();
 
@@ -44,17 +44,17 @@ define(
                 */
                 $newimg.find('input.media').nosMedia(media_options);
 
-
                 // Fix : Passer le bouton Add en inline-block...
                 $newimg.find('div.ui-inputfilethumb-fileactions').children(':first').css('display', 'inline-block');
 
                 $slides_container.append($newimg);
-                on_field_added($newimg, {where: 'bottom'});
+                on_field_added($newimg);
+                init_links_to($newimg, field_index);
                 on_focus_preview(get_preview($newimg));
                 $(this).removeClass('ui-state-focus');
             });
 
-            function on_field_added($field, params) {
+            function on_field_added($field) {
                 if ($field.is('.slideshow_model')) {
                     return;
                 }
@@ -71,7 +71,7 @@ define(
                 });
 
                 var $preview = get_preview($field);
-                $preview_container[params.where == 'top' ? 'prepend' : 'append']($preview);
+                $preview_container.append($preview);
                 generate_preview.call($field.get(0), {});
             }
 
@@ -144,7 +144,7 @@ define(
                 $field.remove();
                 hide_field();
                 $preview.addClass('ui-state-error').hide(500, function() {
-                $preview.remove();
+                    $preview.remove();
                 });
             }
 
@@ -207,7 +207,7 @@ define(
                 $preview.html(html);
             }
 
-            var $sortable =  $container.find('ul.preview_container').sortable();
+            $container.find('ul.preview_container').sortable();
 
             function blur() {
                 var $preview = $preview_container.find('.ui-widget-content.ui-state-active');
@@ -224,13 +224,6 @@ define(
                     $field.hide();
                 }
             }
-
-
-            $slides_container.children('.field_enclosure').each(function onEachFields() {
-                var $field = $(this);
-                on_field_added($field, {where: 'bottom'});
-                $field.hide();
-            });
             $slides_container.find('.show_hide').hide();
 
             $slides_container.on('click', '.add_link_to', function (e) {
@@ -250,6 +243,31 @@ define(
                 $link_to.find(':radio').first().prop('checked', true);
                 $link_to.hide();
                 $field.find('.add_link_to').show();
+            });
+
+
+            function init_links_to($field, index) {
+                // Don't transform the model
+                if ($field.is('.slideshow_model')) {
+                    return;
+                }
+                var $this = $field.find('.transform_renderer_page_selector');
+                // Clone
+                var params = $.extend(true, {}, $this.data('renderer_page_selector'), {
+                    input_name: 'images[' + index + '][slidimg_link_to_page_id]'
+                });
+                var id = 'id_' + (new Date().getTime()).toString(16);
+                $this.attr('id', id);
+                require(['jquery-nos-inspector-tree-model-radio'], function() {
+                    $this.nosInspectorTreeModelRadio(params);
+                });
+            }
+
+            $slides_container.children('.field_enclosure').each(function onEachFields() {
+                var $field = $(this);
+                on_field_added($field);
+                init_links_to($field, find_field($field, '_id').val());
+                $field.hide();
             });
         };
     });

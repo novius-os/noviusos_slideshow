@@ -13,6 +13,7 @@
     <div style="overflow:visible;">
 
 
+    <input type="hidden" name="images[<?php echo $i; ?>][_id]" value="<?= $i ?>"/>
     <input type="hidden" name="images[<?php echo $i; ?>][slidimg_id]" value="<?= (!empty($image) ? $image->slidimg_id : '') ?>"/>
 
     <p>
@@ -59,18 +60,30 @@ if ($show_link) {
         ?>
         <a href="#" class="add_link_to" style="<?= $has_link ? 'display:none;' : '' ?>"><?= __('Add a link'); ?></a>
         <div class="link_to" style="<?= $has_link ? '' : 'display:none;' ?>">
-        <?= Nos\Page\Renderer_Selector::renderer(
-            array(
-                'input_name' => 'images['.$i.'][slidimg_link_to_page_id]',
-                'selected' => array(
-                    'id' => !empty($image) ? ($image->slidimg_link_to_page_id) : null,
-                    'model' => 'Nos\\Page\\Model_Page',
-                ),
-                'treeOptions' => array(
-                    'context' => \Input::get('context_main', Nos\Tools_Context::defaultContext()),
-                ),
-            )
-        ); ?>
+            <div class="transform_renderer_page_selector" data-renderer_page_selector="<?= htmlspecialchars(\Format::forge()->to_json(
+                array(
+                    'input_name' => 'images['.$i.'][slidimg_link_to_page_id]',
+                    'selected' => array(
+                        'id' => !empty($image) ? ($image->slidimg_link_to_page_id) : 0,
+                        'model' => 'Nos\Page\Model_Page',
+                    ),
+                    'treeOptions' => array(
+                        'context' => \Input::get('context_main', Nos\Tools_Context::defaultContext()),
+                    ),
+                    // Default
+                    'urlJson' => 'admin/noviusos_page/inspector/page/json',
+                    'reloadEvent' => 'Nos\Page\Model_Page',
+                    'columns' => array(
+                        array(
+                            'dataKey' => 'title',
+                        )
+                    ),
+                    'height' => '150px',
+                    'width' => null,
+                    'contextChange' => true,
+                ))) ?>">
+                <table class="nos-treegrid"></table>
+            </div>
         </div>
         <a href="#" class="remove_link_to link_to" style="<?= $has_link ? '' : 'display:none;' ?>"><?= __('Remove the link'); ?></a>
     </p>
