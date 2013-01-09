@@ -54,23 +54,23 @@ if ($show_link) {
     <p>
         <label><?= e(__('Links to:')) ?></label>
         <br />
-    <?php
-    $has_link = !empty($image) && $image->slidimg_link_to_page_id;
-    ?>
+        <?php
+        $has_link = !empty($image) && $image->slidimg_link_to_page_id;
+        ?>
         <a href="#" class="add_link_to" style="<?= $has_link ? 'display:none;' : '' ?>"><?= __('Add a link'); ?></a>
         <div class="link_to" style="<?= $has_link ? '' : 'display:none;' ?>">
         <?= Nos\Page\Renderer_Selector::renderer(
-        array(
-            'input_name' => 'images['.$i.'][slidimg_link_to_page_id]',
-            'selected' => array(
-                'id' => !empty($image) ? ($image->slidimg_link_to_page_id) : null,
-                'model' => 'Nos\\Page\\Model_Page',
-            ),
-            'treeOptions' => array(
-                'context' => \Input::get('context_main', Nos\Tools_Context::defaultContext()),
-            ),
-        )
-    ); ?>
+            array(
+                'input_name' => 'images['.$i.'][slidimg_link_to_page_id]',
+                'selected' => array(
+                    'id' => !empty($image) ? ($image->slidimg_link_to_page_id) : null,
+                    'model' => 'Nos\\Page\\Model_Page',
+                ),
+                'treeOptions' => array(
+                    'context' => \Input::get('context_main', Nos\Tools_Context::defaultContext()),
+                ),
+            )
+        ); ?>
         </div>
         <a href="#" class="remove_link_to link_to" style="<?= $has_link ? '' : 'display:none;' ?>"><?= __('Remove the link'); ?></a>
     </p>

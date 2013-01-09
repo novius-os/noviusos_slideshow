@@ -47,11 +47,11 @@ ul.preview_container li img {
     margin-top: 0;
 }
 
-.fields_container p.actions {
+.slides_container p.actions {
     text-align: left;
     margin-bottom: 1em;
 }
-.fields_container button.action {
+.slides_container button.action {
     width: 49%;
 }
 
