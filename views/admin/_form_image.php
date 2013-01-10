@@ -17,8 +17,7 @@
     <input type="hidden" name="images[<?php echo $i; ?>][slidimg_id]" value="<?= (!empty($image) ? $image->slidimg_id : '') ?>"/>
 
     <p>
-        <span><label>
-            <?= e(__('Image:')) ?>
+        <span><label><?= e(__('Image:')) ?></label>
             <br />
 <?php
 
@@ -33,7 +32,7 @@ if (!empty($media)) {
     echo $media;
 }
 ?>
-        </label></span>
+        </span>
     </p>
     <p>
         <span><label>

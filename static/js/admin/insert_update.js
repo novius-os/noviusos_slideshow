@@ -36,18 +36,9 @@ define(
                     }
                 });
 
-                // Supprime/Regenere le champs media
-                /*
-                var $media_input = $newimg.find('input.media').removeAttr('id').removeData().removeAttr('data-media-options').off();
-                $media_input.closest('.ui-widget').replaceWith($media_input);
-                $media_input.media(media_options);
-                */
+                $slides_container.append($newimg);
                 $newimg.find('input.media').nosMedia(media_options);
 
-                // Fix : Passer le bouton Add en inline-block...
-                $newimg.find('div.ui-inputfilethumb-fileactions').children(':first').css('display', 'inline-block');
-
-                $slides_container.append($newimg);
                 on_field_added($newimg);
                 init_links_to($newimg, field_index);
                 on_focus_preview(get_preview($newimg));
