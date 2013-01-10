@@ -38,14 +38,14 @@ if (!empty($media)) {
         <span><label>
             <?= e(__('Slide name:')) ?>
             <br />
-            <input type="text" placeholder="<?= e(__('Slide name')) ?>" title="<?= e(__('Slide name')) ?>" name="images[<?= $i ?>][slidimg_title]" value="<?= (!empty($image) ? ($image->slidimg_title) : '') ?>" />
+            <input type="text" title="<?= e(__('Slide name')) ?>" name="images[<?= $i ?>][slidimg_title]" value="<?= (!empty($image) ? ($image->slidimg_title) : '') ?>" />
         </label></span>
     </p>
     <p>
         <span><label>
             <?= e(__('Description:')) ?>
             <br />
-            <textarea name="images[<?php echo $i; ?>][slidimg_description]" rows="4" placeholder="<?= e(__('Description')) ?>"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
+            <textarea name="images[<?php echo $i; ?>][slidimg_description]" rows="4"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
             <label></span>
     </p>
 <?php
