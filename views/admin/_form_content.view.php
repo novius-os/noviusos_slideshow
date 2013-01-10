@@ -101,10 +101,7 @@ require(['jquery-nos', 'static/apps/noviusos_slideshow/js/admin/insert_update.js
                     'file' => '',
                 ),
             ),
-            'dialogDelete' => array(
-                'content' => __('Are you sure you want to delete this slide?'),
-                'title' => __('Delete a slide'),
-            ),
+            'textDelete' =>  __('Are you sure you want to delete this slide?'),
         )) ?>);
    });
 });

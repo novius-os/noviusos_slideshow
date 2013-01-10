@@ -57,7 +57,7 @@ define(
                         var $hidden   = $('<input type="hidden" value="" />');
                         $hidden.insertAfter($checkbox);
                         $checkbox.on('change', function() {
-                        $hidden.attr('name', $(this).is(':checked') ? '' : name);
+                            $hidden.attr('name', $(this).is(':checked') ? '' : name);
                         }).trigger('change');
                 });
 
@@ -145,25 +145,19 @@ define(
                 // Don't bubble to .preview container
                 e.stopPropagation();
 
-                var $self = $preview_container.find('li.ui-state-active').data('field'),
-                media_id = $self.find('input.media').val();
+                var $preview = $preview_container.find('li.ui-state-active'),
+                    $field = $preview.data('field'),
+                    media_id = $field.find('input.media').val();
 
                 var remove_image = function () {
-                    // On en garde toujours au moins une image dans le dom
-                    if ($slides_container.children().length > 1) {
-                        $self.remove();
-                    } else {
-                        $self.find('textarea, input').val('');
-                    }
+                    delete_preview.call($preview);
                 };
 
                 // On fait une confirmation que si on supprime une "vraie" image
-                if (media_id && media_id > 0) {
-                    $container.nosAction('confirmationDialog', {
-                        dialog : $.extend(true, options.dialogDelete, {
-                            confirmed: remove_image
-                        })
-                    });
+                if (media_id && parseInt(media_id) > 0) {
+                    if (confirm(options.textDelete)) {
+                        remove_image();
+                    }
                 } else {
                     remove_image();
                 }
