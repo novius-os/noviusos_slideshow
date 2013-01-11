@@ -14,11 +14,11 @@
 
 
     <input type="hidden" name="images[<?php echo $i; ?>][_id]" value="<?= $i ?>"/>
-    <input type="hidden" name="images[<?php echo $i; ?>][slidimg_id]" value="<?= (!empty($image) ? $image->slidimg_id : '') ?>"/>
+    <input type="hidden" name="images[<?php echo $i; ?>][slidimg_id]" value="<?= e(!empty($image) ? $image->slidimg_id : '') ?>"/>
 
     <p>
-        <span><label><?= e(__('Image:')) ?></label>
-            <br />
+        <label><?= e(__('Image:')) ?></label>
+        <br />
 <?php
 
 $thumbnail = !empty($image->medias->image) ? $image->medias->image->get_public_path_resized(160, 160) : '';
@@ -32,21 +32,20 @@ if (!empty($media)) {
     echo $media;
 }
 ?>
-        </span>
     </p>
     <p>
-        <span><label>
+        <label>
             <?= e(__('Slide name:')) ?>
             <br />
-            <input type="text" title="<?= e(__('Slide name')) ?>" name="images[<?= $i ?>][slidimg_title]" value="<?= (!empty($image) ? ($image->slidimg_title) : '') ?>" />
-        </label></span>
+            <input type="text" title="<?= e(__('Slide name')) ?>" name="images[<?= $i ?>][slidimg_title]" value="<?= e(!empty($image) ? ($image->slidimg_title) : '') ?>" />
+        </label>
     </p>
     <p>
-        <span><label>
+        <label>
             <?= e(__('Description:')) ?>
             <br />
-            <textarea name="images[<?php echo $i; ?>][slidimg_description]" rows="4"><?= (!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
-            <label></span>
+            <textarea name="images[<?php echo $i; ?>][slidimg_description]" rows="4"><?= e(!empty($image) ? ($image->slidimg_description) : '') ?></textarea>
+        <label>
     </p>
 <?php
 if ($show_link) {
