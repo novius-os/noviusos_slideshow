@@ -111,7 +111,7 @@ require(['jquery-nos', 'static/apps/noviusos_slideshow/js/admin/insert_update.js
                 ),
             ),
             'textDelete' =>  __('Are you sure you want to delete this slide?'),
-        )) ?>);
+        )) ?>, <?= $crud['is_new'] ? 'true' : 'false'; ?>);
    });
 });
 </script>

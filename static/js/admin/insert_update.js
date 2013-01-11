@@ -6,7 +6,7 @@ define(
     ],
     function($) {
         "use strict";
-        return function(id, options) {
+        return function(id, options, is_new) {
 
             var $container = $(id);
             var $preview_container = $container.find('.preview_container');
@@ -254,5 +254,9 @@ define(
                 init_links_to($field, find_field($field, '_id').val());
                 $field.hide();
             });
+
+            if (is_new) {
+                $container.find('[data-id=add]').click();
+            }
         };
     });
