@@ -61,6 +61,16 @@ function slidimg($image = null, $is_model = false)
 
     return $view;
 }
+if (!$item->is_new()) {
+    $count = \Nos\Model_Wysiwyg::count(array(
+        'where' => array(
+            array('wysiwyg_text', 'LIKE', '%&quot;slideshow_id&quot;:&quot;'.$item->id.'%'),
+        ),
+    ));
+    if ($count == 0) {
+        echo \View::forge('noviusos_slideshow::admin/warning_not_published', $view_params, false);
+    }
+}
 ?>
     <div class="line">
         <div class="col c8" style="position:relative;">
