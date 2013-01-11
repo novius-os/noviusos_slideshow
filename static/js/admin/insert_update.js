@@ -114,7 +114,7 @@ define(
 
                 $focus = $focus || $preview_container.find('li.ui-state-active');
                 if ($focus.length > 0) {
-                    var diff = -24; // 29 = arrow height
+                    var diff = -40;
                     var pos = $focus.position();
                     $slides_container.css({
                         paddingTop: Math.max(0, pos.top + diff) + 'px'

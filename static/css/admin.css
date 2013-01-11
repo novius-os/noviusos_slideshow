@@ -49,18 +49,20 @@ ul.preview_container li img {
 
 .slides_container p.actions {
     text-align: left;
-    margin-bottom: 1em;
+    position: relative;
+    height: 40px;
+    padding: 0;
+    margin: 0;
 }
 .slides_container button.action {
     width: 49%;
 }
 
 .preview_arrow {
-    position: relative;
-    top: 29px; /* image height = 29px */
+    position: absolute;
+    top: 44px;
     left: -35px;
 }
-
 
 .preview.ui-sortable-helper {
     padding: 0;

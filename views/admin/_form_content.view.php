@@ -64,8 +64,7 @@ function slidimg($image = null, $is_model = false)
 ?>
     <div class="line">
         <div class="col c8" style="position:relative;">
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
+            <p style="height: 40px;">&nbsp;</p>
             <ul class="preview_container">
             </ul>
             <button type="button" class="primary" style="float:left; width: 168px; height: 168px; margin: 3px;" data-icon="plus" data-id="add" data-params="<?= e(json_encode(array('where' => 'bottom'))) ?>"><?= __('Add a slide') ?></button>
@@ -73,9 +72,9 @@ function slidimg($image = null, $is_model = false)
         </div>
 
         <div class="col c4 slides_container" style="display:none;padding-top:3px;">
-            <img class="preview_arrow show_hide" src="static/apps/noviusos_slideshow/img/arrow-edition.png" />
             <p class="actions show_hide">
                 <button type="button" data-icon="trash" data-id="delete" class="action"><?= ('Delete') ?></button>
+                <img class="preview_arrow show_hide" src="static/apps/noviusos_slideshow/img/arrow-edition.png" />
             </p>
 <?php
 // Model pour ajouter une nouvelle image
