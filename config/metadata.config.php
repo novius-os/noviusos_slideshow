@@ -9,7 +9,7 @@
  */
 
 return array(
-    'name'      => 'Slideshow',
+    'name'      => 'Slideshows',
     'namespace' => 'Nos\Slideshow',
     'version'   => '0.2',
     'provider'  => array(
@@ -17,9 +17,10 @@ return array(
     ),
     'permission' => array(
     ),
+    'i18n_file' => 'noviusos_slideshow::metadata',
     'launchers' => array(
         'noviusos_slideshow' => array(
-            'name'    => 'Slideshow',
+            'name'    => 'Slideshows',
             'action' => array(
                 'action' => 'nosTabs',
                 'tab' => array(
