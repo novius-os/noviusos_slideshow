@@ -8,11 +8,11 @@ ul.preview_container {
     margin: 0;
     padding: 0;
 }
-ul.preview_container li {
+ul.preview_container li, .preview_style {
     margin: 3px;
     padding: 3px;
     float: left;
-    width: 160px;
+    width: 170px;
     height: 160px;
     line-height: 160px;
     font-size: 1.4em;
@@ -64,6 +64,9 @@ ul.preview_container li img {
     left: -35px;
 }
 
+.preview {
+    position: relative;
+}
 .preview.ui-sortable-helper {
     padding: 0;
 }
@@ -84,16 +87,10 @@ ul.preview_container li img {
     border-bottom: 0;*/
 }
 
-
-
 .preview .preview_content {
-    margin-right: 8px;
-    margin-left: 16px; /* .handle width */
+    margin-left: 10px; /* .handle width */
 }
 
-.preview_content {
-    margin-top: 0.5em;
-}
 .preview .handle img {
     position: absolute;
     left: 50%;

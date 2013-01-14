@@ -74,7 +74,9 @@ define(
                 }
 
                 // Generate a new preview
-                $preview = $('<li class="ui-widget-content"></li>');
+                $preview = $('<li class="preview ui-widget-content"><div class="handle ui-widget-header">' +
+                    '<img src="static/apps/noviusos_slideshow/img/move-handle-dark3.png">' +
+                    '</div><span class="preview_content"></span></li>');
 
                 $field.data('preview', $preview);
                 $preview.data('field', $field);
@@ -189,7 +191,7 @@ define(
 
                 html += '<img src="' + thumbnail + '" />';
 
-                $preview.html(html);
+                $preview.find('.preview_content').html(html);
             }
 
             $container.find('ul.preview_container').sortable();
