@@ -22,7 +22,7 @@ define(
                 e.preventDefault();
 
                 var $form = $(this).closest('form'),
-                $newimg = $slide_model.clone(true).removeClass('slideshow_model').find('*').removeAttr('id').end();
+                $newimg = $slide_model.clone().removeClass('slideshow_model').find('*').removeAttr('id').end().nosFormUI();
 
                 // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
                 // L'idée est que les attr('name') de chaque input/textarea d'un même bloc aient le même index
