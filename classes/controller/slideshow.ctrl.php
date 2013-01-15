@@ -42,6 +42,7 @@ class Controller_Slideshow extends Controller_Front_Application
 
         return \View::forge($this->config['views']['index'], array(
             'slideshow' => $slideshow,
+            'size_key'  => $args['size'],
             'class'		=> $size['class'],
             'height'	=> $size['img_height'],
             'width'		=> $size['img_width'],
