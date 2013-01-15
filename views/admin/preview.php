@@ -10,6 +10,6 @@
 ?>
 <div style="overflow: hidden">
     <img style="float: left; width: 64px; height: 64px;" src="<?= $src ?>" />
-    <h1 style="margin-left: 80px;"><?= \Str::tr(__('Slideshow :title'), array('title' => $title)) ?></h1>
-    <p style="margin-left: 80px;">(affichage en <?=$size;?>)</p>
+    <h1 style="margin-left: 80px;"><?= strtr(__('Slideshow ‘{{title}}’'), array('{{title}}' => $title)) ?></h1>
+    <p style="margin-left: 80px;"><?= strtr(__('(format: {{format}}'), array('{{format}}' => $size)) ?></p>
 </div>

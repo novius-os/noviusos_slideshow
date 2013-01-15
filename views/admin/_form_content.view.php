@@ -9,16 +9,23 @@
  */
 
 \Config::load('noviusos_slideshow::slideshow', 'slideshow');
-$show_link = \Config::get('slideshow.slides_with_link');
 
 $form_id = 'slideshow_'.uniqid(true);
-$content = array('<div id="'.$form_id.'">');
 
-$content[] = '<style>.slideshow_model { display: none }</style>'; // TODO
+?>
+<link rel="stylesheet" href="static/apps/noviusos_slideshow/css/admin.css" />
+
+<div id="<?= $form_id ?>">
+<?php
 
 // Retourne un "bloc" (une image avec ses infos)
-function slidimg($i, $image = null, $is_model = false, $show_link = false)
+function slidimg($image = null, $is_model = false)
 {
+    static $i = 1;
+    static $show_link = null;
+    if ($show_link === null) {
+        $show_link = \Config::get('slideshow.slides_with_link', false);
+    }
     $media_id = 0;
     if (!empty($image) && !empty($image->medias->image) && !empty($image->medias->image->media_id)) {
         $media_id = $image->medias->image->media_id;
@@ -50,127 +57,61 @@ function slidimg($i, $image = null, $is_model = false, $show_link = false)
         )
     );
     $view->set_safe('media', $media);
+    $i++;
 
     return $view;
 }
+if (!$item->is_new()) {
+    $count = \Nos\Model_Wysiwyg::count(array(
+        'where' => array(
+            array('wysiwyg_text', 'LIKE', '%&quot;slideshow_id&quot;:&quot;'.$item->id.'%'),
+        ),
+    ));
+    if ($count == 0) {
+        echo \View::forge('noviusos_slideshow::admin/warning_not_published', $view_params, false);
+    }
+}
+?>
+    <div class="line">
+        <div class="col c8" style="position:relative;">
+            <p style="height: 40px;">&nbsp;</p>
+            <ul class="preview_container">
+            </ul>
+            <button type="button" class="primary preview_style" style="width: 178px; height: 168px;" data-icon="plus" data-id="add" data-params="<?= e(json_encode(array('where' => 'bottom'))) ?>"><?= __('Add a slide') ?></button>
+            <br style="clear:both;" />
+        </div>
 
-$content[] = '<div class="slideshow_imageslist">';
-
+        <div class="col c4 slides_container" style="display:none;padding-top:3px;">
+            <p class="actions show_hide">
+                <button type="button" data-icon="trash" data-id="delete" class="action"><?= ('Delete') ?></button>
+                <img class="preview_arrow show_hide" src="static/apps/noviusos_slideshow/img/arrow-edition.png" />
+            </p>
+<?php
 // Model pour ajouter une nouvelle image
-$field_index = 1;
-$content[] = slidimg($field_index++, null, true);
+echo slidimg(null, true);
 
 // Liste des images actuelles
 foreach ($item->images as $img) {
-    $content[] = slidimg($field_index++, $img, false, $show_link);
+    echo slidimg($img, false);
 }
-
-// Ajouter une nouvelle image (champ vide)
-$content[] = slidimg($field_index++, null, false, $show_link);
-
-$content[] = '</div>';
-
-// Bouton "Nouvelle image"
-$content[] = '<div style="text-align: right;"><button data-icon="plus" class="slideshow_add_image">'.__('Add an image').'</button></div>';
-$content[] = '</div>';
-
-echo implode("\n", $content);
-
 ?>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
-    require(['jquery-nos', 'jquery-ui.sortable'], function ($) {
-        $(function () {
-
-            var $container = $('#<?php echo $form_id; ?>'),
-                    $slideshow_list = $container.find('div.slideshow_imageslist'),
-                    media_options = $slideshow_list.children(':last').find('input.media').data('media-options'),
-                    field_index = $slideshow_list.children().length + 1;
-            $slideshow_list.sortable({
-                axis:'y',
-                handle:'.handle'
-            });
-
-            $container.on('click', 'div.slideshow_image button.close', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-
-                var self = this,
-                        media_id = $(self).closest('div.slideshow_image').find('input.media').val();
-
-                var remove_image = function () {
-                    // On en garde toujours au moins une image dans le dom
-                    if ($slideshow_list.children().length > 1) {
-                        $(self).closest('div.slideshow_image').remove();
-                    }
-                    else {
-                        $(self).closest('div.slideshow_image').find('textarea, input').val('');
-                    }
-                };
-
-                // On fait une confirmation que si on supprime une "vraie" image
-                if (media_id && media_id > 0) {
-                    $container.nosAction('confirmationDialog', {
-                        dialog : {
-                            content:<?= Format::forge()->to_json('Are you sure you want to delete this image?') ?>,
-                            title:<?= Format::forge()->to_json('Delete an image') ?>,
-                            confirmed:remove_image
-                        }
-                    });
-                }
-                else {
-                    remove_image();
-                }
-            })
-                    .on('click', 'button.slideshow_add_image', function (e) {
-                        e.preventDefault();
-
-                        var $form = $(this).closest('form'),
-                                $lastimg = $slideshow_list.find('div.slideshow_model'),
-                                $newimg = $lastimg.clone(true).removeClass('slideshow_model').find('*').removeAttr('id').end();
-
-                        // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
-                        // L'idée est que les attr('name') de chaque input/textarea d'un même bloc aient le même index
-                        field_index++;
-                        $newimg.find('textarea, input').val('').each(function () {
-                            var _name = $(this).attr('name');
-                            if (_name && _name.length > 0) {
-                                var re = new RegExp(/^images\[([0-9]+)\]\[([a-z_]+)\]$/g),
-                                        m = re.exec(_name);
-                                m && $(this).attr('name', 'images[' + field_index + '][' + m[2] + ']');
-                            }
-                        });
-
-                        // Supprime/Regenere le champs media
-                        /*
-                        var $media_input = $newimg.find('input.media').removeAttr('id').removeData().removeAttr('data-media-options').off();
-                        $media_input.closest('.ui-widget').replaceWith($media_input);
-                        $media_input.media(media_options);
-                        */
-                        $newimg.find('input.media').nosMedia(media_options);
-
-                        // Fix : Passer le bouton Add en inline-block...
-                        $newimg.find('div.ui-inputfilethumb-fileactions').children(':first').css('display', 'inline-block');
-
-                        $slideshow_list.append($newimg);
-                    });
-
-            // Changement titre du tab
-            var tabInfos = {
-                label: <?= \Format::forge()->to_json($item->is_new() ? __('Add a slideshow') : $item->slideshow_title) ?>,
-                iconUrl:'static/apps/noviusos_slideshow/img/slideshow-16.png',
-            };
-            $container.nosOnShow('bind', function () {
-                $container.nosTabs('update', tabInfos);
-            });
-            $('.toggle_link_to').bind('click', function () {
-                $target = $(this).parents('.slideshow_image').find('.link_to');
-                if ($target.height() == 0)
-                    $target.height(150);
-                else
-                    $target.height(0);
-                return false;
-            });
-        });
-    });
+require(['jquery-nos', 'static/apps/noviusos_slideshow/js/admin/insert_update.js'], function($, init_form) {
+    $(function() {
+        init_form('#<?= $form_id ?>', <?= Format::forge()->to_json(array(
+            'mediaSelector' => array(
+                'mode' => 'image',
+                'inputFileThumb' => array(
+                    'title' => __('Image'),
+                    'file' => '',
+                ),
+            ),
+            'textDelete' =>  __('Are you sure you want to delete this slide?'),
+        )) ?>, <?= $crud['is_new'] ? 'true' : 'false'; ?>);
+   });
+});
 </script>

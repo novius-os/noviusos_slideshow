@@ -12,7 +12,7 @@ return array(
     ),
     'i18n' => array(
         // Crud
-        'notification item added' => __('All good! Your new slideshow has been added.'),
+        'notification item added' => __('Added! This is a nice new slideshow you have here.'),
         'notification item deleted' => __('The slideshow has been deleted.'),
 
         // General errors
