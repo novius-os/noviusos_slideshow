@@ -21,10 +21,9 @@ return array(
 
         // Deletion popup
         'deleting item title' => __('Deleting the slideshow ‘{{title}}’'),
-        'deleting confirmation' => __('Last chance, there’s no undo. Do you really want to delete this slideshow?'),
 
         # Delete action's labels
-        'deleting button 1 item' => __('Delete this slideshow'),
+        'deleting button 1 item' => __('Yes, delete this slideshow'),
 
         '1 item' => __('1 slideshow'),
         'N items' => __('{{count}} slideshows'),
