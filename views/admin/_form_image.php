@@ -9,7 +9,7 @@
  */
 ?>
 <div class="slideshow_image accordion fieldset field_enclosure <?= !empty($is_model) ? 'slideshow_model ' : '' ?>">
-    <h3><a href="#"><?= __('Required information') ?></a></h3>
+    <h3><a href="#"><?= __('Properties (mandatory)') ?></a></h3>
     <div style="overflow:visible;">
 
 
