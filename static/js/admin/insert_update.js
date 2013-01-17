@@ -17,6 +17,12 @@ define(
             var $slide_model =  $slides_container.find('div.slideshow_model');
             $slides_container.show();
 
+            function reorderSlides() {
+                $preview_container.find('li.preview').each(function() {
+                    $(this).data('field').appendTo($slides_container);
+                });
+            }
+
             // Add a field
             $container.on('click', '[data-id=add]', function onAdd(e) {
                 e.preventDefault();
@@ -194,7 +200,11 @@ define(
                 $preview.find('.preview_content').html(html);
             }
 
-            $container.find('ul.preview_container').sortable();
+            $container.find('ul.preview_container').sortable({
+                update: function(event, ui) {
+                    reorderSlides();
+                }
+            });
 
             function blur() {
                 var $preview = $preview_container.find('.ui-widget-content.ui-state-active');
