@@ -9,6 +9,17 @@ return array(
             'title' => __('Title'),
             'column' => 'slideshow_title',
         ),
+        'thumbnail' => array(
+            'value' => function ($item) {
+                $images = $item->images;
+                return empty($images) ? false : current($images)->medias->image->get_public_path_resized(64, 64);
+            },
+        ),
+        'thumbnailAlternate' => array(
+            'value' => function ($item) {
+                return 'static/novius-os/admin/vendor/jquery/jquery-ui-input-file-thumb/css/images/apn.png';
+            }
+        ),
         'slide_count' => array(
             'title' => __('Slides'),
             'cellFormatters' => array(

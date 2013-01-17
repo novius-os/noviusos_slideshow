@@ -14,6 +14,7 @@ return array(
     'model' => 'Nos\Slideshow\Model_Slideshow',
     'query' => array(
         'order_by' => array('slideshow_created_at' => 'ASC'),
+        'related' => array('images'),
     ),
     'search_text' => 'slideshow_title',
     'i18n' => array(
@@ -40,5 +41,11 @@ return array(
                 }
                 return $query;
             },
+    ),
+    'thumbnails' => true,
+    'appdesk' => array(
+        'appdesk' => array(
+            'defaultView' => 'thumbnails',
+        ),
     ),
 );

@@ -24,6 +24,9 @@ class Model_Slideshow extends Model
             'key_to' => 'slidimg_slideshow_id',
             'cascade_save' => true,
             'cascade_delete' => false,
+            'conditions' => array(
+                'order_by' => array('slidimg_position' => 'ASC'),
+            ),
         ),
     );
 
