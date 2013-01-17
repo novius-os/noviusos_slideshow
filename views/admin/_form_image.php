@@ -9,7 +9,7 @@
  */
 ?>
 <div class="slideshow_image accordion fieldset field_enclosure <?= !empty($is_model) ? 'slideshow_model ' : '' ?>">
-    <h3><a href="#"><?= __('Properties (mandatory)') ?></a></h3>
+    <h3><a href="#"><?= __('Properties') ?></a></h3>
     <div style="overflow:visible;">
 
 
@@ -17,7 +17,7 @@
     <input type="hidden" name="images[<?php echo $i; ?>][slidimg_id]" value="<?= e(!empty($image) ? $image->slidimg_id : '') ?>"/>
 
     <p>
-        <label><?= e(__('Image:')) ?></label>
+        <label><?= e(__('Image:')) ?> <span style="font-size: 1.5em; line-height: 1em; font-weight: bold">*</span></label>
         <br />
 <?php
 
