@@ -9,6 +9,28 @@ return array(
             'title' => __('Title'),
             'column' => 'slideshow_title',
         ),
+        'slide_count' => array(
+            'title' => __('Slides'),
+            'cellFormatters' => array(
+                'center' => array(
+                    'type' => 'css',
+                    'css' => array('text-align' => 'center'),
+                ),
+            ),
+            'value' => function($item) {
+                return $item->is_new() ? 0 : \Nos\Slideshow\Model_Image::count(array(
+                    'where' => array(array('slidimg_slideshow_id' => $item->slideshow_id)),
+                ));
+            },
+            'sorting_callback' => function(&$query, $sortDirection) {
+                $query->_join_relation('images', $join);
+                $query->group_by($join['alias_from'].'.slideshow_id');
+                $query->order_by(\Db::expr('COUNT(*)'), $sortDirection);
+            },
+            'width' => 100,
+            'ensurePxWidth' => true,
+            'allowSizing' => false,
+        ),
     ),
     'i18n' => array(
         // Crud
