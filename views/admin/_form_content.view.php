@@ -9,6 +9,7 @@
  */
 
 \Config::load('noviusos_slideshow::slideshow', 'slideshow');
+Nos\I18n::current_dictionary('noviusos_slideshow::common');
 
 $form_id = 'slideshow_'.uniqid(true);
 

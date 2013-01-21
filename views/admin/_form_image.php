@@ -7,6 +7,10 @@
  *             http://www.gnu.org/licenses/agpl-3.0.html
  * @link http://www.novius-os.org
  */
+
+
+Nos\I18n::current_dictionary('noviusos_slideshow::common');
+
 ?>
 <div class="slideshow_image accordion fieldset field_enclosure <?= !empty($is_model) ? 'slideshow_model ' : '' ?>">
     <h3><a href="#"><?= __('Properties') ?></a></h3>
