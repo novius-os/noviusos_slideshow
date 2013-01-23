@@ -39,6 +39,7 @@ function slidimg($image = null, $is_model = false)
             array(
                 'name' => 'images['.$i.'][media_id]',
                 'value' => $media_id,
+                'required' => true,
                 'renderer_options' => array(
                     'inputFileThumb' => array(
                         'title' => __('Image'),
