@@ -50,7 +50,7 @@ return array(
 
         // General errors
         'notification item does not exist anymore' => __('This slideshow doesn’t exist any more. It has been deleted.'),
-        'notification item not found' => __('We cannot find this slideshow. Are you sure it exists?'),
+        'notification item not found' => __('We cannot find this slideshow.'),
 
         // Deletion popup
         'deleting item title' => __('Deleting the slideshow ‘{{title}}’'),

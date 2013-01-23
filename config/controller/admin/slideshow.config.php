@@ -55,6 +55,7 @@ return array(
             'form' => array(
                 'type' => 'submit',
                 'tag' => 'button',
+                // Note to translator: This is a submit button
                 'value' => __('Save'),
                 'class' => 'primary',
                 'data-icon' => 'check',

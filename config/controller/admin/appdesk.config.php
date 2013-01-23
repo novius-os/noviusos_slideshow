@@ -21,8 +21,9 @@ return array(
         'item' => __('slideshow'),
         'items' => __('slideshows'),
         'showNbItems' => __('Showing {{x}} slideshows out of {{y}}'),
-        'showOneItem' => __('Show 1 slideshow'),
+        'showOneItem' => __('Showing 1 slideshow'),
         'showNoItem' => __('No slideshows'),
+        // Note to translator: This is the action that clears the 'Search' field
         'showAll' => __('Show all slideshows'),
     ),
     'inputs' => array(
