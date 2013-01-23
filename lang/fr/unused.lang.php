@@ -6,10 +6,10 @@
 // 2 out of 2 words are translated (100%).
 
 return array(
-    #. Overwritten
+    #: metadata
     'Slideshows' => 'Diaporamas',
 
-    #. Overwritten
+    #: metadata
     'Slideshow' => 'Diaporama',
 
 );
