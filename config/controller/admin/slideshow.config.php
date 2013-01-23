@@ -8,6 +8,8 @@
  * @link http://www.novius-os.org
  */
 
+Nos\I18n::current_dictionary('noviusos_slideshow::common');
+
 return array(
     'controller_url'  => 'admin/noviusos_slideshow/slideshow',
     'model' => 'Nos\\Slideshow\\Model_Slideshow',
