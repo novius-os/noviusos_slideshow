@@ -9,7 +9,8 @@
  */
 
 \Config::load('noviusos_slideshow::slideshow', 'slideshow');
-Nos\I18n::current_dictionary('noviusos_slideshow::common');
+
+Nos\I18n::current_dictionary(array('noviusos_slideshow::common', 'nos::common'));
 
 $form_id = 'slideshow_'.uniqid(true);
 
@@ -85,7 +86,7 @@ if (!$item->is_new()) {
 
         <div class="col c4 slides_container" style="display:none;padding-top:3px;">
             <p class="actions show_hide">
-                <button type="button" data-icon="trash" data-id="delete" class="action"><?= ('Delete') ?></button>
+                <button type="button" data-icon="trash" data-id="delete" class="action"><?= __('Delete') ?></button>
                 <img class="preview_arrow show_hide" src="static/apps/noviusos_slideshow/img/arrow-edition.png" />
             </p>
 <?php
@@ -110,6 +111,13 @@ require(['jquery-nos', 'static/apps/noviusos_slideshow/js/admin/insert_update.js
                 'inputFileThumb' => array(
                     'title' => __('Image'),
                     'file' => '',
+                    'allowDelete' => false,
+                    'texts' => array(
+                        'add'            => __('Pick an image'),
+                        'edit'           => __('Pick another image'),
+                        'delete'         => __('No image'),
+                        'wrongExtension' => __('This extension is not allowed.'),
+                    ),
                 ),
             ),
             'textDelete' =>  __('Are you sure you want to delete this slide?'),
