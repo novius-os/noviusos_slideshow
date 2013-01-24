@@ -11,10 +11,10 @@
 return array(
     'popup' => array(
         'layout' => array(
-            'view' => 'noviusos_slideshow::admin/popup',
+            'view' => 'noviusos_slideshow::admin/enhancer/popup',
         ),
     ),
     'preview' => array(
-        'view' => 'noviusos_slideshow::admin/preview',
+        'view' => 'noviusos_slideshow::admin/enhancer/preview',
     ),
 );

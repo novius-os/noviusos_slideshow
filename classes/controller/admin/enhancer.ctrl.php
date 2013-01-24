@@ -39,7 +39,8 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
         $params = array();
         $params['src'] = Model_Image::find()->where('slidimg_slideshow_id', $_POST['slideshow_id'])->get_one()->medias->image->get_public_path_resized(100, 40);
         $params['title'] = Model_Slideshow::find($_POST['slideshow_id'])->slideshow_title;
-        $params['size'] = !empty($_POST['size']) ? $_POST['size'] : current(array_keys($sizes));
+        $size = (!empty($_POST['size']) ? $_POST['size'] : current(array_keys($sizes)));
+        $params['size'] = \Arr::get($sizes, $size.'.label', $size);
         $body = array(
             'config'  => \Format::forge()->to_json($_POST),
             'preview' => \View::forge($this->config['preview']['view'], $params)->render(),

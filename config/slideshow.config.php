@@ -15,12 +15,14 @@ return array(
         'grand' => array(
             'img_width' => '800',
             'img_height' => '600',
-            'class' => 'slide-home'
+            'class' => 'slide-home',
+            'label' => __('Big'),
         ),
         'petit' => array(
             'img_width' => '414',
             'img_height' => '300',
-            'class' => 'slide-small'
-        )
-    )
+            'class' => 'slide-small',
+            'label' => __('Small'),
+        ),
+    ),
 );

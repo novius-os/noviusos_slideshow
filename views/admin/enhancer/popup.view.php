@@ -7,10 +7,12 @@
  *             http://www.gnu.org/licenses/agpl-3.0.html
  * @link http://www.novius-os.org
  */
+
+Nos\I18n::current_dictionary('noviusos_slideshow::common');
+
 ?>
-<div class="expander">
-    <h3>Slideshow</h3>
-    <div>
+<p style="margin-bottom: 0.5em;">
+    <label><?= __('Select a slideshow:') ?>&nbsp;
 <?php
 if ( !empty($params['slideshows']) ) {
     echo '<select name="slideshow_id">';
@@ -20,26 +22,24 @@ if ( !empty($params['slideshows']) ) {
             $slideshow->slideshow_title, '</option>';
     }
     echo '</select>';
-} else {
-    echo '<p>Aucun slideshow disponible.</p>';
 }
 ?>
-    </div>
-</div>
+    </label>
+</p>
+<p style="margin-bottom: 0.5em;">
+    <label><?= __('Format:') ?>&nbsp;
 <?php
 if ( !empty($params['sizes']) ) {
     if (count($params['sizes']) === 1) {
         echo '<input type="hidden" name="size" value="'.current(array_keys($params['sizes'])).'" />';
     } else {
-        echo '<div class="expander"><h3>Format</h3><div>';
         echo '<select name="size">';
         foreach ($params['sizes'] as $key => $s) {
             echo '<option value="', $key, '" ',
                 ( \Fuel\Core\Input::get('size', 0) === $key ? 'selected="selected"' : '' ), '>',
-                $key, '</option>';
+                \Arr::get($s, 'label', $key), '</option>';
         }
-        echo '</select></div>';
+        echo '</select>';
     }
-} else {
-    echo '<p>Le format d\'afficahge des slideshow n\est pas configuré, merci de contacter un adminisitrateur</p>';
 }
+?></label></p>

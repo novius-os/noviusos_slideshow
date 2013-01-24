@@ -7,6 +7,9 @@
  *             http://www.gnu.org/licenses/agpl-3.0.html
  * @link http://www.novius-os.org
  */
+
+Nos\I18n::current_dictionary('noviusos_slideshow::common');
+
 ?>
 <div style="overflow: hidden">
     <img style="float: left; width: 64px; height: 64px;" src="<?= $src ?>" />
