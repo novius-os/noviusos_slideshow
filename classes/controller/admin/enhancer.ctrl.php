@@ -16,6 +16,7 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
     public function action_popup()
     {
         $this->config['popup']['params']['slideshows'] = Model_Slideshow::find('all', array(
+            'where' => array(array('context', \Arr::get(\Input::get(), 'nosContext', \Nos\Tools_Context::defaultContext()))),
             'order_by' => array('slideshow_title' => 'asc'),
         ));
 
