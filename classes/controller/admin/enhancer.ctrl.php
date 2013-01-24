@@ -15,10 +15,15 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
 
     public function action_popup()
     {
-        $this->config['popup']['params']['slideshows'] = Model_Slideshow::find('all', array(
-            'where' => array(array('context', \Arr::get(\Input::get(), 'nosContext', \Nos\Tools_Context::defaultContext()))),
+        $options = array(
             'order_by' => array('slideshow_title' => 'asc'),
-        ));
+        );
+        $nosContext = \Arr::get(\Input::get(), 'nosContext', null);
+        if (!empty($nosContext)) {
+            $options['where'] = array(array('context', $nosContext));
+        }
+
+        $this->config['popup']['params']['slideshows'] = Model_Slideshow::find('all', $options);
 
         \Config::load('noviusos_slideshow::slideshow', 'slideshow');
         $this->config['popup']['params']['sizes'] = \Config::get('slideshow.sizes');
