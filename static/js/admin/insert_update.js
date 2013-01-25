@@ -163,7 +163,7 @@ define(
 
                 // On fait une confirmation que si on supprime une "vraie" image
                 if (media_id && parseInt(media_id) > 0) {
-                    if (confirm(options.textDelete)) {
+                    if (confirm($.nosCleanupTranslation(options.textDelete))) {
                         remove_image();
                     }
                 } else {
