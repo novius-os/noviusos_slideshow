@@ -12,7 +12,14 @@ return array(
         'thumbnail' => array(
             'value' => function ($item) {
                 $images = $item->images;
-                return empty($images) ? false : current($images)->medias->image->get_public_path_resized(64, 64);
+                if (empty($images)) {
+                    return false;
+                }
+                $image = current($images)->medias->image;
+                if (empty($image)) {
+                    return false;
+                }
+                return $image->get_public_path_resized(64, 64);
             },
         ),
         'thumbnailAlternate' => array(
