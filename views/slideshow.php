@@ -8,22 +8,16 @@
  * @link http://www.novius-os.org
  */
 
-\Nos\Nos::main_controller()->addJavascriptInline('window.jQuery || document.write(\'<scr\'+\'ipt type="text/javascript" src="static/apps/noviusos_slideshow/js/jquery.min.js"></scr\'+\'ipt>\');', false);
+\Nos\Nos::main_controller()->addJavascript('static/apps/noviusos_slideshow/js/jquery.min.js');
 \Nos\Nos::main_controller()->addJavascript('static/apps/noviusos_slideshow/js/jquery.flexslider.js');
 \Nos\Nos::main_controller()->addCss('static/apps/noviusos_slideshow/css/flexslider.css');
 if ($slides_preview) {
     \Nos\Nos::main_controller()->addJavascript('static/apps/noviusos_slideshow/js/jquery.novius_flexpreview.js');
     \Nos\Nos::main_controller()->addCss('static/apps/noviusos_slideshow/css/flexpreview.css');
 }
- ?>
-<script type="text/javascript" charset="utf-8">
-<?php
-    $config = \Config::load('noviusos_slideshow::flexslider', true);
+$config = \Config::load('noviusos_slideshow::flexslider', true);
+\Nos\Nos::main_controller()->addJavascriptInline(\View::forge('noviusos_slideshow::slideshow_js', array('config' => $config, 'slides_preview' => $slides_preview)));
 ?>
-    $(window).load(function() {
-        $('.flexslider').flexslider(<?= json_encode($config) ?>)<?= $slides_preview ? '.novius_flexpreview()' : ''?>;
-    });
-</script>
 <div class="flex-nav-container <?=$class?>">
 <div class="flexslider">
     <ul class="slides">
