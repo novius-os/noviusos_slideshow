@@ -70,7 +70,7 @@ if ($show_link) {
                         'model' => 'Nos\Page\Model_Page',
                     ),
                     'treeOptions' => array(
-                        'context' => \Input::get('context_main', Nos\Tools_Context::defaultContext()),
+                        'context' => !empty($context) ? $context : \Input::get('context_main', Nos\Tools_Context::defaultContext()),
                     ),
                     // Default
                     'urlJson' => 'admin/noviusos_page/inspector/page/json',

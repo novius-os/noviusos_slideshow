@@ -21,7 +21,7 @@ $form_id = 'slideshow_'.uniqid(true);
 <?php
 
 // Retourne un "bloc" (une image avec ses infos)
-function slidimg($image = null, $is_model = false)
+function slidimg($image, $is_model, $item)
 {
     static $i = 1;
     static $show_link = null;
@@ -57,6 +57,7 @@ function slidimg($image = null, $is_model = false)
             'image' => $image,
             'show_link' => $show_link,
             'is_model' => $is_model,
+            'context' => $item->get_context(),
         )
     );
     $view->set_safe('media', $media);
@@ -91,11 +92,11 @@ if (!$item->is_new()) {
             </p>
 <?php
 // Model pour ajouter une nouvelle image
-echo slidimg(null, true);
+echo slidimg(null, true, $item);
 
 // Liste des images actuelles
 foreach ($item->images as $img) {
-    echo slidimg($img, false);
+    echo slidimg($img, false, $item);
 }
 ?>
         </div>
