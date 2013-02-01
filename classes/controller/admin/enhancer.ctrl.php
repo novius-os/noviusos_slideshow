@@ -36,13 +36,17 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
         \Config::load('noviusos_slideshow::slideshow', 'slideshow');
         $sizes = \Config::get('slideshow.sizes');
 
+        if (empty($args)) {
+            $args = $_POST;
+        }
+
         $params = array();
         $params['src'] = Model_Image::find()->where('slidimg_slideshow_id', $_POST['slideshow_id'])->get_one()->medias->image->get_public_path_resized(100, 40);
         $params['title'] = Model_Slideshow::find($_POST['slideshow_id'])->slideshow_title;
         $size = (!empty($_POST['size']) ? $_POST['size'] : current(array_keys($sizes)));
         $params['size'] = \Arr::get($sizes, $size.'.label', $size);
         $body = array(
-            'config'  => \Format::forge()->to_json($_POST),
+            'config'  => $args,
             'preview' => \View::forge($this->config['preview']['view'], $params)->render(),
         );
         \Response::json($body);
