@@ -71,10 +71,10 @@ return array(
     'Not published' => 'Non publié',
 
     #: views/admin/warning_not_published.view.php:19
-    'To publish this slideshow, add it to a page, a blog post or any other text editor.' => 'Pour publier ce diaporama, ajoutez-le à une page, un billet de blog ou toutautre éditeur de texte.',
+    'To publish this slideshow, add it to a page, a blog post or any other text editor.' => 'Pour publier ce diaporama, ajoutez-le à une page, un billet de blog ou tout autre éditeur de texte.',
 
     #: views/admin/warning_not_published.view.php:22
-    '<p>Most Novius OS text editors (also called WYSIWYG editors) feature this button {{preview}} in the toolbar.</p><p>Click it to access the list of applications you can enhance your text with.</p>' => '<p>La plupart des éditeurs de texte de Novius OS (aussi appelés éditeursWYSIWYG) ont ce bouton {{preview}} dans la barre d’outils.</p><p>Cliquezpour accéder à la liste des applications permettant d’enrichir voscontenus.</p>',
+    '<p>Most Novius OS text editors (also called WYSIWYG editors) feature this button {{preview}} in the toolbar.</p><p>Click it to access the list of applications you can enhance your text with.</p>' => '<p>La plupart des éditeurs de texte de Novius OS (aussi appelés éditeurs WYSIWYG) ont ce bouton {{preview}} dans la barre d’outils.</p><p>Cliquez pour accéder à la liste des applications permettant d’enrichir vos contenus.</p>',
 
     #: views/admin/warning_not_published.view.php:23
     'Applications' => 'Applications',
@@ -131,7 +131,7 @@ return array(
     'This slideshow doesn’t exist any more. It has been deleted.' => 'Ce diaporama n’existe plus. Il a été supprimé.',
 
     #: config/common/slideshow.config.php:54
-    'We cannot find this slideshow.' => 'Nous n’arrivons pas à trouver ce diaporama. Êtes-vous sûr(e) qu’ilexiste&nbsp;?',
+    'We cannot find this slideshow.' => 'Nous n’arrivons pas à trouver ce diaporama. Êtes-vous sûr(e) qu’il existe&nbsp;?',
 
     #. Deletion popup
     #: config/common/slideshow.config.php:57
