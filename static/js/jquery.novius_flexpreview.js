@@ -13,7 +13,7 @@
             horizontal             : true,
             callback_touchstart    : function() { },
             callback_touchmove     : function() { },
-            callback_touchend      : function() { },
+            callback_touchend      : function() { }
         };
         if ( options ) 
         {
