@@ -36,7 +36,7 @@ function slidimg($image, $is_model, $item)
     if ($is_model) {
         $media = '';
     } else {
-        $media = \Nos\Renderer_Media::renderer(
+        $media = \Nos\Media\Renderer_Media::renderer(
             array(
                 'name' => 'images['.$i.'][media_id]',
                 'value' => $media_id,
