@@ -1,5 +1,5 @@
 <?php
-namespace Fuel\Migrations;
+namespace Nos\Slideshow\Migrations;
 
 class Install extends \Nos\Migration
 {
