@@ -17,6 +17,15 @@ class Model_Image extends Model
     protected static $_table_name = 'nos_slideshow_image';
     protected static $_primary_key = array('slidimg_id');
 
+    protected static $_properties = array(
+        'slidimg_id',
+        'slidimg_slideshow_id',
+        'slidimg_position',
+        'slidimg_title',
+        'slidimg_description',
+        'slidimg_link_to_page_id',
+    );
+
     protected static $_has_one = array(
         'page' => array(
             'key_from'          => 'slidimg_link_to_page_id',

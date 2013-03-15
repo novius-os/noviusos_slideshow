@@ -17,6 +17,14 @@ class Model_Slideshow extends Model
     protected static $_table_name = 'nos_slideshow';
     protected static $_primary_key = array('slideshow_id');
 
+    protected static $_properties = array(
+        'slideshow_id',
+        'slideshow_title',
+        'slideshow_context',
+        'slideshow_created_at',
+        'slideshow_updated_at',
+    );
+
     protected static $_has_many = array(
         'images' => array(
             'key_from' => 'slideshow_id',
