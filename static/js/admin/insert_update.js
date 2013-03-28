@@ -33,7 +33,7 @@ define(
 
                 // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
                 $.ajax({
-                    url: 'admin/noviusos_slideshow/slideshow/image_fields/'.,
+                    url: 'admin/noviusos_slideshow/slideshow/image_fields/',
                     dataType: 'json',
                     success: function(json) {
                         console.log(json);
@@ -194,7 +194,7 @@ define(
                     delete_preview.call($preview);
                 };
 
-                // On fait une confirmation que si on supprime une "vraie" image
+                // On ne fait une confirmation que si on supprime une "vraie" image
                 if (media_id && parseInt(media_id) > 0) {
                     if (confirm($.nosCleanupTranslation(options.textDelete))) {
                         remove_image();

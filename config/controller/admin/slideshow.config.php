@@ -65,18 +65,18 @@ return array(
         ),
     ),
     'image_fields' => array(
-        'medil->media_id' => array(
+        'image[media_id]' => array(
             'label' => __('Image'),
             'form' => array(
             ),
         ),
-        'slidimg_title' => array(
+        'image[slidimg_title]' => array(
             'label' => __('Title'),
         ),
-        'slidimg_description' => array(
+        'image[slidimg_description]' => array(
             'label' => __('Description'),
         ),
-        'slidimg_link_to_page_id' => array(
+        'image[slidimg_link_to_page_id]' => array(
             'label' => __('Link to page'),
         ),
     ),
