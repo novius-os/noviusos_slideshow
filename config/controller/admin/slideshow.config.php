@@ -76,6 +76,7 @@ return array(
         'image[media_id][]'                => array(
             'label' => __('Image'),
             'form'  => array(),
+            'renderer' => '\Nos\Renderer_Media',
             'populate' => function($item) {
                 if ($item->medias->image) {
                     return $item->medias->image->media_id;

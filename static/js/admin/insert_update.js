@@ -13,6 +13,7 @@ define(
             var $slides_container = $container.find('.slides_container');
             var media_options = $.extend(true, options.mediaSelector, $slides_container.children(':last').find('input.media').data('media-options') || {});
             media_options.inputFileThumb.file = null;
+            console.log(media_options);
             var field_index = $slides_container.children('.field_enclosure').length ;
             var $slide_model =  $slides_container.find('div.slideshow_model');
             $slides_container.show();
@@ -26,69 +27,27 @@ define(
             // Add a field
             $container.on('click', '[data-id=add]', function onAdd(e) {
                 e.preventDefault();
-
-                var $form = $(this).closest('form'),
-                // Changer les trucs à partir d'ici.
-                $newimg = $slide_model.clone().removeClass('slideshow_model').find('*').removeAttr('id').end().nosFormUI();
+                var $that = $(this);
 
                 // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
                 $.ajax({
                     url: 'admin/noviusos_slideshow/slideshow/image_fields/',
                     dataType: 'json',
                     success: function(json) {
-                        console.log(json);
-                        /*$blank_slate.hide();
-                        var $fields = $(json.fields).filter(function() {
-                            return this.nodeType != 3; // 3 == Node.TEXT_NODE
-                        });
-                        if (params.where == 'top') {
-                            $fields = $($fields.get().reverse());
-                        }
-                        var $previews = $(); // $([]) in jQuery < 1.4
-                        $fields_container.append($fields);
-                        $fields.nosFormUI();
-                        $fields.each(function() {
-                            var $field = $(this);
-                            on_field_added($field, params);
-                            $field.hide();
-                            $previews = $previews.add($field.data('preview'));
-                        });
-                        apply_layout(json.layout);
-                        init_all();
-                        nos_fixed_content.scrollTop = old_scroll_top;
-                        $previews.addClass('ui-state-hover');
-                        setTimeout(function() {
-                            $previews.removeClass('ui-state-hover');
-                        }, 500);*/
+                        var $newimg = $(json.fieldset);
+                        $newimg.find('*').nosFormUI();
+                        $slides_container.append($newimg);
+                        on_field_added($newimg);
+                        on_focus_preview(get_preview($newimg));
+                        $that.removeClass('ui-state-focus');
                     }
                 });
-
-
-                // L'idée est que les attr('name') de chaque input/textarea d'un même bloc aient le même index
-                field_index++;
-                $newimg.find('textarea, input').val('').each(function () {
-                    var _name = $(this).attr('name');
-                    if (_name && _name.length > 0) {
-                        var re = new RegExp(/^images\[([0-9]+)\]\[([a-z_]+)\]$/g),
-                        m = re.exec(_name);
-                        m && $(this).attr('name', 'images[' + field_index + '][' + m[2] + ']');
-                    }
-                });
-
-                $slides_container.append($newimg);
-                $newimg.find('input.media').nosMedia(media_options);
-
-                on_field_added($newimg);
-                init_links_to($newimg, field_index);
-                on_focus_preview(get_preview($newimg));
-                $(this).removeClass('ui-state-focus');
             });
 
             function on_field_added($field) {
                 if ($field.is('.slideshow_model')) {
                     return;
                 }
-
                 // Make checkbox fill a hidden field instead (we're sending an array, we don't want "missing" values)
                 $field.find('input[type=checkbox]').each(function normaliseCheckboxes() {
                         var $checkbox = $(this);
@@ -205,6 +164,7 @@ define(
             });
 
             $slides_container.on('change', 'input[name*="media_id"]', function on_media_change(e, data) {
+                console.log(e, data);
                 var $field = $(this).closest('.field_enclosure');
                 generate_preview.call($field.get(0), data ? data.item : {});
             });

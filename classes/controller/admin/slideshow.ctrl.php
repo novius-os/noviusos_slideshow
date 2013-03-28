@@ -100,7 +100,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             'layout' => $this->config['image_layout'],
         );
         $image_view_params['view_params'] = &$image_view_params;
-        return \View::forge($view, $image_view_params, false)->render();
+        return \View::forge($view, $image_view_params, false)->render().$fieldset->build_append();
     }
 
     public function create_image_db($data = array())
