@@ -85,7 +85,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         $response['fieldset'] = $this->action_render_image_fieldset($image);
 
         $response['id'] = $image->slidimg_id;
-        $response['id2'] = 'Une chaîne avec des "guillemets" ?';
+
         $response['conf'] = $this->config['image_fields'];
         \Response::json($response);
     }
@@ -97,6 +97,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         $fieldset = \Fieldset::build_from_config($this->config['image_fields'], $item, array('save' => false));
         $image_view_params = array(
             'fieldset' => $fieldset,
+            'layout' => $this->config['image_layout'],
         );
         $image_view_params['view_params'] = &$image_view_params;
         return \View::forge($view, $image_view_params, false)->render();

@@ -65,19 +65,43 @@ return array(
         ),
     ),
     'image_fields' => array(
-        'image[media_id]' => array(
-            'label' => __('Image'),
+        'image[slidimg_id][]'              => array(
             'form' => array(
+                'type' => 'hidden',
             ),
         ),
-        'image[slidimg_title]' => array(
+        'image[media_id][]'                => array(
+            'label' => __('Image'),
+            'form'  => array(),
+        ),
+        'image[slidimg_title][]'           => array(
             'label' => __('Title'),
         ),
-        'image[slidimg_description]' => array(
+        'image[slidimg_description][]'     => array(
             'label' => __('Description'),
         ),
-        'image[slidimg_link_to_page_id]' => array(
+        'image[slidimg_link_to_page_id][]' => array(
             'label' => __('Link to page'),
+        ),
+    ),
+    'image_layout' => array(
+        'standard' => array(
+            'view'   => 'nos::form/accordion',
+            'params' => array(
+                //'classes' => 'notransform',
+                'accordions' => array(
+                    'main' => array(
+                        'title'  => __('Properties'),
+                        'fields' => array(
+                            'image[slidimg_id][]',
+                            'image[media_id][]',
+                            'image[slidimg_title][]',
+                            'image[slidimg_description][]',
+                            'image[slidimg_link_to_page_id][]',
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 );

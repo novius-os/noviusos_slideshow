@@ -20,51 +20,6 @@ $form_id = 'slideshow_'.uniqid(true);
 <div id="<?= $form_id ?>">
 <?php
 
-// Retourne un "bloc" (une image avec ses infos)
-function slidimg($image, $is_model, $item)
-{
-    static $i = 1;
-    static $show_link = null;
-    if ($show_link === null) {
-        $show_link = \Config::get('slideshow.slides_with_link', false);
-    }
-    $media_id = 0;
-    if (!empty($image) && !empty($image->medias->image) && !empty($image->medias->image->media_id)) {
-        $media_id = $image->medias->image->media_id;
-    }
-
-    if ($is_model) {
-        $media = '';
-    } else {
-        $media = \Nos\Renderer_Media::renderer(
-            array(
-                'name' => 'images['.$i.'][media_id]',
-                'value' => $media_id,
-                'required' => true,
-                'renderer_options' => array(
-                    'inputFileThumb' => array(
-                        'title' => __('Image'),
-                    ),
-                ),
-            )
-        );
-    }
-
-    $view = \View::forge(
-        'noviusos_slideshow::admin/_form_image',
-        array(
-            'i' => $i,
-            'image' => $image,
-            'show_link' => $show_link,
-            'is_model' => $is_model,
-            'context' => $item->get_context(),
-        )
-    );
-    $view->set_safe('media', $media);
-    $i++;
-
-    return $view;
-}
 if (!$item->is_new()) {
     $count = \Nos\Model_Wysiwyg::count(array(
         'where' => array(
@@ -91,12 +46,9 @@ if (!$item->is_new()) {
                 <img class="preview_arrow show_hide" src="static/apps/noviusos_slideshow/img/arrow-edition.png" />
             </p>
 <?php
-// Model pour ajouter une nouvelle image
-echo slidimg(null, true, $item);
-
 // Liste des images actuelles
 foreach ($item->images as $img) {
-    echo slidimg($img, false, $item);
+        echo \Request::forge('noviusos_slideshow/admin/slideshow/render_image_fieldset')->execute(array($img));
 }
 ?>
         </div>

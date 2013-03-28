@@ -130,9 +130,9 @@ define(
             }
 
             function on_focus_preview(preview) {
+
                 var $preview = $(preview);
                 var $field = $preview.data('field');
-
                 // Make the preview look "active"
                 $preview_container.find('li').removeClass('ui-state-active');
                 $preview.addClass('ui-state-active');
