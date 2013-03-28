@@ -69,19 +69,38 @@ return array(
             'form' => array(
                 'type' => 'hidden',
             ),
+            'populate' => function($item) {
+                return $item->slidimg_id;
+            }
         ),
         'image[media_id][]'                => array(
             'label' => __('Image'),
             'form'  => array(),
+            'populate' => function($item) {
+                if ($item->medias->image) {
+                    return $item->medias->image->media_id;
+                } else {
+                    return '';
+                }
+            }
         ),
         'image[slidimg_title][]'           => array(
             'label' => __('Title'),
+            'populate' => function($item) {
+                return $item->slidimg_title;
+            }
         ),
         'image[slidimg_description][]'     => array(
             'label' => __('Description'),
+            'populate' => function($item) {
+                return $item->slidimg_description;
+            }
         ),
         'image[slidimg_link_to_page_id][]' => array(
             'label' => __('Link to page'),
+            'populate' => function($item) {
+                return $item->slidimg_link_to_page_id;
+            }
         ),
     ),
     'image_layout' => array(
