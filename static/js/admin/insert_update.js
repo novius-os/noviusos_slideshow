@@ -28,9 +28,42 @@ define(
                 e.preventDefault();
 
                 var $form = $(this).closest('form'),
+                // Changer les trucs à partir d'ici.
                 $newimg = $slide_model.clone().removeClass('slideshow_model').find('*').removeAttr('id').end().nosFormUI();
 
                 // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
+                $.ajax({
+                    url: 'admin/noviusos_slideshow/slideshow/image_fields/'.,
+                    dataType: 'json',
+                    success: function(json) {
+                        console.log(json);
+                        /*$blank_slate.hide();
+                        var $fields = $(json.fields).filter(function() {
+                            return this.nodeType != 3; // 3 == Node.TEXT_NODE
+                        });
+                        if (params.where == 'top') {
+                            $fields = $($fields.get().reverse());
+                        }
+                        var $previews = $(); // $([]) in jQuery < 1.4
+                        $fields_container.append($fields);
+                        $fields.nosFormUI();
+                        $fields.each(function() {
+                            var $field = $(this);
+                            on_field_added($field, params);
+                            $field.hide();
+                            $previews = $previews.add($field.data('preview'));
+                        });
+                        apply_layout(json.layout);
+                        init_all();
+                        nos_fixed_content.scrollTop = old_scroll_top;
+                        $previews.addClass('ui-state-hover');
+                        setTimeout(function() {
+                            $previews.removeClass('ui-state-hover');
+                        }, 500);*/
+                    }
+                });
+
+
                 // L'idée est que les attr('name') de chaque input/textarea d'un même bloc aient le même index
                 field_index++;
                 $newimg.find('textarea, input').val('').each(function () {

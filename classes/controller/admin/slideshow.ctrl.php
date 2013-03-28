@@ -78,4 +78,54 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         return parent::save($item, $data);
     }
 
+    public function action_image_fields()
+    {
+
+        $response = array();
+        $fields = array();
+        $image = $this->create_image_db();
+        foreach ($this->config['image_fields'] as $name => $field_data) {
+            /*$field = $this->create_image_db($field_data);
+            $fields[] = $this->action_render_field($field);*/
+            $response[$name] = $field_data;
+        }
+        $response['id'] = $image->slidimg_id;
+        \Response::json($response);
+    }
+
+    public function action_render_field($item, $view = null)
+    {
+        // This action is not available from the browser. Only internal requests are authorised.
+        if (!empty($view) && !\Request::is_hmvc()) {
+            exit();
+        } else {
+            $view = 'noviusos_form::admin/layout';
+        }
+
+        if ($item->field_type == 'page_break') {
+            return $this->render_page_break($item);
+        }
+
+        $fieldset = \Fieldset::build_from_config($this->config['fields_config'], $item, array('save' => false));
+        $fields_view_params = array(
+            'layout' => $this->config['fields_layout'],
+            'fieldset' => $fieldset,
+        );
+        $fields_view_params['view_params'] = &$fields_view_params;
+        return \View::forge($view, $fields_view_params, false);
+    }
+
+    public function create_image_db($data = array())
+    {
+        $default_data = array(
+            'slidimg_slideshow_id' => '0',
+            'slidimg_position' => 0,
+            'slidimg_title' => '',
+            'slidimg_description' => '',
+        );
+        $model_image = Model_Image::forge(array_merge($default_data, $data), true);
+        $model_image->save();
+        return $model_image;
+    }
+
 }
