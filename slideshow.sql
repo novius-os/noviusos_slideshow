@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `nos_slideshow` (
 
 CREATE TABLE IF NOT EXISTS `nos_slideshow_image` (
   `slidimg_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `slidimg_slideshow_id` varchar(255) NOT NULL,
+  `slidimg_slideshow_id` varchar(255) NOT NULL, /* à migrer en int unsigned comme slideshow_id */
   `slidimg_position` int(10) NOT NULL,
   `slidimg_title` varchar(255) DEFAULT NULL,
   `slidimg_description` text,
