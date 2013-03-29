@@ -44,8 +44,9 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             Arr::pluck($images, 'slidimg_id')
         );
 
-        foreach ($images as $img_data) {
+        foreach ($images as $index => $img_data) {
             $img_id = $img_data['slidimg_id'];
+            $img_data['slidimg_position'] = $index + 1;
             $model_img = Model_Image::find($img_id);
             foreach($this->config['image_fields'] as $name => $field_config) {
                 if ($field_config['before_save'] && is_callable($field_config['before_save'])) {

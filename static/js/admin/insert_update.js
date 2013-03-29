@@ -194,9 +194,7 @@ define(
             }
 
             $container.find('ul.preview_container').sortable({
-                update: function(event, ui) {
-                    reorderSlides();
-                }
+                update: reorderSlides
             });
 
             function blur() {
