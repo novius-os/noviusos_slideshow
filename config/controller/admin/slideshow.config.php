@@ -63,6 +63,12 @@ return array(
                 'data-icon' => 'check',
             ),
         ),
+        'image' => array(
+            'label' => '',
+            'form' => array(
+                'type' => 'hidden',
+            ),
+        ),
     ),
     'image_fields' => array(
         'image[slidimg_id][]'              => array(

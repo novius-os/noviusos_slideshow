@@ -10,72 +10,64 @@
 
 namespace Nos\Slideshow;
 
+use Fuel\Core\Arr;
+
 class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 {
-    public function save($item, $data)
+    protected static $to_delete = array();
+
+    public function before_save($item, $data)
     {
-        // Sauvegarde des images
-        if ( !empty($_POST['images']) ) {
-            $images = $item->images;
-            $form_images_ids = array();
-
-            $position = 1;
-            foreach ($_POST['images'] as $image) {
-                // Pas de media, pas de chocolat.
-                if ( empty($image['media_id']) ) {
-                    continue;
-                }
-
-                $media_id = $image['media_id'];
-                unset($image['media_id']);
-
-                // Update
-                if ( !empty($image['slidimg_id']) && !empty($images[$image['slidimg_id']]) ) {
-                    $values = array_diff_key($image, array(
-                        'slidimg_id' => true
-                    ));
-                    $values = array_merge($values, array(
-                        'slidimg_position'      => $position,
-                    ));
-                    $images[$image['slidimg_id']]->set($values);
-                    $images[$image['slidimg_id']]->medias->image = $media_id;
-                    $images[$image['slidimg_id']]->save();
-
-                    $form_images_ids[] = $image['slidimg_id'];
-                }
-
-                // Insert
-                else {
-                    if ( isset($image['slidimg_id']) ) {
-                        unset($image['slidimg_id']);
-                    }
-                    $values = array_merge($image, array(
-                        'slidimg_position'      => $position,
-                    ));
-                    $image_model = Model_Image::forge($values);
-                    $item->images[] = $image_model;
-                    $image_model->medias->image = $media_id;
-
-                    $form_images_ids[] = $image_model->slidimg_id;
-                }
-
-                $position++;
+        $field_names = array();
+        foreach ($this->config['image_fields'] as $name => $img_data) {
+            if (!empty($img_data['dont_save']) || (!empty($img_data['form']['type']) && $img_data['form']['type'] == 'submit')) {
+                continue;
             }
-
-            // Images a supprimer
-            $images_to_be_deleted = array_diff(array_keys($images), $form_images_ids);
-            if ( !empty($images_to_be_deleted) ) {
-                \DB::delete(Model_Image::table())->where('slidimg_id', 'IN', $images_to_be_deleted)->execute();
-                \DB::delete('nos_media_link')->where(array(
-                    array('medil_from_table', '=', 'slideshow_image'),
-                    array('medil_foreign_id', 'IN', $images_to_be_deleted),
-                ))->execute();
+            $name = str_replace(array('image[', '][]'), '', $name);
+            $field_names[] = $name;
+        }
+        // null is for the first argument of array_map() to transpose the matrix
+        $values = array(null);
+        $images = array();
+        foreach ($field_names as &$name) {
+            $values[] = \Input::post('image.'.$name);
+        }
+        // If there are values
+        if (!empty($values[1])) {
+            foreach (call_user_func_array('array_map', $values) as $value) {
+                $images[] = array_combine(array_values($field_names), $value);
             }
-
-            $item->save();
         }
 
-        return parent::save($item, $data);
+        static::$to_delete = array_diff(
+            array_keys($item->images),
+            Arr::pluck($images, 'slidimg_id')
+        );
+
+        foreach ($images as $img_data) {
+            $img_id = $img_data['slidimg_id'];
+            $model_img = Model_Image::find($img_id);
+            unset($img_data['slidimg_id']);
+            $model_img->set($img_data);
+            $item->images[$img_id] = $model_img;
+        }
+    }
+
+    public function save($item, $data)
+    {
+        $return = parent::save($item, $data);
+        foreach ($item->images as $img) {
+            if (in_array($img->slidimg_id, static::$to_delete)) {
+                continue;
+            }
+            $img->slidimg_slideshow_id = $item->slideshow_id;
+            $img->save();
+        }
+        foreach (static::$to_delete as $img_id) {
+            $item->images[$img_id]->delete();
+            unset($item->images[$img_id]);
+        }
+        return $return;
     }
 
     public function action_image_fields()

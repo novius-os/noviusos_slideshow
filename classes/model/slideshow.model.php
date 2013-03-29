@@ -22,7 +22,7 @@ class Model_Slideshow extends Model
             'key_from' => 'slideshow_id',
             'model_to' => '\Nos\Slideshow\Model_Image',
             'key_to' => 'slidimg_slideshow_id',
-            'cascade_save' => true,
+            'cascade_save' => false,
             'cascade_delete' => false,
             'conditions' => array(
                 'order_by' => array('slidimg_position' => 'ASC'),
