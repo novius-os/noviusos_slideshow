@@ -30,9 +30,10 @@ define(
                     url: 'admin/noviusos_slideshow/slideshow/image_fields/',
                     dataType: 'json',
                     success: function(json) {
-                        var $newimg = $(json.fieldset);
-                        $newimg.find('*').nosFormUI();
-                        $slides_container.append($newimg);
+                        var $content = $(json.fieldset);
+                        $content.find('*').nosFormUI();
+                        $slides_container.append($content);
+                        var $newimg = $($content[0]);
                         on_field_added($newimg);
                         on_focus_preview(get_preview($newimg));
                         $that.removeClass('ui-state-focus');
@@ -41,9 +42,6 @@ define(
             });
 
             function on_field_added($field) {
-                if ($field.is('.slideshow_model')) {
-                    return;
-                }
                 // Make checkbox fill a hidden field instead (we're sending an array, we don't want "missing" values)
                 $field.find('input[type=checkbox]').each(function normaliseCheckboxes() {
                         var $checkbox = $(this);
@@ -80,7 +78,6 @@ define(
                 $preview.find('input, select').on('click', function(e) {
                     e.preventDefault();
                 });
-
                 return $preview;
             }
 
