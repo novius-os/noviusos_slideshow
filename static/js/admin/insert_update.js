@@ -185,7 +185,9 @@ define(
                         thumbnail = $(img).attr('src').replace(/64-64/g, '160-160');
                     }
                 }
-
+                if (!thumbnail) {
+                    thumbnail = "static/novius-os/admin/vendor/jquery/jquery-ui-input-file-thumb/css/images/apn.png"
+                }
                 html += '<img src="' + thumbnail + '" />';
 
                 $preview.find('.preview_content').html(html);
