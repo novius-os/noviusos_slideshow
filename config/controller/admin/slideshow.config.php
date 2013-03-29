@@ -90,8 +90,8 @@ return array(
                     return '';
                 }
             },
-            'before_save' => function($item, $item_data) {
-                $item->medias->image = $item_data['media_id'];
+            'before_save' => function($img_item, $item_data) {
+                $img_item->medias->image = $item_data['media_id'];
             }
         ),
         'image[slidimg_title][]'           => array(
@@ -110,7 +110,7 @@ return array(
             'label' => __('Link to page'),
             'populate' => function($item) {
                 return $item->slidimg_link_to_page_id;
-            }
+            },
         ),
     ),
     'image_layout' => array(
