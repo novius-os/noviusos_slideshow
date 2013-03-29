@@ -13,8 +13,6 @@ define(
             var $slides_container = $container.find('.slides_container');
             var media_options = $.extend(true, options.mediaSelector, $slides_container.children(':last').find('input.media').data('media-options') || {});
             media_options.inputFileThumb.file = null;
-            console.log(media_options);
-            var field_index = $slides_container.children('.field_enclosure').length ;
             var $slide_model =  $slides_container.find('div.slideshow_model');
             $slides_container.show();
 
@@ -28,8 +26,6 @@ define(
             $container.on('click', '[data-id=add]', function onAdd(e) {
                 e.preventDefault();
                 var $that = $(this);
-
-                // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
                 $.ajax({
                     url: 'admin/noviusos_slideshow/slideshow/image_fields/',
                     dataType: 'json',
@@ -164,7 +160,6 @@ define(
             });
 
             $slides_container.on('change', 'input[name*="media_id"]', function on_media_change(e, data) {
-                console.log(e, data);
                 var $field = $(this).closest('.field_enclosure');
                 generate_preview.call($field.get(0), data ? data.item : {});
             });
@@ -186,6 +181,12 @@ define(
                 }
                 if (thumbnail == '') {
                     thumbnail = find_field($slide_model, 'thumb').val()
+                }
+                if (!thumbnail) {
+                    var img = $field.find('img[src*=64-64]');
+                    if (img.length) {
+                        thumbnail = $(img).attr('src').replace(/64-64/g, '160-160');
+                    }
                 }
 
                 html += '<img src="' + thumbnail + '" />';
@@ -255,9 +256,11 @@ define(
 
             $slides_container.children('.field_enclosure').each(function onEachFields() {
                 var $field = $(this);
-                on_field_added($field);
-                init_links_to($field, find_field($field, '_id').val());
-                $field.hide();
+                setTimeout(function delayedOnEeachField() {
+                    on_field_added($field);
+                    init_links_to($field, find_field($field, '_id').val());
+                    $field.hide();
+                }, 500);
             });
 
             if (is_new) {
