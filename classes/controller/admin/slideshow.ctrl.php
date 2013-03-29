@@ -47,6 +47,12 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         foreach ($images as $img_data) {
             $img_id = $img_data['slidimg_id'];
             $model_img = Model_Image::find($img_id);
+            foreach($this->config['image_fields'] as $name => $field_config) {
+                if ($field_config['before_save'] && is_callable($field_config['before_save'])) {
+                    $before_save = $field_config['before_save'];
+                    $before_save($model_img, $img_data);
+                }
+            }
             unset($img_data['slidimg_id']);
             $model_img->set($img_data);
             $item->images[$img_id] = $model_img;

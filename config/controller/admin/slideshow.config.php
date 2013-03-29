@@ -89,6 +89,9 @@ return array(
                 } else {
                     return '';
                 }
+            },
+            'before_save' => function($item, $item_data) {
+                $item->medias->image = $item_data['media_id'];
             }
         ),
         'image[slidimg_title][]'           => array(
