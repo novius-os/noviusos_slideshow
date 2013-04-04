@@ -99,7 +99,15 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             'layout' => $this->config['image_layout'],
         );
         $image_view_params['view_params'] = &$image_view_params;
-        return \View::forge($view, $image_view_params, false)->render().$fieldset->build_append();
+
+        // Replace name="image[slidimg_description][]" "with image[slidimg_description][12345]" <- add slide_ID here
+        $replaces = array();
+        foreach ($this->config['image_fields'] as $name => $image_config) {
+            $replaces[$name] = preg_replace('`\[\]`', '['.$item->slidimg_id.']', $name, 1);
+        }
+        $return = (string) \View::forge($view, $image_view_params, false)->render().$fieldset->build_append();
+
+        return strtr($return, $replaces);
     }
 
     public function create_image_db($data = array())
