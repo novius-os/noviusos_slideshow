@@ -71,20 +71,23 @@ return array(
         ),
     ),
     'image_fields' => array(
-        'image[slidimg_id][]' => array(
+        'slidimg_id' => array(
             'form' => array(
                 'type' => 'hidden',
             ),
-            'populate' => function($item) {
-                return $item->slidimg_id;
-            }
         ),
-        'image[media_id][]' => array(
+        'media_id' => array(
             'label' => __('Image:'),
             'form'  => array(
-                'required' => true,
+                'type' => 'text',
             ),
             'renderer' => 'Nos\Renderer_Media',
+            'renderer_options' => array(
+                'inputFileThumb' => array(
+                    'title' => __('Image'),
+                    'allowDelete' => false,
+                ),
+            ),
             'populate' => function($item) {
                 if ($item->medias->image) {
                     return $item->medias->image->media_id;
@@ -96,24 +99,15 @@ return array(
                 $img_item->medias->image = $item_data['media_id'];
             }
         ),
-        'image[slidimg_title][]' => array(
+        'slidimg_title' => array(
             'label' => __('Slide name:'),
-            'populate' => function($item) {
-                return $item->slidimg_title;
-            }
         ),
-        'image[slidimg_description][]' => array(
+        'slidimg_description' => array(
             'label' => __('Description:'),
-            'populate' => function($item) {
-                return $item->slidimg_description;
-            }
         ),
-        'image[slidimg_link_to_page_id][]' => array(
+        'slidimg_link_to_page_id' => array(
             'label' => __('Links to:'),
             'renderer' => 'Nos\Page\Renderer_Selector',
-            'populate' => function($item) {
-                return $item->slidimg_link_to_page_id;
-            },
         ),
     ),
     'image_layout' => array(
@@ -125,11 +119,11 @@ return array(
                     'main' => array(
                         'title'  => __('Properties'),
                         'fields' => array(
-                            'image[slidimg_id][]',
-                            'image[media_id][]',
-                            'image[slidimg_title][]',
-                            'image[slidimg_description][]',
-                            'image[slidimg_link_to_page_id][]',
+                            'slidimg_id',
+                            'media_id',
+                            'slidimg_title',
+                            'slidimg_description',
+                            'slidimg_link_to_page_id',
                         ),
                     ),
                 ),

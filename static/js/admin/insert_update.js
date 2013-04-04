@@ -138,13 +138,13 @@ define(
 
                 var $preview = $preview_container.find('li.ui-state-active'),
                     $field = $preview.data('field'),
-                    media_id = $field.find('input.media').val();
+                    media_id = $field.find('input[name*="media_id"]').val();
 
                 var remove_image = function () {
                     delete_preview.call($preview);
                 };
 
-                // On ne fait une confirmation que si on supprime une "vraie" image
+                // Only ask a confirmation when a media is actually selected
                 if (media_id && parseInt(media_id) > 0) {
                     if (confirm($.nosCleanupTranslation(options.textDelete))) {
                         remove_image();
@@ -169,8 +169,6 @@ define(
                 var $media_id = find_field($field, 'media_id');
                 var media_id = $media_id.val();
                 var $preview = $field.data('preview');
-                var html  = '';
-
                 var media_options = $media_id.data('media-options') || {};
 
                 var thumbnail = item.thumbnail ? item.thumbnail : (media_options.inputFileThumb ? media_options.inputFileThumb.file : '');
@@ -191,9 +189,8 @@ define(
                 } else {
                     thumbnail = "static/novius-os/admin/vendor/jquery/jquery-ui-input-file-thumb/css/images/apn.png"
                 }
-                html += '<img src="' + thumbnail + '" />';
 
-                $preview.find('.preview_content').html(html);
+                $preview.find('.preview_content').html('<img src="' + thumbnail + '" />');
             }
 
             $container.find('ul.preview_container').sortable({

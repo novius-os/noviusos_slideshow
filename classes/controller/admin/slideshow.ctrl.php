@@ -23,7 +23,6 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             if (!empty($img_data['dont_save']) || (!empty($img_data['form']['type']) && $img_data['form']['type'] == 'submit')) {
                 continue;
             }
-            $name = str_replace(array('image[', '][]'), '', $name);
             $field_names[] = $name;
         }
         // null is for the first argument of array_map() to transpose the matrix
@@ -46,6 +45,11 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 
         foreach ($images as $index => $img_data) {
             $img_id = $img_data['slidimg_id'];
+            if (empty($img_data['media_id'])) {
+                // Only unset, don't delete because it's still shown in the interface and the user can pick another image instead
+                unset($item->images[$img_id]);
+                continue;
+            }
             $img_data['slidimg_position'] = $index + 1;
             $model_img = Model_Image::find($img_id);
             foreach($this->config['image_fields'] as $name => $field_config) {
@@ -91,9 +95,17 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 
     public function action_render_image_fieldset($item, $view = null)
     {
+        static $auto_id_increment = 1;
         // This action is not available from the browser. Only internal requests are authorised.
         $view = 'noviusos_slideshow::admin/layout';
         $fieldset = \Fieldset::build_from_config($this->config['image_fields'], $item, array('save' => false));
+        // Override auto_id generation so it don't use the name (because we replace it below)
+        $auto_id = uniqid('auto_id_');
+        foreach ($fieldset->field() as $field) {
+            if ($field->get_attribute('id') == '') {
+                $field->set_attribute('id', $auto_id.$auto_id_increment++);
+            }
+        }
         $image_view_params = array(
             'fieldset' => $fieldset,
             'layout' => $this->config['image_layout'],
@@ -103,7 +115,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         // Replace name="image[slidimg_description][]" "with image[slidimg_description][12345]" <- add slide_ID here
         $replaces = array();
         foreach ($this->config['image_fields'] as $name => $image_config) {
-            $replaces[$name] = preg_replace('`\[\]`', '['.$item->slidimg_id.']', $name, 1);
+            $replaces[$name] = "image[$name][{$item->slidimg_id}]";
         }
         $return = (string) \View::forge($view, $image_view_params, false)->render().$fieldset->build_append();
 
