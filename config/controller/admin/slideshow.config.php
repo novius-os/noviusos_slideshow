@@ -71,7 +71,7 @@ return array(
         ),
     ),
     'image_fields' => array(
-        'image[slidimg_id][]'              => array(
+        'image[slidimg_id][]' => array(
             'form' => array(
                 'type' => 'hidden',
             ),
@@ -79,9 +79,11 @@ return array(
                 return $item->slidimg_id;
             }
         ),
-        'image[media_id][]'                => array(
-            'label' => __('Image'),
-            'form'  => array(),
+        'image[media_id][]' => array(
+            'label' => __('Image:'),
+            'form'  => array(
+                'required' => true,
+            ),
             'renderer' => 'Nos\Renderer_Media',
             'populate' => function($item) {
                 if ($item->medias->image) {
@@ -94,20 +96,20 @@ return array(
                 $img_item->medias->image = $item_data['media_id'];
             }
         ),
-        'image[slidimg_title][]'           => array(
-            'label' => __('Title'),
+        'image[slidimg_title][]' => array(
+            'label' => __('Slide name:'),
             'populate' => function($item) {
                 return $item->slidimg_title;
             }
         ),
-        'image[slidimg_description][]'     => array(
-            'label' => __('Description'),
+        'image[slidimg_description][]' => array(
+            'label' => __('Description:'),
             'populate' => function($item) {
                 return $item->slidimg_description;
             }
         ),
         'image[slidimg_link_to_page_id][]' => array(
-            'label' => __('Link to page'),
+            'label' => __('Links to:'),
             'renderer' => 'Nos\Page\Renderer_Selector',
             'populate' => function($item) {
                 return $item->slidimg_link_to_page_id;
