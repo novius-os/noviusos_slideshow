@@ -11,8 +11,6 @@ define(
             var $container = $(id);
             var $preview_container = $container.find('.preview_container');
             var $slides_container = $container.find('.slides_container');
-            var media_options = $.extend(true, options.mediaSelector, $slides_container.children(':last').find('input.media').data('media-options') || {});
-            media_options.inputFileThumb.file = null;
             var $slide_model =  $slides_container.find('div.slideshow_model');
             $slides_container.show();
 
@@ -27,7 +25,7 @@ define(
                 e.preventDefault();
                 var $that = $(this);
                 $.ajax({
-                    url: 'admin/noviusos_slideshow/slideshow/image_fields/',
+                    url: 'admin/noviusos_slideshow/slideshow/image_fields',
                     dataType: 'json',
                     success: function(json) {
                         var $content = $(json.fieldset);

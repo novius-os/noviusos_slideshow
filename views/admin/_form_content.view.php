@@ -59,20 +59,6 @@ foreach ($item->images as $img) {
 require(['jquery-nos', 'static/apps/noviusos_slideshow/js/admin/insert_update.js'], function($, init_form) {
     $(function() {
         init_form('#<?= $form_id ?>', <?= Format::forge()->to_json(array(
-            'mediaSelector' => array(
-                'mode' => 'image',
-                'inputFileThumb' => array(
-                    'title' => __('Image'),
-                    'file' => '',
-                    'allowDelete' => false,
-                    'texts' => array(
-                        'add'            => __('Pick an image'),
-                        'edit'           => __('Pick another image'),
-                        'delete'         => __('No image'),
-                        'wrongExtension' => __('This extension is not allowed.'),
-                    ),
-                ),
-            ),
             'textDelete' =>  __('Are you sure you want to delete this slide?'),
         )) ?>, <?= $crud['is_new'] ? 'true' : 'false'; ?>);
    });
