@@ -168,11 +168,14 @@ define(
 
             function generate_preview(item) {
                 var $field = $(this).closest('.field_enclosure');
-                var media_id = find_field($field, 'media_id').val();
+                var $media_id = find_field($field, 'media_id');
+                var media_id = $media_id.val();
                 var $preview = $field.data('preview');
                 var html  = '';
 
-                var thumbnail = item.thumbnail ? item.thumbnail.replace(/64-64/g, '160-160') : '';
+                var media_options = $media_id.data('media-options') || {};
+
+                var thumbnail = item.thumbnail ? item.thumbnail : (media_options.inputFileThumb ? media_options.inputFileThumb.file : '');
                 if (thumbnail == '') {
                     thumbnail = find_field($field, 'thumb').val()
                 }
@@ -182,10 +185,12 @@ define(
                 if (!thumbnail) {
                     var img = $field.find('img[src*=64-64]');
                     if (img.length) {
-                        thumbnail = $(img).attr('src').replace(/64-64/g, '160-160');
+                        thumbnail = $(img).attr('src');
                     }
                 }
-                if (!thumbnail) {
+                if (thumbnail) {
+                    thumbnail = thumbnail.replace(/64-64/g, '160-160');
+                } else {
                     thumbnail = "static/novius-os/admin/vendor/jquery/jquery-ui-input-file-thumb/css/images/apn.png"
                 }
                 html += '<img src="' + thumbnail + '" />';
@@ -233,31 +238,10 @@ define(
                 $field.find('.add_link_to').show();
             });
 
-
-            function init_links_to($field, index) {
-                // Don't transform the model
-                if ($field.is('.slideshow_model')) {
-                    return;
-                }
-                var $this = $field.find('.transform_renderer_page_selector');
-                // Clone
-                var params = $.extend(true, {}, $this.data('renderer_page_selector'), {
-                    input_name: 'images[' + index + '][slidimg_link_to_page_id]'
-                });
-                var id = 'id_' + (new Date().getTime()).toString(16);
-                $this.attr('id', id);
-                require(['jquery-nos-inspector-tree-model-radio'], function() {
-                    $this.nosInspectorTreeModelRadio(params);
-                });
-            }
-
             $slides_container.children('.field_enclosure').each(function onEachFields() {
                 var $field = $(this);
-                setTimeout(function delayedOnEeachField() {
-                    on_field_added($field);
-                    init_links_to($field, find_field($field, '_id').val());
-                    $field.hide();
-                }, 500);
+                on_field_added($field);
+                $field.hide();
             });
 
             if (is_new) {

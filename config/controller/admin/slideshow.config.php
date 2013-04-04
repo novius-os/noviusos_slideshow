@@ -82,7 +82,7 @@ return array(
         'image[media_id][]'                => array(
             'label' => __('Image'),
             'form'  => array(),
-            'renderer' => '\Nos\Renderer_Media',
+            'renderer' => 'Nos\Renderer_Media',
             'populate' => function($item) {
                 if ($item->medias->image) {
                     return $item->medias->image->media_id;
@@ -108,6 +108,7 @@ return array(
         ),
         'image[slidimg_link_to_page_id][]' => array(
             'label' => __('Link to page'),
+            'renderer' => 'Nos\Page\Renderer_Selector',
             'populate' => function($item) {
                 return $item->slidimg_link_to_page_id;
             },
