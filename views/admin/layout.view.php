@@ -7,10 +7,24 @@
  *             http://www.gnu.org/licenses/agpl-3.0.html
  * @link http://www.novius-os.org
  */
+
 echo '<div class="field_enclosure">';
+
+$has_restricted_fields = false;
 foreach ($fieldset->field() as $field) {
-    $field->is_expert() && $field->set_type('hidden')->set_template('{field}');
+    if ($field->isRestricted()) {
+        if (!$has_restricted) {
+            echo '<div style="display:none;">';
+            $has_restricted_fields = true;
+        }
+        echo $field->set_template('{field}')->build();
+    }
 }
+if ($has_restricted_fields) {
+    echo '</div>';
+}
+echo $fieldset->build_hidden_fields();
+
 foreach ($layout as $view) {
     if (!empty($view['view'])) {
         $view['params'] = empty($view['params']) ? array() : $view['params'];
