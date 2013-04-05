@@ -16,6 +16,12 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 {
     protected static $to_delete = array();
 
+    public static function _init()
+    {
+        // Used to retrieve the slides_with_link config
+        \Config::load('noviusos_slideshow::slideshow', true);
+    }
+
     public function before_save($item, $data)
     {
         $field_names = array();

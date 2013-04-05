@@ -48,7 +48,7 @@ if (!$item->is_new()) {
 <?php
 // Liste des images actuelles
 foreach ($item->images as $img) {
-        echo \Request::forge('noviusos_slideshow/admin/slideshow/render_image_fieldset')->execute(array($img));
+    echo \Request::forge('noviusos_slideshow/admin/slideshow/render_image_fieldset')->execute(array($img));
 }
 ?>
         </div>
