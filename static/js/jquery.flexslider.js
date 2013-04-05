@@ -65,7 +65,7 @@
         if (slider.transitions) {
           slider.setTransition(0);
         }
-        slider.css({"overflow": "hidden", 'padding-bottom':'40px'});
+        slider.css({"overflow": "hidden"});
         if (slider.vars.animationLoop) {
           slider.cloneCount = 2;
           slider.cloneOffset = 1;
