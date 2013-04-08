@@ -17,12 +17,32 @@ class Model_Slideshow extends Model
     protected static $_table_name = 'nos_slideshow';
     protected static $_primary_key = array('slideshow_id');
 
+    protected static $_title_property = 'slideshow_title';
     protected static $_properties = array(
-        'slideshow_id',
-        'slideshow_title',
-        'slideshow_context',
-        'slideshow_created_at',
-        'slideshow_updated_at',
+        'slideshow_id' => array(
+            'default' => null,
+            'data_type' => 'int unsigned',
+            'null' => false,
+        ),
+        'slideshow_title' => array(
+            'default' => null,
+            'data_type' => 'varchar',
+            'null' => false,
+        ),
+        'slideshow_context' => array(
+            'default' => null,
+            'data_type' => 'varchar',
+            'null' => false,
+        ),
+        'slideshow_created_at' => array(
+            'data_type' => 'timestamp',
+            'null' => false,
+        ),
+        'slideshow_updated_at' => array(
+            'default' => 'CURRENT_TIMESTAMP',
+            'data_type' => 'timestamp',
+            'null' => false,
+        ),
     );
 
     protected static $_has_many = array(

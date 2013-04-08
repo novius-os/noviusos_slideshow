@@ -17,13 +17,41 @@ class Model_Image extends Model
     protected static $_table_name = 'nos_slideshow_image';
     protected static $_primary_key = array('slidimg_id');
 
+    protected static $_title_property = 'slidimg_title';
     protected static $_properties = array(
-        'slidimg_id',
-        'slidimg_slideshow_id',
-        'slidimg_position',
-        'slidimg_title',
-        'slidimg_description',
-        'slidimg_link_to_page_id',
+        'slidimg_id' => array(
+            'default' => null,
+            'data_type' => 'int unsigned',
+            'null' => false,
+        ),
+        'slidimg_slideshow_id' => array(
+            'default' => null,
+            'data_type' => 'varchar',
+            'null' => false,
+        ),
+        'slidimg_position' => array(
+            'default' => null,
+            'data_type' => 'int',
+            'null' => false,
+        ),
+        'slidimg_title' => array(
+            'default' => null,
+            'data_type' => 'varchar',
+            'null' => true,
+            'convert_empty_to_null' => true,
+        ),
+        'slidimg_description' => array(
+            'default' => null,
+            'data_type' => 'text',
+            'null' => true,
+            'convert_empty_to_null' => true,
+        ),
+        'slidimg_link_to_page_id' => array(
+            'default' => null,
+            'data_type' => 'int',
+            'null' => true,
+            'convert_empty_to_null' => true,
+        ),
     );
 
     protected static $_has_one = array(
