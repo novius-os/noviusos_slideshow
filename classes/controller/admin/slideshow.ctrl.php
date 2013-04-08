@@ -51,7 +51,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             }
             $image['slidimg_position'] = $position++;
             $model_img = Model_Image::find($img_id);
-            foreach($this->config['image_fields'] as $config) {
+            foreach ($this->config['image_fields'] as $config) {
                 if (isset($config['before_save']) && is_callable($config['before_save'])) {
                     $before_save = $config['before_save'];
                     $before_save($model_img, $image);
