@@ -11,9 +11,6 @@ define(
             var $container = $(id);
             var $preview_container = $container.find('.preview_container');
             var $slides_container = $container.find('.slides_container');
-            var media_options = $.extend(true, options.mediaSelector, $slides_container.children(':last').find('input.media').data('media-options') || {});
-            media_options.inputFileThumb.file = null;
-            var field_index = $slides_container.children('.field_enclosure').length ;
             var $slide_model =  $slides_container.find('div.slideshow_model');
             $slides_container.show();
 
@@ -26,36 +23,23 @@ define(
             // Add a field
             $container.on('click', '[data-id=add]', function onAdd(e) {
                 e.preventDefault();
-
-                var $form = $(this).closest('form'),
-                $newimg = $slide_model.clone().removeClass('slideshow_model').find('*').removeAttr('id').end().nosFormUI();
-
-                // On doit vider les champs du nouveau bloc, et re-indexer leur nom (index du tableau $_POST['images'])
-                // L'idée est que les attr('name') de chaque input/textarea d'un même bloc aient le même index
-                field_index++;
-                $newimg.find('textarea, input').val('').each(function () {
-                    var _name = $(this).attr('name');
-                    if (_name && _name.length > 0) {
-                        var re = new RegExp(/^images\[([0-9]+)\]\[([a-z_]+)\]$/g),
-                        m = re.exec(_name);
-                        m && $(this).attr('name', 'images[' + field_index + '][' + m[2] + ']');
+                var $that = $(this);
+                $.ajax({
+                    url: 'admin/noviusos_slideshow/slideshow/image_fields',
+                    dataType: 'json',
+                    success: function(json) {
+                        var $content = $(json.fieldset);
+                        $content.find('*').nosFormUI();
+                        $slides_container.append($content);
+                        var $newimg = $($content[0]);
+                        on_field_added($newimg);
+                        on_focus_preview(get_preview($newimg));
+                        $that.removeClass('ui-state-focus');
                     }
                 });
-
-                $slides_container.append($newimg);
-                $newimg.find('input.media').nosMedia(media_options);
-
-                on_field_added($newimg);
-                init_links_to($newimg, field_index);
-                on_focus_preview(get_preview($newimg));
-                $(this).removeClass('ui-state-focus');
             });
 
             function on_field_added($field) {
-                if ($field.is('.slideshow_model')) {
-                    return;
-                }
-
                 // Make checkbox fill a hidden field instead (we're sending an array, we don't want "missing" values)
                 $field.find('input[type=checkbox]').each(function normaliseCheckboxes() {
                         var $checkbox = $(this);
@@ -92,14 +76,13 @@ define(
                 $preview.find('input, select').on('click', function(e) {
                     e.preventDefault();
                 });
-
                 return $preview;
             }
 
             function on_focus_preview(preview) {
+
                 var $preview = $(preview);
                 var $field = $preview.data('field');
-
                 // Make the preview look "active"
                 $preview_container.find('li').removeClass('ui-state-active');
                 $preview.addClass('ui-state-active');
@@ -155,13 +138,13 @@ define(
 
                 var $preview = $preview_container.find('li.ui-state-active'),
                     $field = $preview.data('field'),
-                    media_id = $field.find('input.media').val();
+                    media_id = $field.find('input[name*="media_id"]').val();
 
                 var remove_image = function () {
                     delete_preview.call($preview);
                 };
 
-                // On fait une confirmation que si on supprime une "vraie" image
+                // Only ask a confirmation when a media is actually selected
                 if (media_id && parseInt(media_id) > 0) {
                     if (confirm($.nosCleanupTranslation(options.textDelete))) {
                         remove_image();
@@ -183,27 +166,35 @@ define(
 
             function generate_preview(item) {
                 var $field = $(this).closest('.field_enclosure');
-                var media_id = find_field($field, 'media_id').val();
+                var $media_id = find_field($field, 'media_id');
+                var media_id = $media_id.val();
                 var $preview = $field.data('preview');
-                var html  = '';
+                var media_options = $media_id.data('media-options') || {};
 
-                var thumbnail = item.thumbnail ? item.thumbnail.replace(/64-64/g, '160-160') : '';
+                var thumbnail = item.thumbnail ? item.thumbnail : (media_options.inputFileThumb ? media_options.inputFileThumb.file : '');
                 if (thumbnail == '') {
                     thumbnail = find_field($field, 'thumb').val()
                 }
                 if (thumbnail == '') {
                     thumbnail = find_field($slide_model, 'thumb').val()
                 }
+                if (!thumbnail) {
+                    var img = $field.find('img[src*=64-64]');
+                    if (img.length) {
+                        thumbnail = $(img).attr('src');
+                    }
+                }
+                if (thumbnail) {
+                    thumbnail = thumbnail.replace(/64-64/g, '160-160');
+                } else {
+                    thumbnail = "static/novius-os/admin/vendor/jquery/jquery-ui-input-file-thumb/css/images/apn.png"
+                }
 
-                html += '<img src="' + thumbnail + '" />';
-
-                $preview.find('.preview_content').html(html);
+                $preview.find('.preview_content').html('<img src="' + thumbnail + '" />');
             }
 
             $container.find('ul.preview_container').sortable({
-                update: function(event, ui) {
-                    reorderSlides();
-                }
+                update: reorderSlides
             });
 
             function blur() {
@@ -242,28 +233,9 @@ define(
                 $field.find('.add_link_to').show();
             });
 
-
-            function init_links_to($field, index) {
-                // Don't transform the model
-                if ($field.is('.slideshow_model')) {
-                    return;
-                }
-                var $this = $field.find('.transform_renderer_page_selector');
-                // Clone
-                var params = $.extend(true, {}, $this.data('renderer_page_selector'), {
-                    input_name: 'images[' + index + '][slidimg_link_to_page_id]'
-                });
-                var id = 'id_' + (new Date().getTime()).toString(16);
-                $this.attr('id', id);
-                require(['jquery-nos-inspector-tree-model-radio'], function() {
-                    $this.nosInspectorTreeModelRadio(params);
-                });
-            }
-
             $slides_container.children('.field_enclosure').each(function onEachFields() {
                 var $field = $(this);
                 on_field_added($field);
-                init_links_to($field, find_field($field, '_id').val());
                 $field.hide();
             });
 

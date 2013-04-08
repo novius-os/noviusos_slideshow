@@ -63,5 +63,75 @@ return array(
                 'data-icon' => 'check',
             ),
         ),
+        'image' => array(
+            'label' => '',
+            'form' => array(
+                'type' => 'hidden',
+            ),
+        ),
+    ),
+    'image_fields' => array(
+        'slidimg_id' => array(
+            'form' => array(
+                'type' => 'hidden',
+            ),
+        ),
+        'media_id' => array(
+            'label' => __('Image:'),
+            'form'  => array(
+                'type' => 'text',
+            ),
+            'template' => "\t\t<span class=\"{error_class}\">{label}&nbsp;<span style=\"font-size: 1.5em; line-height: 1em; font-weight: bold\">*</span></span>\n\t\t<br />\n\t\t<span class=\"{error_class}\">{field} {error_msg}</span>\n",
+            'renderer' => 'Nos\Renderer_Media',
+            'renderer_options' => array(
+                'inputFileThumb' => array(
+                    'title' => __('Image'),
+                    'allowDelete' => false,
+                ),
+            ),
+            'populate' => function($item) {
+                if ($item->medias->image) {
+                    return $item->medias->image->media_id;
+                } else {
+                    return '';
+                }
+            },
+            'before_save' => function($img_item, $item_data) {
+                $img_item->medias->image = $item_data['media_id'];
+            }
+        ),
+        'slidimg_title' => array(
+            'label' => __('Slide name:'),
+        ),
+        'slidimg_description' => array(
+            'label' => __('Description:'),
+        ),
+        'slidimg_link_to_page_id' => array(
+            'label' => __('Links to:'),
+            'renderer' => 'Nos\Slideshow\Renderer_Page',
+            'show_when' => function() {
+                return \Config::get('noviusos_slideshow::slideshow.slides_with_link', false);
+            }
+        ),
+    ),
+    'image_layout' => array(
+        'standard' => array(
+            'view'   => 'nos::form/accordion',
+            'params' => array(
+                //'classes' => 'notransform',
+                'accordions' => array(
+                    'main' => array(
+                        'title'  => __('Properties'),
+                        'fields' => array(
+                            'slidimg_id',
+                            'media_id',
+                            'slidimg_title',
+                            'slidimg_description',
+                            'slidimg_link_to_page_id',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     ),
 );

@@ -83,9 +83,6 @@ return array(
     #: views/admin/_form_image.view.php:40
     'Slide name:' => 'Nom de la diapo&nbsp;:',
 
-    #: views/admin/_form_image.view.php:42
-    'Slide name' => 'Nom de la diapo',
-
     #: views/admin/_form_image.view.php:47
     'Description:' => 'Description&nbsp;:',
 
