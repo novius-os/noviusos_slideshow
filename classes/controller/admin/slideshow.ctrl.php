@@ -92,12 +92,11 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         \Response::json($response);
     }
 
-    public function action_render_image_fieldset($item, $view = null)
+    public function action_render_image_fieldset($item)
     {
         static $auto_id_increment = 1;
-        // This action is not available from the browser. Only internal requests are authorised.
-        $view = 'noviusos_slideshow::admin/layout';
-        $fieldset = \Fieldset::build_from_config($this->config['image_fields'], $item, array('save' => false));
+
+        $fieldset = \Fieldset::build_from_config($this->config['image_fields'], $item, array('save' => false, 'auto_id' => false));
         // Override auto_id generation so it don't use the name (because we replace it below)
         $auto_id = uniqid('auto_id_');
         foreach ($fieldset->field() as $field) {
@@ -105,6 +104,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
                 $field->set_attribute('id', $auto_id.$auto_id_increment++);
             }
         }
+
         $image_view_params = array(
             'fieldset' => $fieldset,
             'layout' => $this->config['image_layout'],
@@ -114,9 +114,9 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         // Replace name="image[slidimg_description][]" "with image[slidimg_description][12345]" <- add slide_ID here
         $replaces = array();
         foreach ($this->config['image_fields'] as $name => $image_config) {
-            $replaces[$name] = "image[$name][{$item->slidimg_id}]";
+            $replaces[$name] = "image[{$item->slidimg_id}][$name]";
         }
-        $return = (string) \View::forge($view, $image_view_params, false)->render().$fieldset->build_append();
+        $return = (string) \View::forge('noviusos_slideshow::admin/layout', $image_view_params, false)->render().$fieldset->build_append();
 
         return strtr($return, $replaces);
     }
@@ -133,5 +133,4 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         $model_image->save();
         return $model_image;
     }
-
 }
