@@ -10,8 +10,6 @@
 
 namespace Nos\Slideshow;
 
-use Fuel\Core\Arr;
-
 class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 {
     protected static $to_delete = array();
@@ -24,48 +22,43 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 
     public function before_save($item, $data)
     {
-        $field_names = array();
-        foreach ($this->config['image_fields'] as $name => $img_data) {
-            if (!empty($img_data['dont_save']) || (!empty($img_data['form']['type']) && $img_data['form']['type'] == 'submit')) {
-                continue;
-            }
-            $field_names[] = $name;
-        }
-        // null is for the first argument of array_map() to transpose the matrix
-        $values = array(null);
-        $images = array();
-        foreach ($field_names as &$name) {
-            $values[] = \Input::post('image.'.$name);
-        }
-        // If there are values
-        if (!empty($values[1])) {
-            foreach (call_user_func_array('array_map', $values) as $value) {
-                $images[] = array_combine(array_values($field_names), $value);
+        $images = \Input::post('image', array());
+
+        // Empty checkboxes should be populated with the 'empty' key of the configuration array
+        // We need to do it manually here, since we're not using the Fieldset class
+        foreach ($this->config['image_fields'] as $name => $config) {
+            if (isset($config['form']['type']) && $config['form']['type'] == 'checkbox') {
+                foreach ($images as $index => $image) {
+                    if (empty($image[$name]) && isset($config['form']['empty'])) {
+                        $fields[$index][$name] = $config['form']['empty'];
+                    }
+                }
             }
         }
 
         static::$to_delete = array_diff(
             array_keys($item->images),
-            Arr::pluck($images, 'slidimg_id')
+            \Arr::pluck($images, 'slidimg_id')
         );
 
-        foreach ($images as $index => $img_data) {
-            $img_id = $img_data['slidimg_id'];
-            if (empty($img_data['media_id'])) {
+        $position = 1;
+        foreach ($images as $image) {
+            $img_id = $image['slidimg_id'];
+            if (empty($image['media_id'])) {
                 // Only unset, don't delete because it's still shown in the interface and the user can pick another image instead
                 unset($item->images[$img_id]);
                 continue;
             }
-            $img_data['slidimg_position'] = $index + 1;
+            $image['slidimg_position'] = $position++;
             $model_img = Model_Image::find($img_id);
-            foreach($this->config['image_fields'] as $name => $field_config) {
-                if ($field_config['before_save'] && is_callable($field_config['before_save'])) {
-                    $before_save = $field_config['before_save'];
-                    $before_save($model_img, $img_data);
+            foreach($this->config['image_fields'] as $config) {
+                if (isset($config['before_save']) && is_callable($config['before_save'])) {
+                    $before_save = $config['before_save'];
+                    $before_save($model_img, $image);
                 }
             }
-            unset($img_data['slidimg_id']);
-            $model_img->set($img_data);
+            unset($image['slidimg_id']);
+            $model_img->set($image);
             $item->images[$img_id] = $model_img;
         }
     }
