@@ -69,14 +69,11 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 
     public function action_image_fields()
     {
-        $response = array();
         $image = $this->create_image_db();
-        $response['fieldset'] = $this->action_render_image_fieldset($image);
-
-        $response['id'] = $image->slidimg_id;
-
-        $response['conf'] = $this->config['image_fields'];
-        \Response::json($response);
+        $slide = $this->action_render_image_fieldset($image);
+        \Response::json(array(
+            'slide' => $slide,
+        ));
     }
 
     public function action_render_image_fieldset($item)

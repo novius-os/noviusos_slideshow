@@ -28,29 +28,28 @@ define(
                     url: 'admin/noviusos_slideshow/slideshow/image_fields',
                     dataType: 'json',
                     success: function(json) {
-                        var $content = $(json.fieldset);
-                        $content.find('*').nosFormUI();
-                        $slides_container.append($content);
-                        var $newimg = $($content[0]);
-                        on_field_added($newimg);
-                        on_focus_preview(get_preview($newimg));
+                        var $slide = $(json.slide);
+                        $slide.nosFormUI();
+                        $slides_container.append($slide);
+
+                        // Open the media centre directly
+                        setTimeout(function openMediaCentre() {
+                            var $media = find_field($slide, 'media_id');
+                            if ($media.data('inputFileThumb')) {
+                                $media.data('inputFileThumb').choose();
+                            } else {
+                                setTimeout(openMediaCentre, 10);
+                            }
+                        }, 10);
+
+                        on_field_added($slide);
+                        on_focus_preview(get_preview($slide));
                         $that.removeClass('ui-state-focus');
                     }
                 });
             });
 
             function on_field_added($field) {
-                // Make checkbox fill a hidden field instead (we're sending an array, we don't want "missing" values)
-                $field.find('input[type=checkbox]').each(function normaliseCheckboxes() {
-                        var $checkbox = $(this);
-                        var name     = $checkbox.attr('name');
-                        var $hidden   = $('<input type="hidden" value="" />');
-                        $hidden.insertAfter($checkbox);
-                        $checkbox.on('change', function() {
-                            $hidden.attr('name', $(this).is(':checked') ? '' : name);
-                        }).trigger('change');
-                });
-
                 var $preview = get_preview($field);
                 $preview_container.append($preview);
                 generate_preview.call($field.get(0), {});
