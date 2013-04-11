@@ -12,7 +12,9 @@ namespace Nos\Slideshow;
 
 class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 {
-    protected static $to_delete = array();
+    protected $to_delete = array();
+    protected $images_fieldset = array();
+    protected $images_data = array();
 
     public static function _init()
     {
@@ -22,43 +24,26 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 
     public function before_save($item, $data)
     {
-        $images = \Input::post('image', array());
+        $images_data = \Input::post('image', array());
 
-        // Empty checkboxes should be populated with the 'empty' key of the configuration array
-        // We need to do it manually here, since we're not using the Fieldset class
-        foreach ($this->config['image_fields'] as $name => $config) {
-            if (isset($config['form']['type']) && $config['form']['type'] == 'checkbox') {
-                foreach ($images as $index => $image) {
-                    if (empty($image[$name]) && isset($config['form']['empty'])) {
-                        $fields[$index][$name] = $config['form']['empty'];
-                    }
-                }
-            }
-        }
-
-        static::$to_delete = array_diff(
+        $this->to_delete = array_diff(
             array_keys($item->images),
-            \Arr::pluck($images, 'slidimg_id')
+            \Arr::pluck($images_data, 'slidimg_id')
         );
 
-        $position = 1;
-        foreach ($images as $image) {
-            $img_id = $image['slidimg_id'];
+        foreach ($images_data as $image_data) {
+            $img_id = $image_data['slidimg_id'];
             if (empty($image['media_id'])) {
                 // Only unset, don't delete because it's still shown in the interface and the user can pick another image instead
                 unset($item->images[$img_id]);
                 continue;
             }
-            $image['slidimg_position'] = $position++;
             $model_img = Model_Image::find($img_id);
-            foreach ($this->config['image_fields'] as $config) {
-                if (isset($config['before_save']) && is_callable($config['before_save'])) {
-                    $before_save = $config['before_save'];
-                    $before_save($model_img, $image);
-                }
-            }
-            unset($image['slidimg_id']);
-            $model_img->set($image);
+            $this->images_fieldset[$img_id] = \Fieldset::build_from_config($this->config['image_fields'], array(
+                'save' => false,
+            ));
+            $this->images_fieldset[$img_id]->populate($image);
+            $this->images_data[$img_id] = $image_data;
             $item->images[$img_id] = $model_img;
         }
     }
@@ -66,17 +51,22 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
     public function save($item, $data)
     {
         $return = parent::save($item, $data);
-        foreach ($item->images as $img) {
-            if (in_array($img->slidimg_id, static::$to_delete)) {
+        // Save slideshow images
+        foreach ($this->images_fieldset as $img_id => $fieldset) {
+            if (in_array($img_id, $this->to_delete)) {
                 continue;
             }
+            $img = $item->images[$img_id];
             $img->slidimg_slideshow_id = $item->slideshow_id;
-            $img->save();
+            $fieldset->validation()->run($this->images_data[$img->slidimg_id]);
+            $fieldset->triggerComplete($img, $fieldset->validated());
         }
-        foreach (static::$to_delete as $img_id) {
+        // Delete slides
+        foreach ($this->to_delete as $img_id) {
             $item->images[$img_id]->delete();
             unset($item->images[$img_id]);
         }
+        $this->to_delete = array();
         return $return;
     }
 

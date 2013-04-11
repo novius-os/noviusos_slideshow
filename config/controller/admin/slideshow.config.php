@@ -96,8 +96,8 @@ return array(
                     return '';
                 }
             },
-            'before_save' => function($img_item, $item_data) {
-                $img_item->medias->image = $item_data['media_id'];
+            'before_save' => function($item, $data) {
+                $item->medias->image = $data['media_id'];
             }
         ),
         'slidimg_title' => array(
@@ -105,6 +105,13 @@ return array(
         ),
         'slidimg_description' => array(
             'label' => __('Description:'),
+        ),
+        'slidimg_position' => array(
+            'dont_populate' => true,
+            'before_save' => function($item, $data) {
+                static $position = 1;
+                $item->slidimg_position = $position++;
+            },
         ),
         'slidimg_link_to_page_id' => array(
             'label' => __('Links to:'),
