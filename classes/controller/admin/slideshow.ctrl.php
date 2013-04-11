@@ -31,20 +31,17 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             \Arr::pluck($images_data, 'slidimg_id')
         );
 
-        foreach ($images_data as $image_data) {
-            $img_id = $image_data['slidimg_id'];
-            if (empty($image['media_id'])) {
+        foreach ($images_data as $img_id => $image_data) {
+            if (empty($image_data['media_id'])) {
                 // Only unset, don't delete because it's still shown in the interface and the user can pick another image instead
                 unset($item->images[$img_id]);
                 continue;
             }
-            $model_img = Model_Image::find($img_id);
             $this->images_fieldset[$img_id] = \Fieldset::build_from_config($this->config['image_fields'], array(
                 'save' => false,
             ));
-            $this->images_fieldset[$img_id]->populate($image);
             $this->images_data[$img_id] = $image_data;
-            $item->images[$img_id] = $model_img;
+            $item->images[$img_id] = Model_Image::find($img_id);
         }
     }
 
@@ -58,7 +55,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
             }
             $img = $item->images[$img_id];
             $img->slidimg_slideshow_id = $item->slideshow_id;
-            $fieldset->validation()->run($this->images_data[$img->slidimg_id]);
+            $fieldset->validation()->run($this->images_data[$img_id]);
             $fieldset->triggerComplete($img, $fieldset->validated());
         }
         // Delete slides
