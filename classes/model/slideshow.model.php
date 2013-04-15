@@ -60,19 +60,16 @@ class Model_Slideshow extends Model
 
     protected static $_behaviours = array(
         'Nos\Orm_Behaviour_Contextable' => array(
-            'events' => array('before_insert'),
             'context_property'      => 'slideshow_context',
         ),
     );
 
     protected static $_observers = array(
         'Orm\Observer_CreatedAt' => array(
-            'events' => array('before_insert'),
             'mysql_timestamp' => true,
             'property' => 'slideshow_created_at'
         ),
         'Orm\Observer_UpdatedAt' => array(
-            'events' => array('before_save'),
             'mysql_timestamp' => true,
             'property' => 'slideshow_updated_at'
         )
