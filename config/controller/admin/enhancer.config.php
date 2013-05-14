@@ -8,10 +8,28 @@
  * @link http://www.novius-os.org
  */
 
+$app_config = \Config::load('noviusos_slideshow::slideshow', true);
+
+$sizes = array();
+foreach ($app_config['sizes'] as $key => $size) {
+    $sizes[$key] = \Arr::get($size, 'label', $key);
+}
+
 return array(
-    'popup' => array(
-        'layout' => array(
-            'view' => 'noviusos_slideshow::admin/enhancer/popup',
+    'fields' => array(
+        'slideshow_id' => array(
+            'label' => __('Select a slideshow:'),
+            'form' => array(
+                'type' => 'select',
+            ),
+        ),
+        'size' => array(
+            'label' => __('Format:'),
+            'form' => array(
+                'type' => count($sizes) === 1 ? 'hidden' : 'select',
+                'options' => $sizes,
+                'value' => key($sizes),
+            ),
         ),
     ),
     'preview' => array(

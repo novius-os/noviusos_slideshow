@@ -12,29 +12,24 @@ namespace Nos\Slideshow;
 
 class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
 {
-
-    public function action_popup()
+    protected function config_build()
     {
-        $options = array(
-            'order_by' => array('slideshow_title' => 'asc'),
+        parent::config_build();
+        $this->config['fields']['slideshow_id']['form']['options'] = \Arr::pluck(
+            Model_Slideshow::find('all', array(
+                'where' => array(
+                    array('context', $this->placeholders['_parent_context']),
+                ),
+            )),
+            'slideshow_title',
+            'slideshow_id'
         );
-        $nosContext = \Arr::get(\Input::get(), 'nosContext', null);
-        if (!empty($nosContext)) {
-            $options['where'] = array(array('context', $nosContext));
-        }
-
-        $this->config['popup']['params']['slideshows'] = Model_Slideshow::find('all', $options);
-
-        \Config::load('noviusos_slideshow::slideshow', 'slideshow');
-        $this->config['popup']['params']['sizes'] = \Config::get('slideshow.sizes');
-
-        return parent::action_popup();
     }
 
     public function action_save(array $args = null)
     {
-        \Config::load('noviusos_slideshow::slideshow', 'slideshow');
-        $sizes = \Config::get('slideshow.sizes');
+        \Config::load('noviusos_slideshow::slideshow', true);
+        $sizes = \Config::get('noviusos_slideshow::slideshow.sizes');
 
         if (empty($args)) {
             $args = $_POST;
