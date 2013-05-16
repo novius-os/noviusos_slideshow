@@ -32,15 +32,18 @@ define(
                         $slide.nosFormUI();
                         $slides_container.append($slide);
 
+                        var tries = 0;
                         // Open the media centre directly
                         setTimeout(function openMediaCentre() {
                             var $media = find_field($slide, 'media_id');
                             if ($media.data('inputFileThumb')) {
                                 $media.data('inputFileThumb').choose();
                             } else {
-                                setTimeout(openMediaCentre, 10);
+                                if (tries++ < 50) {;
+                                    setTimeout(openMediaCentre, 20);
+                                }
                             }
-                        }, 10);
+                        }, 20);
 
                         on_field_added($slide);
                         on_focus_preview(get_preview($slide));
