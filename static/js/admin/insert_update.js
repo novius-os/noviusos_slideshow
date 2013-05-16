@@ -29,15 +29,16 @@ define(
                     dataType: 'json',
                     success: function(json) {
                         var $slide = $(json.slide);
-                        $slide.nosFormUI();
                         $slides_container.append($slide);
+                        $slide = $slide.not('script');
+                        $slide.nosFormUI();
 
                         var tries = 0;
                         // Open the media centre directly
                         setTimeout(function openMediaCentre() {
                             var $media = find_field($slide, 'media_id');
-                            if ($media.data('inputFileThumb')) {
-                                $media.data('inputFileThumb').choose();
+                            if ($media.data('uiInputFileThumb')) {
+                                $media.data('uiInputFileThumb').choose();
                             } else {
                                 if (tries++ < 50) {;
                                     setTimeout(openMediaCentre, 20);
