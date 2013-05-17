@@ -35,7 +35,7 @@ if (!$item->is_new()) {
             <p style="height: 40px;">&nbsp;</p>
             <ul class="preview_container">
             </ul>
-            <button type="button" class="primary preview_style" style="width: 178px; height: 168px;" data-icon="plus" data-id="add" data-params="<?= e(json_encode(array('where' => 'bottom'))) ?>"><?= __('Add a slide') ?></button>
+            <button type="button" class="ui-priority-primary preview_style" style="width: 178px; height: 168px;" data-icon="plus" data-id="add" data-params="<?= e(json_encode(array('where' => 'bottom'))) ?>"><?= __('Add a slide') ?></button>
             <br style="clear:both;" />
         </div>
 
