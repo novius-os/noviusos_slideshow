@@ -43,6 +43,18 @@ class Model_Slideshow extends Model
             'data_type' => 'timestamp',
             'null' => false,
         ),
+        'slideshow_created_by_id' => array(
+            'default' => null,
+            'data_type' => 'int unsigned',
+            'null' => true,
+            'convert_empty_to_null' => true,
+        ),
+        'slideshow_updated_by_id' => array(
+            'default' => null,
+            'data_type' => 'int unsigned',
+            'null' => true,
+            'convert_empty_to_null' => true,
+        ),
     );
 
     protected static $_has_many = array(
@@ -61,6 +73,10 @@ class Model_Slideshow extends Model
     protected static $_behaviours = array(
         'Nos\Orm_Behaviour_Contextable' => array(
             'context_property'      => 'slideshow_context',
+        ),
+        'Nos\Orm_Behaviour_Author' => array(
+            'created_by_property' => 'slideshow_created_by_id',
+            'updated_by_property' => 'slideshow_updated_by_id',
         ),
     );
 
