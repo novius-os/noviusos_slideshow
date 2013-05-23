@@ -217,25 +217,6 @@ define(
             }
             $slides_container.find('.show_hide').hide();
 
-            $slides_container.on('click', '.add_link_to', function (e) {
-                e.preventDefault();
-
-                var $field = $(this).closest('.field_enclosure');
-                var $link_to = $field.find('.link_to');
-                $link_to.show().nosOnShow();
-                $field.find('.add_link_to').hide();
-            });
-
-            $slides_container.on('click', '.remove_link_to', function (e) {
-                e.preventDefault();
-
-                var $field = $(this).closest('.field_enclosure');
-                var $link_to = $field.find('.link_to');
-                $link_to.find(':radio').first().prop('checked', true);
-                $link_to.hide();
-                $field.find('.add_link_to').show();
-            });
-
             $slides_container.children('.field_enclosure').each(function onEachFields() {
                 var $field = $(this);
                 on_field_added($field);
