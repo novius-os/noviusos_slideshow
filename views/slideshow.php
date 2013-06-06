@@ -18,7 +18,7 @@ if ($slides_preview) {
 $config = \Config::load('noviusos_slideshow::flexslider', true);
 \Nos\Nos::main_controller()->addJavascriptInline(\View::forge('noviusos_slideshow::slideshow_js', array('config' => $config, 'slides_preview' => $slides_preview)));
 ?>
-<div class="flex-nav-container <?=$class?>">
+<div class="noviusos_slideshow noviusos_enhancer flex-nav-container <?=$class?>">
 <div class="flexslider">
     <ul class="slides">
 <?php
