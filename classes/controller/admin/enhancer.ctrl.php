@@ -36,7 +36,15 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
         }
 
         $params = array();
-        $params['src'] = Model_Image::find()->where('slidimg_slideshow_id', $_POST['slideshow_id'])->get_one()->medias->image->get_public_path_resized(100, 40);
+        try {
+            $slide = Model_Image::find()->where('slidimg_slideshow_id', $_POST['slideshow_id'])->get_one();
+            if (empty($slide) || empty($slide->medias->image)) {
+                throw new \Exception();
+            }
+            $params['src'] = $slide->medias->image->get_public_path_resized(100, 40);
+        } catch (\Exception $e) {
+            $params['src'] = 'static/apps/noviusos_slideshow/img/slideshow-64.png';
+        }
         $params['title'] = Model_Slideshow::find($_POST['slideshow_id'])->slideshow_title;
         $size = (!empty($_POST['size']) ? $_POST['size'] : current(array_keys($sizes)));
         $params['size'] = \Arr::get($sizes, $size.'.label', $size);
