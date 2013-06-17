@@ -15,15 +15,22 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
     protected function config_build()
     {
         parent::config_build();
-        $this->config['fields']['slideshow_id']['form']['options'] = \Arr::pluck(
-            Model_Slideshow::find('all', array(
-                'where' => array(
-                    array('context', $this->placeholders['_parent_context']),
-                ),
-            )),
-            'slideshow_title',
-            'slideshow_id'
-        );
+        $slideshows = Model_Slideshow::find('all', array(
+            'where' => array(
+                array('context', $this->placeholders['_parent_context']),
+            ),
+        ));
+        if (!empty($slideshows)) {
+            $this->config['fields']['slideshow_id']['form']['options'] = \Arr::pluck(
+                $slideshows,
+                'slideshow_title',
+                'slideshow_id'
+            );
+        } else {
+            unset($this->config['fields']);
+            $this->config['popup']['view'] = 'noviusos_slideshow::admin/enhancer/blank_slate';
+            $this->config['popup']['params'] = $this->placeholders;
+        }
     }
 
     public function action_save(array $args = null)
