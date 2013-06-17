@@ -8,6 +8,7 @@ define(
         "use strict";
         return function(id, options, is_new) {
 
+            var popupMediaCentre = !is_new;
             var $container = $(id);
             var $preview_container = $container.find('.preview_container');
             var $slides_container = $container.find('.slides_container');
@@ -34,17 +35,21 @@ define(
                         $slide.nosFormUI();
 
                         var tries = 0;
-                        // Open the media centre directly
-                        setTimeout(function openMediaCentre() {
-                            var $media = find_field($slide, 'media_id');
-                            if ($media.data('uiInputFileThumb')) {
-                                $media.data('uiInputFileThumb').choose();
-                            } else {
-                                if (tries++ < 50) {;
-                                    setTimeout(openMediaCentre, 20);
+                        if (popupMediaCentre) {
+                            // Open the media centre directly
+                            setTimeout(function openMediaCentre() {
+                                var $media = find_field($slide, 'media_id');
+                                if ($media.data('uiInputFileThumb')) {
+                                    $media.data('uiInputFileThumb').choose();
+                                } else {
+                                    if (tries++ < 50) {;
+                                        setTimeout(openMediaCentre, 20);
+                                    }
                                 }
-                            }
-                        }, 20);
+                            }, 20);
+                        } else {
+                            popupMediaCentre = true;
+                        }
 
                         on_field_added($slide);
                         on_focus_preview(get_preview($slide));
