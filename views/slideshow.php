@@ -37,7 +37,11 @@ foreach ($slideshow->images as $image) {
     if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
         echo '<a href="'. $image->page->url().'">';
     }
-    echo '<img style="margin: 0 auto;" src="', $image->medias->image->get_public_path_resized($width, $height), '" alt="', htmlspecialchars($image->slidimg_title), '" title="', htmlspecialchars($image->slidimg_title), '" />';
+    echo $image->medias->image->get_img_tag_resized($width, $height, array(
+        'alt' => $image->slidimg_title,
+        'title' => $image->slidimg_title,
+        'style' => 'margin: 0 auto;',
+    ));
     if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
         echo '</a>';
     }
