@@ -1,9 +1,9 @@
 <?php
 
-// Generated on 16/04/2013 19:15:50
+// Generated on 25/06/2013 11:06:52
 
-// 39 out of 39 messages are translated (100%).
-// 150 out of 150 words are translated (100%).
+// 39 out of 41 messages are translated (95%).
+// 150 out of 180 words are translated (95%).
 
 return array(
     #: views/admin/_form_content.view.php:38
@@ -15,17 +15,17 @@ return array(
     #: views/admin/_form_content.view.php:61
     'Are you sure you want to delete this slide?' => 'このスライドを削除してもよろしいですか？',
 
-    #: views/admin/enhancer/popup.view.php:15
-    'Select a slideshow:' => 'スライドショーを選択:',
-
-    #: views/admin/enhancer/popup.view.php:30
-    'Format:' => 'フォーマット:',
-
     #: views/admin/enhancer/preview.view.php:16
     'Slideshow ‘{{title}}’' => 'スライドショー ‘{{title}}’',
 
     #: views/admin/enhancer/preview.view.php:17
     '(format: {{format}})' => '(フォーマット: {{format}})',
+
+    #: views/admin/enhancer/blank_slate.view.php:14
+    'No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this language.</a>' => '',
+
+    #: views/admin/enhancer/blank_slate.view.php:16
+    'No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this context.</a>' => '',
 
     #: views/admin/warning_not_published.view.php:18
     'Not published' => '未公開',
@@ -80,6 +80,12 @@ return array(
 
     #: config/controller/admin/slideshow.config.php:131
     'Properties' => 'プロパティ',
+
+    #: config/controller/admin/enhancer.config.php:21
+    'Select a slideshow:' => 'スライドショーを選択:',
+
+    #: config/controller/admin/enhancer.config.php:27
+    'Format:' => 'フォーマット:',
 
     #: config/controller/admin/appdesk.config.php:21
     'slideshow' => 'スライドショー',
