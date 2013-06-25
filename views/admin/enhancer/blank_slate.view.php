@@ -8,10 +8,18 @@
  * @link http://www.novius-os.org
  */
 $id = uniqid('slideshow_');
+
+$sites = \Nos\Tools_Context::sites();
+if (count($sites) === 1) {
+    $message = __('No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this language.</a>');
+} else {
+    $message = __('No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this context.</a>');
+}
 ?>
 <p>&nbsp;</p>
 <p>
-    <?= strtr(__('You don’t have any slideshow to add. Go ahead, <a>add your first slideshow.</a>'), array(
+    <?= strtr($message, array(
+        '{{context}}' => \Nos\Tools_Context::contextLabel($params['_parent_context']),
         '<a>' => '<a href="#" id="'.$id.'">',
     ));
     ?>
