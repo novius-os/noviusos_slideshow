@@ -48,7 +48,7 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
             if (empty($slide) || empty($slide->medias->image)) {
                 throw new \Exception();
             }
-            $params['src'] = $slide->medias->image->get_public_path_resized(100, 40);
+            $params['src'] = $slide->medias->image->urlResized(100, 40);
         } catch (\Exception $e) {
             $params['src'] = 'static/apps/noviusos_slideshow/img/slideshow-64.png';
         }

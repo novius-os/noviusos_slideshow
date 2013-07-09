@@ -29,7 +29,7 @@ foreach ($slideshow->images as $image) {
 
     echo '<li ';
     if ($slides_preview) {
-        echo 'data-thumb="', $image->medias->image->get_public_path_resized(300, 100), '"';
+        echo 'data-thumb="', $image->medias->image->urlResized(300, 100), '"';
     }
     echo '>';
 
@@ -37,7 +37,7 @@ foreach ($slideshow->images as $image) {
     if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
         echo '<a href="'. $image->page->url().'">';
     }
-    echo $image->medias->image->get_img_tag_resized($width, $height, array(
+    echo $image->medias->image->getImgTagResized($width, $height, array(
         'alt' => $image->slidimg_title,
         'title' => $image->slidimg_title,
         'style' => 'margin: 0 auto;',

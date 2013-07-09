@@ -19,7 +19,7 @@ return array(
                 if (empty($image)) {
                     return false;
                 }
-                return $image->get_public_path_resized(64, 64);
+                return $image->urlResized(64, 64);
             },
         ),
         'thumbnailAlternate' => array(
