@@ -33,17 +33,16 @@ foreach ($slideshow->images as $image) {
     }
     echo '>';
 
-    // Image, avec ou sans lien
-    if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
-        echo '<a href="'. $image->page->url().'">';
-    }
-    echo $image->medias->image->getImgTagResized($width, $height, array(
+    // Image, with or without anchor
+    $img = $image->medias->image->getImgTagResized($width, $height, array(
         'alt' => $image->slidimg_title,
         'title' => $image->slidimg_title,
         'style' => 'margin: 0 auto;',
     ));
     if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
-        echo '</a>';
+        echo $image->page->htmlAnchor(array('text' => $img));
+    } else {
+        echo $img;
     }
 
     // Caption
