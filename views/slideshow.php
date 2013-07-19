@@ -34,7 +34,7 @@ foreach ($slideshow->images as $image) {
     echo '>';
 
     // Image, with or without anchor
-    $img = $image->medias->image->getImgTagResized($width, $height, array(
+    $img = $image->medias->image->htmlImgResized($width, $height, array(
         'alt' => $image->slidimg_title,
         'title' => $image->slidimg_title,
         'style' => 'margin: 0 auto;',
