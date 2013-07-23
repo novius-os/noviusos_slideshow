@@ -10,10 +10,11 @@
 
 $app_config = \Config::load('noviusos_slideshow::slideshow', true);
 
-$sizes = array();
-foreach ($app_config['sizes'] as $key => $size) {
-    $sizes[$key] = \Arr::get($size, 'label', $key);
+$formats = array();
+foreach ($app_config['formats'] as $key => $config) {
+    $formats[$key] = \Arr::get($config, 'label', $key);
 }
+$current = \Arr::get($app_config, 'default_format', key($formats));
 
 return array(
     'fields' => array(
@@ -23,12 +24,12 @@ return array(
                 'type' => 'select',
             ),
         ),
-        'size' => array(
+        'format' => array(
             'label' => __('Format:'),
             'form' => array(
-                'type' => count($sizes) === 1 ? 'hidden' : 'select',
-                'options' => $sizes,
-                'value' => key($sizes),
+                'type' => count($formats) === 1 ? 'hidden' : 'select',
+                'options' => $formats,
+                'value' => $current,
             ),
         ),
     ),

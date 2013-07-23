@@ -10,6 +10,6 @@
 ?>
 (function($) {
     $(window).load(function() {
-        $('.flexslider').flexslider(<?= json_encode($config) ?>)<?= $slides_preview ? '.novius_flexpreview()' : ''?>;
+        $('.flexslider').flexslider(<?= json_encode($flexslider_config) ?>)<?= $slides_preview ? '.novius_flexpreview()' : ''?>;
     });
 })($.noConflict(true));

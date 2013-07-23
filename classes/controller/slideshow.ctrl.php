@@ -27,11 +27,10 @@ class Controller_Slideshow extends Controller_Front_Application
 
         $config = \Config::load('noviusos_slideshow::slideshow', true);
 
-        if (empty($args['size'])) {
-            $size = current($config['sizes']);
-        } else {
-            $size = $config['sizes'][$args['size']];
-        }
+        $default_format = \Arr::get($config, 'default_format');
+        $format = \Arr::get($args, 'format', $default_format);
+        $format_config = \Arr::get($config, 'formats.'.$format, \Arr::get($config, 'formats.'.$default_format, array()));
+
         $slideshow = Model_Slideshow::find($args['slideshow_id'], array(
             'related' => array(
                 'images' => array(
@@ -40,14 +39,9 @@ class Controller_Slideshow extends Controller_Front_Application
             ),
         ));
 
-        return \View::forge($this->config['views']['index'], array(
+        return \View::forge(\Arr::get($format_config, 'view'), array(
             'slideshow' => $slideshow,
-            'size_key'  => $args['size'],
-            'class'		=> $size['class'],
-            'height'	=> $size['img_height'],
-            'width'		=> $size['img_width'],
-            'show_link' => $config['slides_with_link'],
-            'slides_preview' => $config['slides_preview']
+            'config' => \Arr::get($format_config, 'config', array()),
         ), false);
     }
 }

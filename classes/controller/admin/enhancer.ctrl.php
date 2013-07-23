@@ -36,7 +36,7 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
     public function action_save(array $args = null)
     {
         \Config::load('noviusos_slideshow::slideshow', true);
-        $sizes = \Config::get('noviusos_slideshow::slideshow.sizes');
+        $formats = \Config::get('noviusos_slideshow::slideshow.formats');
 
         if (empty($args)) {
             $args = $_POST;
@@ -53,8 +53,8 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
             $params['src'] = 'static/apps/noviusos_slideshow/img/slideshow-64.png';
         }
         $params['title'] = Model_Slideshow::find($_POST['slideshow_id'])->slideshow_title;
-        $size = (!empty($_POST['size']) ? $_POST['size'] : current(array_keys($sizes)));
-        $params['size'] = \Arr::get($sizes, $size.'.label', $size);
+        $format = (!empty($_POST['format']) ? $_POST['format'] : \Config::get('noviusos_slideshow::slideshow.default_format'));
+        $params['format'] = \Arr::get($formats, $format.'.label', $format);
         $body = array(
             'config'  => $args,
             'preview' => \View::forge($this->config['preview']['view'], $params)->render(),

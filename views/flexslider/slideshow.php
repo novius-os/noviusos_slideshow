@@ -8,17 +8,31 @@
  * @link http://www.novius-os.org
  */
 
-\Nos\Nos::main_controller()->addJavascript('static/apps/noviusos_slideshow/js/jquery.min.js');
-\Nos\Nos::main_controller()->addJavascript('static/apps/noviusos_slideshow/js/jquery.flexslider.js');
-\Nos\Nos::main_controller()->addCss('static/apps/noviusos_slideshow/css/flexslider.css');
+$slides_preview = \Arr::get($config, 'slides_preview', true);
+$show_link = \Arr::get($config, 'slides_with_link', true);
+
+$libs = array('js.jquery', 'js.flexslider', 'css.flexslider');
 if ($slides_preview) {
-    \Nos\Nos::main_controller()->addJavascript('static/apps/noviusos_slideshow/js/jquery.novius_flexpreview.js');
-    \Nos\Nos::main_controller()->addCss('static/apps/noviusos_slideshow/css/flexpreview.css');
+    $libs = array_merge($libs, array('js.flexpreview', 'css.flexpreview'));
 }
-$config = \Config::load('noviusos_slideshow::flexslider', true);
-\Nos\Nos::main_controller()->addJavascriptInline(\View::forge('noviusos_slideshow::slideshow_js', array('config' => $config, 'slides_preview' => $slides_preview)));
+foreach ($libs as $lib) {
+    $lib_url = \Arr::get($config, $lib, null);
+    if (empty($lib_url)) {
+        continue;
+    }
+    if (substr($lib, 0, 2) === 'js') {
+        \Nos\Nos::main_controller()->addJavascript($lib_url);
+    } else {
+        \Nos\Nos::main_controller()->addCss($lib_url);
+    }
+}
+$flexslider_config = \Config::load('noviusos_slideshow::formats/flexslider', true);
+\Nos\Nos::main_controller()->addJavascriptInline(\View::forge('noviusos_slideshow::flexslider/javascript', array(
+    'flexslider_config' => $flexslider_config,
+    'slides_preview' => $slides_preview,
+)));
 ?>
-<div class="noviusos_slideshow noviusos_enhancer flex-nav-container <?=$class?>">
+<div class="noviusos_slideshow noviusos_enhancer flex-nav-container <?= \Arr::get($config, 'class', '') ?>">
 <div class="flexslider">
     <ul class="slides">
 <?php
@@ -34,11 +48,13 @@ foreach ($slideshow->images as $image) {
     echo '>';
 
     // Image, with or without anchor
-    $img = $image->medias->image->htmlImgResized($width, $height, array(
-        'alt' => $image->slidimg_title,
-        'title' => $image->slidimg_title,
-        'style' => 'margin: 0 auto;',
-    ));
+    $img = $image->medias->image->htmlImgResized(\Arr::get($config, 'width', 800),
+        \Arr::get($config, 'height', 600),
+        array(
+            'alt' => $image->slidimg_title,
+            'title' => $image->slidimg_title,
+            'style' => 'margin: 0 auto;',
+        ));
     if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
         echo $image->page->htmlAnchor(array('text' => $img));
     } else {
