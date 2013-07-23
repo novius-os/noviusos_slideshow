@@ -9,7 +9,7 @@
  */
 
 return array(
-    'animation'         => "slide",             //String: Select your animation type, "fade" or "slide"
+    'animation'         => "fade",             //String: Select your animation type, "fade" or "slide"
     //'slideDirection'    => "horizontal",        //String: Select the sliding direction, "horizontal" or "vertical"
     'slideshow'         => true,                //Boolean: Animate slider automatically
     //'slideshowSpeed'    => 7000,                //Integer: Set the speed of the slideshow cycling, in milliseconds
