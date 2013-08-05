@@ -10,10 +10,14 @@
 $id = uniqid('slideshow_');
 
 $sites = \Nos\Tools_Context::sites();
-if (count($sites) === 1) {
-    $message = __('No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this language.</a>');
+if ($params['slideshow_count'] === 0) {
+    $message = __('How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:').
+        __('<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>
+<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></uL>');
+} else if (count($sites) === 1) {
+    $message = __('No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.');
 } else {
-    $message = __('No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this context.</a>');
+    $message = __('No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.');
 }
 ?>
 <p>&nbsp;</p>
