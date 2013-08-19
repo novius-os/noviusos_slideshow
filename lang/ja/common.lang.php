@@ -1,9 +1,9 @@
 <?php
 
-// Generated on 05/07/2013 14:57:58
+// Generated on 19/08/2013 18:12:14
 
-// 39 out of 41 messages are translated (95%).
-// 150 out of 180 words are translated (95%).
+// 39 out of 43 messages are translated (90%).
+// 150 out of 225 words are translated (90%).
 
 return array(
     #: views/admin/_form_content.view.php:38
@@ -22,10 +22,16 @@ return array(
     '(format: {{format}})' => '(フォーマット: {{format}})',
 
     #: views/admin/enhancer/blank_slate.view.php:14
-    'No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this language.</a>' => '',
+    'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => '',
 
-    #: views/admin/enhancer/blank_slate.view.php:16
-    'No slideshows are available in {{context}}. Go ahead, <a>add you first slideshow in this context.</a>' => '',
+    #: views/admin/enhancer/blank_slate.view.php:15
+    '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>'."\n".'<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></uL>' => '',
+
+    #: views/admin/enhancer/blank_slate.view.php:18
+    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => '',
+
+    #: views/admin/enhancer/blank_slate.view.php:20
+    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => '',
 
     #: views/admin/warning_not_published.view.php:18
     'Not published' => '未公開',
