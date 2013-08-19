@@ -25,7 +25,7 @@ return array(
     'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => 'Voilà qui est frustrant, vous n’avez aucun diaporama à ajouter. Mais, pas de panique, il vous faut simplement&nbsp;:',
 
     #: views/admin/enhancer/blank_slate.view.php:15
-    '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>\n<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></uL>' => '<ul><li><a>Ajoutez votre premier diaporama</a> (s’ouvre dans un nouvel onglet).</li>\n<li>Une fois que vous aurez terminé (ça ne sera pas long), revenez à cet onglet pour insérer votre beau diaporama tout neuf.</li></uL>',
+    '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>\n<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '<ul><li><a>Ajoutez votre premier diaporama</a> (s’ouvre dans un nouvel onglet).</li>\n<li>Une fois que vous aurez terminé (ça ne sera pas long), revenez à cet onglet pour insérer votre beau diaporama tout neuf.</li></ul>',
 
     #: views/admin/enhancer/blank_slate.view.php:18
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => 'Aucun diaporama n’est disponible en {{context}}. Allez-y, <a>ajoutez votre premier diaporama dans cette langue</a>.',
