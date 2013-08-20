@@ -25,7 +25,7 @@ return array(
     'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => '',
 
     #: views/admin/enhancer/blank_slate.view.php:15
-    '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>'."\n".'<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></uL>' => '',
+    '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>'."\n".'<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '',
 
     #: views/admin/enhancer/blank_slate.view.php:18
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => '',
