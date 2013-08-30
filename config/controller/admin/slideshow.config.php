@@ -82,7 +82,7 @@ return array(
                 'type' => 'text',
             ),
             'template' => "\t\t<span class=\"{error_class}\">{label}&nbsp;<span style=\"font-size: 1.5em; line-height: 1em; font-weight: bold\">*</span></span>\n\t\t<br />\n\t\t<span class=\"{error_class}\">{field} {error_msg}</span>\n",
-            'renderer' => 'Nos\Renderer_Media',
+            'renderer' => 'Nos\Media\Renderer_Media',
             'renderer_options' => array(
                 'inputFileThumb' => array(
                     'title' => __('Image'),

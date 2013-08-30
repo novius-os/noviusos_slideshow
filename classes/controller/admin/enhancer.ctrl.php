@@ -46,7 +46,7 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
 
         $params = array();
         try {
-            $slide = Model_Image::find()->where('slidimg_slideshow_id', $_POST['slideshow_id'])->get_one();
+            $slide = Model_Image::query()->where('slidimg_slideshow_id', $_POST['slideshow_id'])->get_one();
             if (empty($slide) || empty($slide->medias->image)) {
                 throw new \Exception();
             }
