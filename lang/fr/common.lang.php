@@ -65,10 +65,6 @@ return array(
     #: config/common/slideshow.config.php:9
     'Title' => 'Titre',
 
-    #. Note to translator: This is a submit button
-    #: config/controller/admin/slideshow.config.php:61
-    'Save' => 'Enregistrer',
-
     #: config/controller/admin/slideshow.config.php:80
     'Image:' => 'Image&nbsp;:',
 

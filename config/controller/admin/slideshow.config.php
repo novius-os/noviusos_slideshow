@@ -33,7 +33,6 @@ return array(
         'menu' => array(
 
         ),
-        'save' => 'save',
     ),
     'fields' => array(
         'slideshow_id' => array (
@@ -50,17 +49,6 @@ return array(
             'validation' => array(
                 'required',
                 'min_length' => array(2),
-            ),
-        ),
-        'save' => array(
-            'label' => '',
-            'form' => array(
-                'type' => 'submit',
-                'tag' => 'button',
-                // Note to translator: This is a submit button
-                'value' => __('Save'),
-                'class' => 'ui-priority-primary',
-                'data-icon' => 'check',
             ),
         ),
         'image' => array(
