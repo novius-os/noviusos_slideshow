@@ -7,9 +7,11 @@
  *             http://www.gnu.org/licenses/agpl-3.0.html
  * @link http://www.novius-os.org
  */
-?>
-(function($) {
-    $(window).load(function() {
-        $('.flexslider').flexslider(<?= json_encode($config) ?>)<?= $slides_preview ? '.novius_flexpreview()' : ''?>;
-    });
-})($.noConflict(true));
+
+\Log::deprecated('The view noviusos_slideshow::slideshow_js is deprecated, '.
+    'please use noviusos_slideshow::flexslider/javascript instead.', 'Chiba.2');
+
+echo \View::forge('noviusos_slideshow::flexslider/javascript', array(
+    'flexslider_config' => $config,
+    'slides_preview' => $slides_preview,
+));

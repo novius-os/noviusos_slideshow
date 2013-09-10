@@ -7,9 +7,9 @@
  *             http://www.gnu.org/licenses/agpl-3.0.html
  * @link http://www.novius-os.org
  */
-
-return array(
-    'views' => array(
-        'index' => 'noviusos_slideshow::slideshow'
-    ),
-);
+?>
+(function($) {
+    $(window).load(function() {
+        $('.flexslider').flexslider(<?= json_encode($flexslider_config) ?>)<?= $slides_preview ? '.novius_flexpreview()' : ''?>;
+    });
+})($.noConflict(true));
