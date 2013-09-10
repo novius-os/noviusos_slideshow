@@ -41,6 +41,15 @@ return array(
                 'width' => '414',
                 'height' => '300',
                 'class' => 'slide-small',
+                'js' => array(
+                    'jquery' => 'static/apps/noviusos_slideshow/js/jquery.min.js',
+                    'flexslider' => 'static/apps/noviusos_slideshow/js/jquery.flexslider.js',
+                    'flexpreview' => 'static/apps/noviusos_slideshow/js/jquery.novius_flexpreview.js',
+                ),
+                'css' => array(
+                    'flexslider' => 'static/apps/noviusos_slideshow/css/flexslider.css',
+                    'flexpreview' => 'static/apps/noviusos_slideshow/css/flexpreview.css',
+                ),
             ),
         ),
     ),
