@@ -21,7 +21,7 @@ class Controller_Slideshow extends Controller_Front_Application
      */
     public function action_main($args = array())
     {
-        if ( empty($args) || empty($args['slideshow_id']) ) {
+        if (empty($args) || empty($args['slideshow_id'])) {
             return false;
         }
 

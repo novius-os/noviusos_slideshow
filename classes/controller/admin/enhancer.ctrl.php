@@ -63,5 +63,4 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
         );
         \Response::json($body);
     }
-
 }

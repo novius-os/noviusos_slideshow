@@ -35,12 +35,12 @@ return array(
                     'css' => array('text-align' => 'center'),
                 ),
             ),
-            'value' => function($item) {
+            'value' => function ($item) {
                 return $item->is_new() ? 0 : \Nos\Slideshow\Model_Image::count(array(
                     'where' => array(array('slidimg_slideshow_id' => $item->slideshow_id)),
                 ));
             },
-            'sorting_callback' => function(&$query, $sortDirection) {
+            'sorting_callback' => function (&$query, $sortDirection) {
                 $query->_join_relation('images', $join);
                 $query->group_by($join['alias_from'].'.slideshow_id');
                 $query->order_by(\Db::expr('COUNT(*)'), $sortDirection);

@@ -77,14 +77,14 @@ return array(
                     'allowDelete' => false,
                 ),
             ),
-            'populate' => function($item) {
+            'populate' => function ($item) {
                 if ($item->medias->image) {
                     return $item->medias->image->media_id;
                 } else {
                     return '';
                 }
             },
-            'before_save' => function($item, $data) {
+            'before_save' => function ($item, $data) {
                 $item->medias->image = $data['media_id'];
             }
         ),
@@ -96,7 +96,7 @@ return array(
         ),
         'slidimg_position' => array(
             'dont_populate' => true,
-            'before_save' => function($item, $data) {
+            'before_save' => function ($item, $data) {
                 static $position = 1;
                 $item->slidimg_position = $position++;
             },
@@ -104,7 +104,7 @@ return array(
         'slidimg_link_to_page_id' => array(
             'label' => __('Links to:'),
             'renderer' => 'Nos\Slideshow\Renderer_Page',
-            'show_when' => function() {
+            'show_when' => function () {
                 return \Config::get('noviusos_slideshow::slideshow.slides_with_link', false);
             }
         ),

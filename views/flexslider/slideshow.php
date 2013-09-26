@@ -57,7 +57,7 @@ $flexslider_config = \Config::load('noviusos_slideshow::formats/flexslider', tru
     <ul class="slides">
 <?php
 foreach ($slideshow->images as $image) {
-    if ( empty($image->medias->image) ) {
+    if (empty($image->medias->image)) {
         continue;
     }
 
@@ -75,19 +75,19 @@ foreach ($slideshow->images as $image) {
             'title' => $image->slidimg_title,
             'style' => 'margin: 0 auto;',
         ));
-    if ( $show_link && !empty($image->slidimg_link_to_page_id) ) {
+    if ($show_link && !empty($image->slidimg_link_to_page_id)) {
         echo $image->page->htmlAnchor(array('text' => $img));
     } else {
         echo $img;
     }
 
     // Caption
-    if ( !empty($image->slidimg_title) || !empty($image->slidimg_description) ) {
+    if (!empty($image->slidimg_title) || !empty($image->slidimg_description)) {
         echo '<p class="flex-caption">';
-        if ( !empty($image->slidimg_title) ) {
+        if (!empty($image->slidimg_title)) {
             echo '<strong>', htmlspecialchars($image->slidimg_title), '</strong><br />';
         }
-        if ( !empty($image->slidimg_description) ) {
+        if (!empty($image->slidimg_description)) {
             echo htmlspecialchars($image->slidimg_description);
         }
         echo '</p>';
