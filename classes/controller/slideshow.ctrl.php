@@ -40,9 +40,9 @@ class Controller_Slideshow extends Controller_Front_Application
             ),
         ));
 
-        $view = \Arr::get($this->config, 'view.index', null);
+        $view = \Arr::get($this->config, 'views.index', null);
         if (!empty($view)) {
-            \Log::deprecated('The use of view.index in Controller_Slideshow config file is deprecated, '.
+            \Log::deprecated('The use of views.index in Controller_Slideshow config file is deprecated, '.
                 'use view key of your format in slideshow config file instead.', 'Chiba.2');
 
             $size_key = $format === 'flexslider-small' ? 'petit' : 'grand';
