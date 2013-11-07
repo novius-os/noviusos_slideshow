@@ -20,8 +20,14 @@ return array(
     'i18n' => array(
         'item' => __('slideshow'),
         'items' => __('slideshows'),
-        'showNbItems' => __('Showing {{x}} slideshows out of {{y}}'),
-        'showOneItem' => __('Showing 1 slideshow'),
+        'NItems' => n__(
+            '1 slideshow',
+            '{{count}} slideshows'
+        ),
+        'showNbItems' => n__(
+            'Showing 1 slideshow out of {{y}}',
+            'Showing {{x}} slideshows out of {{y}}'
+        ),
         'showNoItem' => __('No slideshows'),
         // Note to translator: This is the action that clears the 'Search' field
         'showAll' => __('Show all slideshows'),

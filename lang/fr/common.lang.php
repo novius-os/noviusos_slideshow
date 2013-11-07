@@ -96,10 +96,10 @@ return array(
     'slideshows' => 'diaporamas',
 
     #: config/controller/admin/appdesk.config.php:23
-    'Showing {{x}} slideshows out of {{y}}' => '{{x}} diaporamas sur {{y}} affichés',
-
-    #: config/controller/admin/appdesk.config.php:24
-    'Showing 1 slideshow' => '1 diaporama affiché',
+    'Showing 1 slideshow out of {{y}}' => array(
+        '1 diaporama sur {{y}} affiché',
+        '{{x}} diaporamas sur {{y}} affichés',
+    ),
 
     #: config/controller/admin/appdesk.config.php:25
     'No slideshows' => 'Pas de diaporama',
@@ -131,12 +131,15 @@ return array(
 
     #. Delete action's labels
     #: config/common/slideshow.config.php:67
-    'Yes, delete this slideshow' => 'Oui, supprimer ce diaporama',
+    'Yes, delete this slideshow' => array(
+        0 => 'Oui, supprimer ce diaporama',
+        1 => 'Oui, supprimer ces {{count}} diaporamas',
+    ),
 
     #: config/common/slideshow.config.php:69
-    '1 slideshow' => '1 diaporama',
-
-    #: config/common/slideshow.config.php:70
-    '{{count}} slideshows' => '{{count}} diaporamas',
+    '1 slideshow' => array(
+        0 => '1 diaporama',
+        1 => '{{count}} diaporamas',
+    ),
 
 );

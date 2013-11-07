@@ -96,10 +96,9 @@ return array(
     'slideshows' => 'スライドショー',
 
     #: config/controller/admin/appdesk.config.php:23
-    'Showing {{x}} slideshows out of {{y}}' => '{{y}}件のスライドショーのうち{{x}}件を表示しています',
-
-    #: config/controller/admin/appdesk.config.php:24
-    'Showing 1 slideshow' => '1件のスライドショーを表示しています',
+    'Showing 1 slideshow out of {{y}}' => array(
+        0 => '{{y}}件のスライドショーのうち{{x}}件を表示しています',
+    ),
 
     #: config/controller/admin/appdesk.config.php:25
     'No slideshows' => 'スライドショーはありません',
@@ -131,12 +130,13 @@ return array(
 
     #. Delete action's labels
     #: config/common/slideshow.config.php:67
-    'Yes, delete this slideshow' => 'はい、このスライドショーを削除します',
+    'Yes, delete this slideshow' => array(
+        0 => 'はい、このスライドショーを削除します',
+    ),
 
     #: config/common/slideshow.config.php:69
-    '1 slideshow' => '1個のスライドショー',
-
-    #: config/common/slideshow.config.php:70
-    '{{count}} slideshows' => '{{count}}個のスライドショー',
+    '1 slideshow' => array(
+        0 => '{{count}}個のスライドショー',
+    ),
 
 );
