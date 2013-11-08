@@ -46,7 +46,7 @@ foreach ($libs as $lib) {
         \Nos\Nos::main_controller()->addCss($lib_url);
     }
 }
-$flexslider_config = \Config::load('noviusos_slideshow::formats/flexslider', true);
+$flexslider_config = \Config::loadConfiguration('noviusos_slideshow::formats/flexslider');
 \Nos\Nos::main_controller()->addJavascriptInline(\View::forge('noviusos_slideshow::flexslider/javascript', array(
     'flexslider_config' => $flexslider_config,
     'slides_preview' => $slides_preview,

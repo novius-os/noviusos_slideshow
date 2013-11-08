@@ -37,7 +37,7 @@ class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
 
     public function action_save(array $args = null)
     {
-        \Config::load('noviusos_slideshow::slideshow', true);
+        \Config::loadConfiguration('noviusos_slideshow::slideshow');
         $formats = \Config::get('noviusos_slideshow::slideshow.formats');
 
         if (empty($args)) {
