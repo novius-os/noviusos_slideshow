@@ -11,6 +11,6 @@
 \Log::deprecated('The config file noviusos_slideshow::flexslider is deprecated, '.
     'please use noviusos_slideshow::formats/flexslider instead.', 'Chiba.2');
 
-$flexslider_config = \Config::load('noviusos_slideshow::formats/flexslider', true);
+$flexslider_config = \Config::loadConfiguration('noviusos_slideshow::formats/flexslider');
 
 return $flexslider_config;

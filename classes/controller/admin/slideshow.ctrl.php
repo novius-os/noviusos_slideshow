@@ -19,7 +19,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
     public static function _init()
     {
         // Used to retrieve the slides_with_link config
-        \Config::load('noviusos_slideshow::slideshow', true);
+        \Config::loadConfiguration('noviusos_slideshow::slideshow');
     }
 
     public function before_save($item, $data)

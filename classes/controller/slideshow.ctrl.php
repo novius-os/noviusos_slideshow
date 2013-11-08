@@ -25,7 +25,7 @@ class Controller_Slideshow extends Controller_Front_Application
             return false;
         }
 
-        $config = \Config::load('noviusos_slideshow::slideshow', true);
+        $config = \Config::loadConfiguration('noviusos_slideshow::slideshow');
 
         $default_format = \Arr::get($config, 'default_format');
         $format = \Arr::get($args, 'format', $default_format);

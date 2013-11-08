@@ -8,7 +8,7 @@
  * @link http://www.novius-os.org
  */
 
-$app_config = \Config::load('noviusos_slideshow::slideshow', true);
+$app_config = \Config::loadConfiguration('noviusos_slideshow::slideshow');
 
 $formats = array();
 foreach ($app_config['formats'] as $key => $config) {
