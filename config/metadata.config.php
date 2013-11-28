@@ -11,7 +11,7 @@
 return array(
     'name'      => 'Slideshows',
     'namespace' => 'Nos\Slideshow',
-    'version'   => '0.2',
+    'version' => 'chiba.2.3',
     'provider'  => array(
         'name'  => 'Novius OS',
     ),
