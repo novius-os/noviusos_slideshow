@@ -29,8 +29,11 @@ class Controller_Slideshow extends Controller_Front_Application
 
         $default_format = \Arr::get($config, 'default_format');
         $format = \Arr::get($args, 'format', $default_format);
-        $format_config = \Arr::get($config, 'formats.'.$format,
-            \Arr::get($config, 'formats.'.$default_format, array()));
+        $format_config = \Arr::get(
+            $config,
+            'formats.'.$format,
+            \Arr::get($config, 'formats.'.$default_format, array())
+        );
 
         $slideshow = Model_Slideshow::find($args['slideshow_id'], array(
             'related' => array(
@@ -42,30 +45,51 @@ class Controller_Slideshow extends Controller_Front_Application
 
         $view = \Arr::get($this->config, 'views.index', null);
         if (!empty($view)) {
-            \Log::deprecated('The use of views.index in Controller_Slideshow config file is deprecated, '.
-                'use view key of your format in slideshow config file instead.', 'Chiba.2');
+            \Log::deprecated(
+                'The use of views.index in Controller_Slideshow config file is deprecated, '.
+                'use view key of your format in slideshow config file instead.',
+                'Chiba.2'
+            );
 
             $size_key = $format === 'flexslider-small' ? 'petit' : 'grand';
             return \View::forge($this->config['views']['index'], array(
                 'slideshow' => $slideshow,
                 'size_key'  => $size_key,
-                'class'		=> \Arr::get($config, 'sizes.'.$size_key.'.class',
-                    \Arr::get($format_config, 'config.class', 'slide-home')),
-                'height'	=> \Arr::get($config, 'sizes.'.$size_key.'.img_height',
-                    \Arr::get($format_config, 'config.height', '600')),
-                'width'		=> \Arr::get($config, 'sizes.'.$size_key.'.img_width',
-                    \Arr::get($format_config, 'config.width', '800')),
-                'show_link' => \Arr::get($config, 'slides_with_link',
-                    \Arr::get($format_config, 'config.slides_with_link', true)),
-                'slides_preview' => \Arr::get($config, 'slides_preview',
-                    \Arr::get($format_config, 'config.slides_preview', true)),
+                'class'		=> \Arr::get(
+                    $config,
+                    'sizes.'.$size_key.'.class',
+                    \Arr::get($format_config, 'config.class', 'slide-home')
+                ),
+                'height'	=> \Arr::get(
+                    $config,
+                    'sizes.'.$size_key.'.img_height',
+                    \Arr::get($format_config, 'config.height', '600')
+                ),
+                'width'		=> \Arr::get(
+                    $config,
+                    'sizes.'.$size_key.'.img_width',
+                    \Arr::get($format_config, 'config.width', '800')
+                ),
+                'show_link' => \Arr::get(
+                    $config,
+                    'slides_with_link',
+                    \Arr::get($format_config, 'config.slides_with_link', true)
+                ),
+                'slides_preview' => \Arr::get(
+                    $config,
+                    'slides_preview',
+                    \Arr::get($format_config, 'config.slides_preview', true)
+                ),
             ), false);
         } else {
             if (\Arr::key_exists($config, 'slides_with_link') ||
                 \Arr::key_exists($config, 'slides_preview') ||
                 \Arr::key_exists($config, 'sizes')) {
-                \Log::deprecated('The struture of slideshow config file have changed, '.
-                    'please update your extension.', 'Chiba.2');
+                \Log::deprecated(
+                    'The struture of slideshow config file have changed, '.
+                    'please update your extension.',
+                    'Chiba.2'
+                );
 
                 if (\Arr::key_exists($config, 'slides_with_link')) {
                     \Arr::set($format_config, 'config.slides_with_link', \Arr::get($config, 'slides_with_link'));

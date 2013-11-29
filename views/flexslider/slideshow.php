@@ -20,8 +20,11 @@ try {
     ));
 
     if (!empty($old_view)) {
-        \Log::deprecated('The view noviusos_slideshow::slideshow is deprecated, '.
-            'please use noviusos_slideshow::flexslider/slideshow instead.', 'Chiba.2');
+        \Log::deprecated(
+            'The view noviusos_slideshow::slideshow is deprecated, '.
+            'please use noviusos_slideshow::flexslider/slideshow instead.',
+            'Chiba.2'
+        );
         echo $old_view;
         return;
     }
