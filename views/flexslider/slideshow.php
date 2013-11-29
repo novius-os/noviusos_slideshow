@@ -71,13 +71,15 @@ foreach ($slideshow->images as $image) {
     echo '>';
 
     // Image, with or without anchor
-    $img = $image->medias->image->htmlImgResized(\Arr::get($config, 'width', 800),
+    $img = $image->medias->image->htmlImgResized(
+        \Arr::get($config, 'width', 800),
         \Arr::get($config, 'height', 600),
         array(
             'alt' => $image->slidimg_title,
             'title' => $image->slidimg_title,
             'style' => 'margin: 0 auto;',
-        ));
+        )
+    );
     if ($show_link && !empty($image->slidimg_link_to_page_id)) {
         echo $image->page->htmlAnchor(array('text' => $img));
     } else {
