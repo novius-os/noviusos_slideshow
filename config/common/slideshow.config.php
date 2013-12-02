@@ -64,10 +64,15 @@ return array(
         'deleting item title' => __('Deleting the slideshow ‘{{title}}’'),
 
         # Delete action's labels
-        'deleting button 1 item' => __('Yes, delete this slideshow'),
+        'deleting button N items' => n__(
+            'Yes, delete this slideshow',
+            'Yes, delete these {{count}} slideshows'
+        ),
 
-        '1 item' => __('1 slideshow'),
-        'N items' => __('{{count}} slideshows'),
+        'N items' => n__(
+            '1 slideshow',
+            '{{count}} slideshows'
+        ),
     ),
     'actions' => array(
         'Nos\Slideshow\Model_Slideshow.add' => array(
