@@ -1,6 +1,6 @@
 <?php
 
-// Generated on 03/12/2013 16:06:58
+// Generated on 03/12/2013 16:22:23
 
 // 39 out of 40 messages are translated (97%).
 // 217 out of 223 words are translated (97%).
@@ -103,7 +103,6 @@ return array(
         0 => '1 слайд-шоу',
         1 => '{{count}} слайд-шоу',
         2 => '',
-        3 => '',
     ),
 
     #: config/controller/admin/appdesk.config.php:28
@@ -111,7 +110,6 @@ return array(
         0 => '',
         1 => '',
         2 => 'Показаны {{x}} слайд-шоу из {{y}}',
-        3 => '',
     ),
 
     #: config/controller/admin/appdesk.config.php:31
@@ -147,7 +145,6 @@ return array(
         0 => 'Да, я хочу удалить это слайд-шоу.',
         1 => '',
         2 => '',
-        3 => '',
     ),
 
 );
