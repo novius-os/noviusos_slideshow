@@ -1,9 +1,9 @@
 <?php
 
-// Generated on 02/12/2013 17:53:33
+// Generated on 03/12/2013 16:06:58
 
-// 42 out of 42 messages are translated (100%).
-// 228 out of 228 words are translated (100%).
+// 40 out of 40 messages are translated (100%).
+// 223 out of 223 words are translated (100%).
 
 return array(
     #: views/admin/_form_content.view.php:36
@@ -54,13 +54,13 @@ return array(
     'Remove the link' => 'Retirer le lien',
 
     #: config/slideshow.config.php:17
-    'Big Flexslider v1.8' => '',
+    'Big Flexslider v1.8' => 'Flexslider v1.8 en grand',
 
     #: config/slideshow.config.php:37
-    'Small Flexslider v1.8' => '',
+    'Small Flexslider v1.8' => 'Flexslider v1.8 en petit',
 
     #: config/controller/admin/slideshow.config.php:19
-    #: config/common/slideshow.config.php:74
+    #: config/common/slideshow.config.php:79
     'Add a slideshow' => 'Ajouter un diaporama',
 
     #: config/controller/admin/slideshow.config.php:45
@@ -97,17 +97,24 @@ return array(
     #: config/controller/admin/appdesk.config.php:22
     'slideshows' => 'diaporamas',
 
-    #: config/controller/admin/appdesk.config.php:23
-    'Showing {{x}} slideshows out of {{y}}' => '{{x}} diaporamas sur {{y}} affichés',
-
     #: config/controller/admin/appdesk.config.php:24
-    'Showing 1 slideshow' => '1 diaporama affiché',
+    #: config/common/slideshow.config.php:73
+    '1 slideshow' => array(
+        0 => '1 diaporama',
+        1 => '{{count}} diaporamas',
+    ),
 
-    #: config/controller/admin/appdesk.config.php:25
+    #: config/controller/admin/appdesk.config.php:28
+    'Showing 1 slideshow out of {{y}}' => array(
+        0 => '1 diaporama sur {{y}} affiché',
+        1 => '{{x}} diaporamas sur {{y}} affichés',
+    ),
+
+    #: config/controller/admin/appdesk.config.php:31
     'No slideshows' => 'Pas de diaporama',
 
     #. Note to translator: This is the action that clears the 'Search' field
-    #: config/controller/admin/appdesk.config.php:27
+    #: config/controller/admin/appdesk.config.php:33
     'Show all slideshows' => 'Afficher tous les diaporamas',
 
     #: config/common/slideshow.config.php:31
@@ -131,14 +138,10 @@ return array(
     #: config/common/slideshow.config.php:64
     'Deleting the slideshow ‘{{title}}’' => 'Supprimer le diaporama «&nbsp;{{title}}&nbsp;»',
 
-    #. Delete action's labels
-    #: config/common/slideshow.config.php:67
-    'Yes, delete this slideshow' => 'Oui, supprimer ce diaporama',
-
-    #: config/common/slideshow.config.php:69
-    '1 slideshow' => '1 diaporama',
-
-    #: config/common/slideshow.config.php:70
-    '{{count}} slideshows' => '{{count}} diaporamas',
+    #: config/common/slideshow.config.php:68
+    'Yes, delete this slideshow' => array(
+        0 => 'Oui, supprimer ce diaporama',
+        1 => '',
+    ),
 
 );

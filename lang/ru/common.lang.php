@@ -1,18 +1,18 @@
 <?php
 
-// Generated on 02/12/2013 17:53:33
+// Generated on 03/12/2013 16:06:58
 
-// 42 out of 42 messages are translated (100%).
-// 228 out of 228 words are translated (100%).
+// 39 out of 40 messages are translated (97%).
+// 217 out of 223 words are translated (97%).
 
 return array(
-    #: views/admin/_form_content.view.php:38
+    #: views/admin/_form_content.view.php:36
     'Add a slide' => 'Добавить слайд',
 
-    #: views/admin/_form_content.view.php:44
+    #: views/admin/_form_content.view.php:42
     'Delete' => 'Удалить',
 
-    #: views/admin/_form_content.view.php:61
+    #: views/admin/_form_content.view.php:59
     'Are you sure you want to delete this slide?' => 'Вы уверены, что хотите удалить этот слайд?',
 
     #: views/admin/enhancer/preview.view.php:16
@@ -24,15 +24,15 @@ return array(
     #: views/admin/enhancer/blank_slate.view.php:16
     'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => 'К сожалению, у вас нет слайд-шоу для вставки. Но не будем расстраиваться, вот что нужно сделать:',
 
-    #: views/admin/enhancer/blank_slate.view.php:17
+    #: views/admin/enhancer/blank_slate.view.php:19
     '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>
 <li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '<ul><li><a>Добавить ваше первое слайд-шоу</a> (откроется новая вкладка).</li>
 <li>Как только вы закончите (это займет немного времени), возвращайтесь на эту вкладку, чтобы вставить новехонькое слайд-шоу.</li></ul>',
 
-    #: views/admin/enhancer/blank_slate.view.php:22
+    #: views/admin/enhancer/blank_slate.view.php:27
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => 'Слайд-шоу недоступны в {{context}}. Давайте <a>добавим первое слайд-шоу на этом языке</a>.',
 
-    #: views/admin/enhancer/blank_slate.view.php:24
+    #: views/admin/enhancer/blank_slate.view.php:29
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => 'Слайд-шоу недоступны в {{context}}. Давайте <a>добавим первое слайд-шоу в этот контекст</a>.',
 
     #: views/admin/warning_not_published.view.php:18
@@ -60,7 +60,7 @@ return array(
     'Small Flexslider v1.8' => 'Маленький Flexslider v1.8',
 
     #: config/controller/admin/slideshow.config.php:19
-    #: config/common/slideshow.config.php:74
+    #: config/common/slideshow.config.php:79
     'Add a slideshow' => 'Добавить слайд-шоу',
 
     #: config/controller/admin/slideshow.config.php:45
@@ -97,17 +97,28 @@ return array(
     #: config/controller/admin/appdesk.config.php:22
     'slideshows' => 'слайд-шоу',
 
-    #: config/controller/admin/appdesk.config.php:23
-    'Showing {{x}} slideshows out of {{y}}' => 'Показаны {{x}} слайд-шоу из {{y}}',
-
     #: config/controller/admin/appdesk.config.php:24
-    'Showing 1 slideshow' => 'Показано 1 слайд-шоу',
+    #: config/common/slideshow.config.php:73
+    '1 slideshow' => array(
+        0 => '1 слайд-шоу',
+        1 => '{{count}} слайд-шоу',
+        2 => '',
+        3 => '',
+    ),
 
-    #: config/controller/admin/appdesk.config.php:25
+    #: config/controller/admin/appdesk.config.php:28
+    'Showing 1 slideshow out of {{y}}' => array(
+        0 => '',
+        1 => '',
+        2 => 'Показаны {{x}} слайд-шоу из {{y}}',
+        3 => '',
+    ),
+
+    #: config/controller/admin/appdesk.config.php:31
     'No slideshows' => 'Нет слайд-шоу',
 
     #. Note to translator: This is the action that clears the 'Search' field
-    #: config/controller/admin/appdesk.config.php:27
+    #: config/controller/admin/appdesk.config.php:33
     'Show all slideshows' => 'Показать все слайд-шоу',
 
     #: config/common/slideshow.config.php:31
@@ -131,14 +142,12 @@ return array(
     #: config/common/slideshow.config.php:64
     'Deleting the slideshow ‘{{title}}’' => 'Удаление слайд-шоу «{{title}}»',
 
-    #. Delete action's labels
-    #: config/common/slideshow.config.php:67
-    'Yes, delete this slideshow' => 'Да, я хочу удалить это слайд-шоу.',
-
-    #: config/common/slideshow.config.php:69
-    '1 slideshow' => '1 слайд-шоу',
-
-    #: config/common/slideshow.config.php:70
-    '{{count}} slideshows' => '{{count}} слайд-шоу',
+    #: config/common/slideshow.config.php:68
+    'Yes, delete this slideshow' => array(
+        0 => 'Да, я хочу удалить это слайд-шоу.',
+        1 => '',
+        2 => '',
+        3 => '',
+    ),
 
 );

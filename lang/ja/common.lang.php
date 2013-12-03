@@ -1,9 +1,9 @@
 <?php
 
-// Generated on 02/12/2013 17:53:33
+// Generated on 03/12/2013 16:06:58
 
-// 42 out of 42 messages are translated (100%).
-// 228 out of 228 words are translated (100%).
+// 40 out of 40 messages are translated (100%).
+// 223 out of 223 words are translated (100%).
 
 return array(
     #: views/admin/_form_content.view.php:36
@@ -59,7 +59,7 @@ return array(
     'Small Flexslider v1.8' => '',
 
     #: config/controller/admin/slideshow.config.php:19
-    #: config/common/slideshow.config.php:74
+    #: config/common/slideshow.config.php:79
     'Add a slideshow' => 'スライドショーを追加',
 
     #: config/controller/admin/slideshow.config.php:45
@@ -96,17 +96,22 @@ return array(
     #: config/controller/admin/appdesk.config.php:22
     'slideshows' => 'スライドショー',
 
-    #: config/controller/admin/appdesk.config.php:23
-    'Showing {{x}} slideshows out of {{y}}' => '{{y}}件のスライドショーのうち{{x}}件を表示しています',
-
     #: config/controller/admin/appdesk.config.php:24
-    'Showing 1 slideshow' => '1件のスライドショーを表示しています',
+    #: config/common/slideshow.config.php:73
+    '1 slideshow' => array(
+        0 => '1個のスライドショー',
+    ),
 
-    #: config/controller/admin/appdesk.config.php:25
+    #: config/controller/admin/appdesk.config.php:28
+    'Showing 1 slideshow out of {{y}}' => array(
+        0 => '{{y}}件のスライドショーのうち{{x}}件を表示しています',
+    ),
+
+    #: config/controller/admin/appdesk.config.php:31
     'No slideshows' => 'スライドショーはありません',
 
     #. Note to translator: This is the action that clears the 'Search' field
-    #: config/controller/admin/appdesk.config.php:27
+    #: config/controller/admin/appdesk.config.php:33
     'Show all slideshows' => 'スライドショーを全て表示する',
 
     #: config/common/slideshow.config.php:31
@@ -130,14 +135,9 @@ return array(
     #: config/common/slideshow.config.php:64
     'Deleting the slideshow ‘{{title}}’' => 'スライドショー ‘{{title}}’ を削除します',
 
-    #. Delete action's labels
-    #: config/common/slideshow.config.php:67
-    'Yes, delete this slideshow' => 'はい、このスライドショーを削除します',
-
-    #: config/common/slideshow.config.php:69
-    '1 slideshow' => '1個のスライドショー',
-
-    #: config/common/slideshow.config.php:70
-    '{{count}} slideshows' => '{{count}}個のスライドショー',
+    #: config/common/slideshow.config.php:68
+    'Yes, delete this slideshow' => array(
+        0 => 'はい、このスライドショーを削除します',
+    ),
 
 );

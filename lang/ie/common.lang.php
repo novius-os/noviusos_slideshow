@@ -1,18 +1,18 @@
 <?php
 
-// Generated on 02/12/2013 17:53:33
+// Generated on 03/12/2013 16:06:58
 
-// 42 out of 42 messages are translated (100%).
-// 228 out of 228 words are translated (100%).
+// 40 out of 40 messages are translated (100%).
+// 223 out of 223 words are translated (100%).
 
 return array(
-    #: views/admin/_form_content.view.php:38
+    #: views/admin/_form_content.view.php:36
     'Add a slide' => 'Addir un photo',
 
-    #: views/admin/_form_content.view.php:44
+    #: views/admin/_form_content.view.php:42
     'Delete' => 'Deleter',
 
-    #: views/admin/_form_content.view.php:61
+    #: views/admin/_form_content.view.php:59
     'Are you sure you want to delete this slide?' => 'Desire tu absolumen deleter ti photo?',
 
     #: views/admin/enhancer/preview.view.php:16
@@ -24,15 +24,15 @@ return array(
     #: views/admin/enhancer/blank_slate.view.php:16
     'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => 'Ti es frustrant, tu have null photo-serie por inserter. Ma null panic, tu deve solmen:',
 
-    #: views/admin/enhancer/blank_slate.view.php:17
+    #: views/admin/enhancer/blank_slate.view.php:19
     '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>
 <li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '<ul><li><a>Addi tu prim photo-serie</a> (un nov tabul va apert).</li>
 <li>Pos, (it ne va esser long), reveni a ti tabul pro inserter tu nov magnific photo-serie.</li></ul>',
 
-    #: views/admin/enhancer/blank_slate.view.php:22
+    #: views/admin/enhancer/blank_slate.view.php:27
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => 'Null photo-serie es disponibil in {{context}}. Corage, <a>addi tu prim photo-serie in ti lingue</a>.',
 
-    #: views/admin/enhancer/blank_slate.view.php:24
+    #: views/admin/enhancer/blank_slate.view.php:29
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => 'Null photo-serie es disponibil in {{context}}. Corage, <a>addi tu prim photo-serie in ti context</a>.',
 
     #: views/admin/warning_not_published.view.php:18
@@ -60,7 +60,7 @@ return array(
     'Small Flexslider v1.8' => 'Micri Flexslider v1.8',
 
     #: config/controller/admin/slideshow.config.php:19
-    #: config/common/slideshow.config.php:74
+    #: config/common/slideshow.config.php:79
     'Add a slideshow' => 'Addir un Photo-serie',
 
     #: config/controller/admin/slideshow.config.php:45
@@ -97,17 +97,24 @@ return array(
     #: config/controller/admin/appdesk.config.php:22
     'slideshows' => 'photo-series',
 
-    #: config/controller/admin/appdesk.config.php:23
-    'Showing {{x}} slideshows out of {{y}}' => 'Exhibir {{x}} photo-series ex {{y}}',
-
     #: config/controller/admin/appdesk.config.php:24
-    'Showing 1 slideshow' => 'Exhibir 1 photo-serie',
+    #: config/common/slideshow.config.php:73
+    '1 slideshow' => array(
+        0 => '1 photo-serie',
+        1 => '{{count}} photo-series',
+    ),
 
-    #: config/controller/admin/appdesk.config.php:25
+    #: config/controller/admin/appdesk.config.php:28
+    'Showing 1 slideshow out of {{y}}' => array(
+        0 => 'Exhibir 1 photo-serie ex {{y}}',
+        1 => 'Exhibir {{x}} photo-series ex {{y}}',
+    ),
+
+    #: config/controller/admin/appdesk.config.php:31
     'No slideshows' => 'Null photo-serie',
 
     #. Note to translator: This is the action that clears the 'Search' field
-    #: config/controller/admin/appdesk.config.php:27
+    #: config/controller/admin/appdesk.config.php:33
     'Show all slideshows' => 'Exhibir omni photo-series',
 
     #: config/common/slideshow.config.php:31
@@ -131,14 +138,10 @@ return array(
     #: config/common/slideshow.config.php:64
     'Deleting the slideshow ‘{{title}}’' => 'Deleter li photo-serie ‘{{title}}’',
 
-    #. Delete action's labels
-    #: config/common/slideshow.config.php:67
-    'Yes, delete this slideshow' => 'Yes, deleter ti photo-serie',
-
-    #: config/common/slideshow.config.php:69
-    '1 slideshow' => '1 photo-serie',
-
-    #: config/common/slideshow.config.php:70
-    '{{count}} slideshows' => '{{count}} photo-series',
+    #: config/common/slideshow.config.php:68
+    'Yes, delete this slideshow' => array(
+        0 => 'Yes, deleter ti photo-serie',
+        1 => '',
+    ),
 
 );
