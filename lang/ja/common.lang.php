@@ -1,18 +1,18 @@
 <?php
 
-// Generated on 07/11/2013 15:24:52
+// Generated on 02/12/2013 17:53:33
 
-// 40 out of 40 messages are translated (100%).
-// 223 out of 223 words are translated (100%).
+// 42 out of 42 messages are translated (100%).
+// 228 out of 228 words are translated (100%).
 
 return array(
-    #: views/admin/_form_content.view.php:38
+    #: views/admin/_form_content.view.php:36
     'Add a slide' => 'スライドを追加',
 
-    #: views/admin/_form_content.view.php:44
+    #: views/admin/_form_content.view.php:42
     'Delete' => '削除',
 
-    #: views/admin/_form_content.view.php:61
+    #: views/admin/_form_content.view.php:59
     'Are you sure you want to delete this slide?' => 'このスライドを削除してもよろしいですか？',
 
     #: views/admin/enhancer/preview.view.php:16
@@ -24,14 +24,14 @@ return array(
     #: views/admin/enhancer/blank_slate.view.php:16
     'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => '',
 
-    #: views/admin/enhancer/blank_slate.view.php:17
+    #: views/admin/enhancer/blank_slate.view.php:19
     '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>
 <li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '',
 
-    #: views/admin/enhancer/blank_slate.view.php:22
+    #: views/admin/enhancer/blank_slate.view.php:27
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => '',
 
-    #: views/admin/enhancer/blank_slate.view.php:24
+    #: views/admin/enhancer/blank_slate.view.php:29
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => '',
 
     #: views/admin/warning_not_published.view.php:18
@@ -59,7 +59,7 @@ return array(
     'Small Flexslider v1.8' => '',
 
     #: config/controller/admin/slideshow.config.php:19
-    #: config/common/slideshow.config.php:79
+    #: config/common/slideshow.config.php:74
     'Add a slideshow' => 'スライドショーを追加',
 
     #: config/controller/admin/slideshow.config.php:45
@@ -96,22 +96,17 @@ return array(
     #: config/controller/admin/appdesk.config.php:22
     'slideshows' => 'スライドショー',
 
+    #: config/controller/admin/appdesk.config.php:23
+    'Showing {{x}} slideshows out of {{y}}' => '{{y}}件のスライドショーのうち{{x}}件を表示しています',
+
     #: config/controller/admin/appdesk.config.php:24
-    #: config/common/slideshow.config.php:73
-    '1 slideshow' => array(
-        0 => '{{count}}個のスライドショー',
-    ),
+    'Showing 1 slideshow' => '1件のスライドショーを表示しています',
 
-    #: config/controller/admin/appdesk.config.php:28
-    'Showing 1 slideshow out of {{y}}' => array(
-        0 => '{{y}}件のスライドショーのうち{{x}}件を表示しています',
-    ),
-
-    #: config/controller/admin/appdesk.config.php:31
+    #: config/controller/admin/appdesk.config.php:25
     'No slideshows' => 'スライドショーはありません',
 
     #. Note to translator: This is the action that clears the 'Search' field
-    #: config/controller/admin/appdesk.config.php:33
+    #: config/controller/admin/appdesk.config.php:27
     'Show all slideshows' => 'スライドショーを全て表示する',
 
     #: config/common/slideshow.config.php:31
@@ -135,9 +130,14 @@ return array(
     #: config/common/slideshow.config.php:64
     'Deleting the slideshow ‘{{title}}’' => 'スライドショー ‘{{title}}’ を削除します',
 
-    #: config/common/slideshow.config.php:68
-    'Yes, delete this slideshow' => array(
-        0 => 'はい、このスライドショーを削除します',
-    ),
+    #. Delete action's labels
+    #: config/common/slideshow.config.php:67
+    'Yes, delete this slideshow' => 'はい、このスライドショーを削除します',
+
+    #: config/common/slideshow.config.php:69
+    '1 slideshow' => '1個のスライドショー',
+
+    #: config/common/slideshow.config.php:70
+    '{{count}} slideshows' => '{{count}}個のスライドショー',
 
 );

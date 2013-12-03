@@ -6,8 +6,8 @@
 // 2 out of 2 words are translated (100%).
 
 return array(
-    'Slideshows' => 'スライドショー',
+    'Slideshows' => 'Photo-series',
 
-    'Slideshow' => 'スライドショー',
+    'Slideshow' => 'Photo-serie',
 
 );

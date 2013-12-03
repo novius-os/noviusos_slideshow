@@ -1,18 +1,18 @@
 <?php
 
-// Generated on 07/11/2013 15:24:52
+// Generated on 02/12/2013 17:53:33
 
-// 40 out of 40 messages are translated (100%).
-// 223 out of 223 words are translated (100%).
+// 42 out of 42 messages are translated (100%).
+// 228 out of 228 words are translated (100%).
 
 return array(
-    #: views/admin/_form_content.view.php:38
+    #: views/admin/_form_content.view.php:36
     'Add a slide' => 'Ajouter une diapo',
 
-    #: views/admin/_form_content.view.php:44
+    #: views/admin/_form_content.view.php:42
     'Delete' => 'Supprimer',
 
-    #: views/admin/_form_content.view.php:61
+    #: views/admin/_form_content.view.php:59
     'Are you sure you want to delete this slide?' => 'Êtes-vous sûr(e) de vouloir supprimer cette diapo&nbsp;?',
 
     #: views/admin/enhancer/preview.view.php:16
@@ -24,15 +24,15 @@ return array(
     #: views/admin/enhancer/blank_slate.view.php:16
     'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => 'Voilà qui est frustrant, vous n’avez aucun diaporama à ajouter. Mais, pas de panique, il vous faut simplement&nbsp;:',
 
-    #: views/admin/enhancer/blank_slate.view.php:17
+    #: views/admin/enhancer/blank_slate.view.php:19
     '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>
 <li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '<ul><li><a>Ajoutez votre premier diaporama</a> (s’ouvre dans un nouvel onglet).</li>
 <li>Une fois que vous aurez terminé (ça ne sera pas long), revenez à cet onglet pour insérer votre beau diaporama tout neuf.</li></ul>',
 
-    #: views/admin/enhancer/blank_slate.view.php:22
+    #: views/admin/enhancer/blank_slate.view.php:27
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => 'Aucun diaporama n’est disponible en {{context}}. Allez-y, <a>ajoutez votre premier diaporama dans cette langue</a>.',
 
-    #: views/admin/enhancer/blank_slate.view.php:24
+    #: views/admin/enhancer/blank_slate.view.php:29
     'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => 'Aucun diaporama n’est disponible en {{context}}. Allez-y, <a>ajoutez votre premier diaporama dans ce contexte</a>.',
 
     #: views/admin/warning_not_published.view.php:18
@@ -60,7 +60,7 @@ return array(
     'Small Flexslider v1.8' => '',
 
     #: config/controller/admin/slideshow.config.php:19
-    #: config/common/slideshow.config.php:79
+    #: config/common/slideshow.config.php:74
     'Add a slideshow' => 'Ajouter un diaporama',
 
     #: config/controller/admin/slideshow.config.php:45
@@ -97,24 +97,17 @@ return array(
     #: config/controller/admin/appdesk.config.php:22
     'slideshows' => 'diaporamas',
 
+    #: config/controller/admin/appdesk.config.php:23
+    'Showing {{x}} slideshows out of {{y}}' => '{{x}} diaporamas sur {{y}} affichés',
+
     #: config/controller/admin/appdesk.config.php:24
-    #: config/common/slideshow.config.php:73
-    '1 slideshow' => array(
-        0 => '1 diaporama',
-        1 => '{{count}} diaporamas',
-    ),
+    'Showing 1 slideshow' => '1 diaporama affiché',
 
-    #: config/controller/admin/appdesk.config.php:28
-    'Showing 1 slideshow out of {{y}}' => array(
-        0 => '1 diaporama sur {{y}} affiché',
-        1 => '{{x}} diaporamas sur {{y}} affichés',
-    ),
-
-    #: config/controller/admin/appdesk.config.php:31
+    #: config/controller/admin/appdesk.config.php:25
     'No slideshows' => 'Pas de diaporama',
 
     #. Note to translator: This is the action that clears the 'Search' field
-    #: config/controller/admin/appdesk.config.php:33
+    #: config/controller/admin/appdesk.config.php:27
     'Show all slideshows' => 'Afficher tous les diaporamas',
 
     #: config/common/slideshow.config.php:31
@@ -138,10 +131,14 @@ return array(
     #: config/common/slideshow.config.php:64
     'Deleting the slideshow ‘{{title}}’' => 'Supprimer le diaporama «&nbsp;{{title}}&nbsp;»',
 
-    #: config/common/slideshow.config.php:68
-    'Yes, delete this slideshow' => array(
-        0 => 'Oui, supprimer ce diaporama',
-        1 => 'Oui, supprimer ces {{count}} diaporamas',
-    ),
+    #. Delete action's labels
+    #: config/common/slideshow.config.php:67
+    'Yes, delete this slideshow' => 'Oui, supprimer ce diaporama',
+
+    #: config/common/slideshow.config.php:69
+    '1 slideshow' => '1 diaporama',
+
+    #: config/common/slideshow.config.php:70
+    '{{count}} slideshows' => '{{count}} diaporamas',
 
 );
