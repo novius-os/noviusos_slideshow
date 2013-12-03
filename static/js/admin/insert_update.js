@@ -105,7 +105,7 @@ define(
                     $field.show();
                     $field.nosOnShow();
                 }
-                $field.siblings('.field_enclosure').hide();
+                $field.siblings('.field_enclosure').not($field).hide();
                 set_field_padding();
             }
 
