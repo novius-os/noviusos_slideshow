@@ -31,7 +31,7 @@ define(
                     success: function(json) {
                         var $slide = $(json.slide);
                         $slides_container.append($slide);
-                        $slide = $slide.not('script');
+                        $slide = $slide.filter('.field_enclosure');//remove <link> or <script> tags
                         $slide.nosFormUI();
 
                         var tries = 0;
