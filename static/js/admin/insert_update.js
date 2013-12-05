@@ -29,8 +29,9 @@ define(
                     dataType: 'json',
                     success: function(json) {
                         var $slide = $(json.slide);
-                        $slide.nosFormUI();
                         $slides_container.append($slide);
+                        $slide = $slide.filter('.field_enclosure');//remove <link> or <script> tags
+                        $slide.nosFormUI();
 
                         // Open the media centre directly
                         setTimeout(function openMediaCentre() {
