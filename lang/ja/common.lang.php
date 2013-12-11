@@ -1,6 +1,6 @@
 <?php
 
-// Generated on 03/12/2013 16:22:23
+// Generated on 11/12/2013 10:31:03
 
 // 40 out of 40 messages are translated (100%).
 // 223 out of 223 words are translated (100%).
@@ -22,17 +22,18 @@ return array(
     '(format: {{format}})' => '(フォーマット: {{format}})',
 
     #: views/admin/enhancer/blank_slate.view.php:16
-    'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => '',
+    'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => '申し訳ありませんが、スライドショーがありません。しかしご心配にはおよびません。このようにすれば良いのです。',
 
     #: views/admin/enhancer/blank_slate.view.php:19
     '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>
-<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '',
+<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '<ul><li><a>最初のスライドショーを作成する</a> (新しいタブが開く)。</li>
+<li>スライドショーを作成したら、このタブに戻ってスライドショーを挿入する。</li></ul>',
 
     #: views/admin/enhancer/blank_slate.view.php:27
-    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => '',
+    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => '{{context}}で利用できるスライドショーがありません。<a>この言語の最初のスライドショーを作成してください</a>。',
 
     #: views/admin/enhancer/blank_slate.view.php:29
-    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => '',
+    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => '{{context}}で利用できるスライドショーがありません。<a>このコンテキストの最初のスライドショーを作成してください</a>。',
 
     #: views/admin/warning_not_published.view.php:18
     'Not published' => '未公開',
@@ -53,10 +54,10 @@ return array(
     'Remove the link' => 'リンクを取り除く',
 
     #: config/slideshow.config.php:17
-    'Big Flexslider v1.8' => '',
+    'Big Flexslider v1.8' => '大きいFlexslider v1.8',
 
     #: config/slideshow.config.php:37
-    'Small Flexslider v1.8' => '',
+    'Small Flexslider v1.8' => '小さいFlexslider v1.8',
 
     #: config/controller/admin/slideshow.config.php:19
     #: config/common/slideshow.config.php:79
