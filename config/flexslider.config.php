@@ -14,6 +14,6 @@
     'Chiba.2'
 );
 
-$flexslider_config = \Config::loadConfiguration('noviusos_slideshow::formats/flexslider');
+$flexslider_config = \Config::load('noviusos_slideshow::formats/flexslider', true);
 
 return $flexslider_config;
