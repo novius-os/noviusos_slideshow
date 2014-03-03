@@ -104,9 +104,6 @@ return array(
         'slidimg_link_to_page_id' => array(
             'label' => __('Links to:'),
             'renderer' => 'Nos\Slideshow\Renderer_Page',
-            'show_when' => function () {
-                return \Config::get('noviusos_slideshow::slideshow.slides_with_link', false);
-            }
         ),
     ),
     'image_layout' => array(
