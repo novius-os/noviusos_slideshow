@@ -10,6 +10,8 @@
 
 namespace Nos\Slideshow\Migrations;
 
+use Nos\Tools_Wysiwyg;
+
 class Enhancer_Params extends \Nos\Migration
 {
     public function up()
@@ -29,7 +31,7 @@ class Enhancer_Params extends \Nos\Migration
         $content = $wysiwyg->wysiwyg_text;
 
         $callback = array(__CLASS__, 'enhancerContent');
-        \Nos\Nos::parse_enhancers(
+        Tools_Wysiwyg::parse_enhancers(
             $content,
             function ($enhancer, $config, $tag) use (&$content, $callback) {
                 $new_tag = call_user_func($callback, $tag, $config);
