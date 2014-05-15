@@ -31,7 +31,7 @@ class Enhancer_Params extends \Nos\Migration
         $content = $wysiwyg->wysiwyg_text;
 
         $callback = array(__CLASS__, 'enhancerContent');
-        Tools_Wysiwyg::parse_enhancers(
+        Tools_Wysiwyg::parseEnhancers(
             $content,
             function ($enhancer, $config, $tag) use (&$content, $callback) {
                 $new_tag = call_user_func($callback, $tag, $config);
