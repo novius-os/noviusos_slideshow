@@ -20,8 +20,10 @@ return array(
     'fields' => array(
         'slideshow_id' => array(
             'label' => __('Select a slideshow:'),
-            'form' => array(
-                'type' => 'select',
+            'renderer' => 'Nos\Renderer_Select_Model',
+            'renderer_options' => array(
+                'model' => 'Nos\Slideshow\Model_Slideshow',
+                'empty_option' => false,
             ),
         ),
         'format' => array(
