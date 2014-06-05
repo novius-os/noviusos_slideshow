@@ -12,23 +12,6 @@ namespace Nos\Slideshow;
 
 class Controller_Admin_enhancer extends \Nos\Controller_Admin_Enhancer
 {
-    protected function config_build()
-    {
-        parent::config_build();
-        $slideshows = Model_Slideshow::query(array(
-            'where' => array(
-                array('context', $this->placeholders['_parent_context']),
-            ),
-        ))->count();
-        if (!$slideshows) {
-            unset($this->config['fields']);
-            $this->config['popup']['view'] = 'noviusos_slideshow::admin/enhancer/blank_slate';
-            $this->config['popup']['params'] = $this->placeholders;
-            // Other's contexts count (this one is empty).
-            $this->config['popup']['params']['slideshow_count'] = Model_Slideshow::count();
-        }
-    }
-
     public function action_save(array $args = null)
     {
         \Config::load('noviusos_slideshow::slideshow', true);
