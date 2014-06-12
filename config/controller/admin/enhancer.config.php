@@ -29,7 +29,7 @@ return array(
                     'empty' => __('No slideshow selected'),
                     'add' => __('Pick a slideshow'),
                     'edit' => __('Pick another slideshow'),
-                    'delete' => __('Unselect slideshow'),
+                    'delete' => __('Un-select this slideshow'),
                 ),
             ),
             'validation' => array(
