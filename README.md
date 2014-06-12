@@ -6,7 +6,7 @@ The ‘Slideshows’ application for Novius OS allows you to create and publish 
 
 ## Requirements
 
-* ‘Slideshows’ runs on Novius OS Dubrovka.
+* ‘Slideshows’ runs on Novius OS Elche.
 
 ## Installation
 
