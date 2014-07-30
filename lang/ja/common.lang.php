@@ -1,63 +1,28 @@
 <?php
 
-// Generated on 11/12/2013 17:57:29
+// Generated on 30/07/2014 09:57:01
 
 // 40 out of 40 messages are translated (100%).
-// 223 out of 223 words are translated (100%).
+// 160 out of 160 words are translated (100%).
 
 return array(
-    #: views/admin/_form_content.view.php:36
-    'Add a slide' => 'スライドを追加',
+    #: config/controller/admin/enhancer.config.php:22
+    'Pick a slideshow:' => 'スライドショーを選択: ',
 
-    #: views/admin/_form_content.view.php:42
-    'Delete' => '削除',
+    #: config/controller/admin/enhancer.config.php:29
+    'No slideshow selected' => 'スライドショーが選択されていません',
 
-    #: views/admin/_form_content.view.php:59
-    'Are you sure you want to delete this slide?' => 'このスライドを削除してもよろしいですか？',
+    #: config/controller/admin/enhancer.config.php:30
+    'Pick a slideshow' => 'スライドショーを選択',
 
-    #: views/admin/enhancer/preview.view.php:16
-    'Slideshow ‘{{title}}’' => 'スライドショー ‘{{title}}’',
+    #: config/controller/admin/enhancer.config.php:31
+    'Pick another slideshow' => '別のスライドショーを選択',
 
-    #: views/admin/enhancer/preview.view.php:17
-    '(format: {{format}})' => '(フォーマット: {{format}})',
+    #: config/controller/admin/enhancer.config.php:32
+    'Un-select this slideshow' => 'スライドショーを外す',
 
-    #: views/admin/enhancer/blank_slate.view.php:16
-    'How frustrating, you have no slideshow to insert. But let’s not worry, shall we? Here is how it works:' => '申し訳ありませんが、スライドショーがありません。しかしご心配にはおよびません。このようにすれば良いのです。',
-
-    #: views/admin/enhancer/blank_slate.view.php:19
-    '<ul><li><a>Add your first slideshow</a> (a new tab will open).</li>
-<li>Once you’re done (it won’t take long), come back to this tab to insert your shiny new slideshow.</li></ul>' => '<ul><li><a>最初のスライドショーを作成する</a> (新しいタブが開く)。</li>
-<li>スライドショーを作成したら、このタブに戻ってスライドショーを挿入する。</li></ul>',
-
-    #: views/admin/enhancer/blank_slate.view.php:27
-    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this language</a>.' => '{{context}}で利用できるスライドショーがありません。<a>この言語の最初のスライドショーを作成してください</a>。',
-
-    #: views/admin/enhancer/blank_slate.view.php:29
-    'No slideshows are available in {{context}}. Go ahead, <a>add your first slideshow in this context</a>.' => '{{context}}で利用できるスライドショーがありません。<a>このコンテキストの最初のスライドショーを作成してください</a>。',
-
-    #: views/admin/warning_not_published.view.php:18
-    'Not published' => '未公開',
-
-    #: views/admin/warning_not_published.view.php:19
-    'To publish this slideshow, add it to a page, a blog post or any other text editor.' => 'このスライドショーを公開するには、ページ、ブログ投稿、あるいはその他のテキストエディタに追加してください。',
-
-    #: views/admin/warning_not_published.view.php:22
-    '<p>Most Novius OS text editors (also called WYSIWYG editors) feature this button {{preview}} in the toolbar.</p><p>Click it to access the list of applications you can enhance your text with.</p>' => '<p>ほとんどの Novius OS テキストエディタ (WYSIWYG エディタとも呼びます) のツールバーに、ボタン {{preview}} があります。</p><p>このボタンをクリックすると、アプリケーションの一覧にアクセスし、アプリケーションを追加できます。</p>',
-
-    #: views/admin/warning_not_published.view.php:23
-    'Applications' => 'アプリケーション',
-
-    #: views/admin/renderer/page_selector.view.php:6
-    'Add a link' => 'リンクを追加',
-
-    #: views/admin/renderer/page_selector.view.php:10
-    'Remove the link' => 'リンクを取り除く',
-
-    #: config/slideshow.config.php:17
-    'Big Flexslider v1.8' => '大きいFlexslider v1.8',
-
-    #: config/slideshow.config.php:37
-    'Small Flexslider v1.8' => '小さいFlexslider v1.8',
+    #: config/controller/admin/enhancer.config.php:40
+    'Format:' => 'フォーマット:',
 
     #: config/controller/admin/slideshow.config.php:19
     #: config/common/slideshow.config.php:79
@@ -82,14 +47,8 @@ return array(
     #: config/controller/admin/slideshow.config.php:105
     'Links to:' => 'リンク先:',
 
-    #: config/controller/admin/slideshow.config.php:119
+    #: config/controller/admin/slideshow.config.php:116
     'Properties' => 'プロパティ',
-
-    #: config/controller/admin/enhancer.config.php:22
-    'Select a slideshow:' => 'スライドショーを選択:',
-
-    #: config/controller/admin/enhancer.config.php:28
-    'Format:' => 'フォーマット:',
 
     #: config/controller/admin/appdesk.config.php:21
     'slideshow' => 'スライドショー',
@@ -114,6 +73,12 @@ return array(
     #. Note to translator: This is the action that clears the 'Search' field
     #: config/controller/admin/appdesk.config.php:33
     'Show all slideshows' => 'スライドショーを全て表示する',
+
+    #: config/slideshow.config.php:17
+    'Big Flexslider v1.8' => '大きいFlexslider v1.8',
+
+    #: config/slideshow.config.php:37
+    'Small Flexslider v1.8' => '小さいFlexslider v1.8',
 
     #: config/common/slideshow.config.php:31
     'Slides' => 'スライド',
@@ -140,5 +105,38 @@ return array(
     'Yes, delete this slideshow' => array(
         0 => 'はい、このスライドショーを削除します',
     ),
+
+    #: views/admin/_form_content.view.php:36
+    'Add a slide' => 'スライドを追加',
+
+    #: views/admin/_form_content.view.php:42
+    'Delete' => '削除',
+
+    #: views/admin/_form_content.view.php:59
+    'Are you sure you want to delete this slide?' => 'このスライドを削除してもよろしいですか？',
+
+    #: views/admin/warning_not_published.view.php:18
+    'Not published' => '未公開',
+
+    #: views/admin/warning_not_published.view.php:19
+    'To publish this slideshow, add it to a page, a blog post or any other text editor.' => 'このスライドショーを公開するには、ページ、ブログ投稿、あるいはその他のテキストエディタに追加してください。',
+
+    #: views/admin/warning_not_published.view.php:22
+    '<p>Most Novius OS text editors (also called WYSIWYG editors) feature this button {{preview}} in the toolbar.</p><p>Click it to access the list of applications you can enhance your text with.</p>' => '<p>ほとんどの Novius OS テキストエディタ (WYSIWYG エディタとも呼びます) のツールバーに、ボタン {{preview}} があります。</p><p>このボタンをクリックすると、アプリケーションの一覧にアクセスし、アプリケーションを追加できます。</p>',
+
+    #: views/admin/warning_not_published.view.php:23
+    'Applications' => 'アプリケーション',
+
+    #: views/admin/renderer/page_selector.view.php:6
+    'Add a link' => 'リンクを追加',
+
+    #: views/admin/renderer/page_selector.view.php:10
+    'Remove the link' => 'リンクを取り除く',
+
+    #: views/admin/enhancer/preview.view.php:16
+    'Slideshow ‘{{title}}’' => 'スライドショー ‘{{title}}’',
+
+    #: views/admin/enhancer/preview.view.php:17
+    '(format: {{format}})' => '(フォーマット: {{format}})',
 
 );
