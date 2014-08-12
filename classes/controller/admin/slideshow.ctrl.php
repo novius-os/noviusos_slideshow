@@ -102,6 +102,10 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         }
         $return = (string) \View::forge('noviusos_slideshow::admin/layout', $image_view_params, false)->render().$fieldset->build_append();
 
+        \Event::trigger('noviusos_slideshow.image_fieldset');
+
+        \Event::trigger_function('noviusos_slideshow.image_fieldset', array(array('item' => &$item, 'replaces' => &$replaces)));
+
         return strtr($return, $replaces);
     }
 
