@@ -24,7 +24,7 @@ return array(
                 'js'               => array(
                     'jquery'      => 'static/apps/noviusos_slideshow/js/jquery.min.js',
                     'flexslider'  => 'static/apps/noviusos_slideshow/js/jquery.flexslider-min.js',
-                    'flexpreview' => 'static/apps/noviusos_slideshow/js/jquery.noviusos_flexpreview.js',
+                    'flexpreview' => 'static/apps/noviusos_slideshow/js/jquery.novius_flexpreview.js',
                 ),
                 'css'              => array(
                     'flexslider'  => 'static/apps/noviusos_slideshow/css/flexslider.css',
@@ -44,7 +44,7 @@ return array(
                 'js'               => array(
                     'jquery'      => 'static/apps/noviusos_slideshow/js/jquery.min.js',
                     'flexslider'  => 'static/apps/noviusos_slideshow/js/jquery.flexslider-min.js',
-                    'flexpreview' => 'static/apps/noviusos_slideshow/js/jquery.noviusos_flexpreview.js',
+                    'flexpreview' => 'static/apps/noviusos_slideshow/js/jquery.novius_flexpreview.js',
                 ),
                 'css'              => array(
                     'flexslider'  => 'static/apps/noviusos_slideshow/css/flexslider.css',
