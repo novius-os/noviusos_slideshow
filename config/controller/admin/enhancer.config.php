@@ -16,7 +16,7 @@ foreach ($app_config['formats'] as $key => $config) {
 }
 $current = \Arr::get($app_config, 'default_format', key($formats));
 
-$config = array(
+return array(
     'fields' => array(
         'slideshow_id' => array(
             'label' => __('Pick a slideshow:'),
@@ -36,23 +36,16 @@ $config = array(
                 'required',
             ),
         ),
+        'format' => array(
+            'label' => __('Format:'),
+            'form' => array(
+                'type' => count($formats) === 1 ? 'hidden' : 'select',
+                'options' => $formats,
+                'value' => $current,
+            ),
+        ),
     ),
     'preview' => array(
         'view' => 'noviusos_slideshow::admin/enhancer/preview',
     ),
 );
-
-// Don't display list of format if we only have one format
-if (count($formats) > 1) {
-    $config['fields']['format'] = array(
-        'label' => __('Format:'),
-        'form'  => array(
-            'type'    => count($formats) === 1 ? 'hidden' : 'select',
-            'options' => $formats,
-            'value'   => $current,
-        ),
-    );
-}
-
-return $config;
-
