@@ -39,7 +39,7 @@ return array(
         'format' => array(
             'label' => __('Format:'),
             'form' => array(
-                'type' => count($formats) <= 2 ? 'hidden' : 'select',
+                'type' => count($formats) <= 1 ? 'hidden' : 'select',
                 'options' => $formats,
                 'value' => $current,
             ),
