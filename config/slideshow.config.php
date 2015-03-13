@@ -5,13 +5,13 @@
  * @copyright  2011 Novius
  * @license    GNU Affero General Public License v3 or (at your option) any later version
  *             http://www.gnu.org/licenses/agpl-3.0.html
- * @link       http://www.novius-os.org
+ * @link http://www.novius-os.org
  */
 
 return array(
     'default_format' => 'flexslider-big',
 
-    'formats'        => array(
+    'formats' => array(
         'flexslider-big' => array(
             'view' => 'noviusos_slideshow::flexslider/slideshow',
             'label' => __('Big Flexslider v1.8'),
