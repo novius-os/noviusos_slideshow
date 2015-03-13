@@ -63,12 +63,12 @@ return array(
                 'class'            => 'slide-home',
                 'js'               => array(
                     'jquery'      => 'static/apps/noviusos_slideshow/js/jquery.min.js',
-                    'flexslider'  => 'static/apps/noviusos_slideshow/2.3/js/jquery.flexslider-min.js',
-                    'flexpreview' => 'static/apps/noviusos_slideshow/2.3/js/jquery.novius_flexpreview.js',
+                    'flexslider'  => 'static/apps/noviusos_slideshow/js/2.3/jquery.flexslider-min.js',
+                    'flexpreview' => 'static/apps/noviusos_slideshow/js/2.3/jquery.novius_flexpreview.js',
                 ),
                 'css'              => array(
-                    'flexslider'  => 'static/apps/noviusos_slideshow/2.3/css/flexslider.css',
-                    'flexpreview' => 'static/apps/noviusos_slideshow/2.3/css/flexpreview.css',
+                    'flexslider'  => 'static/apps/noviusos_slideshow/css/2.3/flexslider.css',
+                    'flexpreview' => 'static/apps/noviusos_slideshow/css/2.3/flexpreview.css',
                 ),
             ),
         ),
