@@ -29,36 +29,18 @@
 	
 	var showTooltip = function() 
 	{
-	    // Resize de la taille de la preview, au premier hover.
-	    if ( preview_width == 0 ) 
-	    {
-		preview_width = $tooltip.children('.ps_preview_wrapper').height() * $flexslider.width() / $flexslider.height();
-		preview_width = Math.round(Math.min(preview_width, $tooltip.height()*3));
-		$tooltip.children('.ps_preview_wrapper').width(preview_width);
-	    }
-	    
-	    var $link		= $(this),
-		idx		= $link.parent().index(),
-		linkOuterWidth	= $link.parent().outerWidth(),
-		left		= $link.position().left - $tooltip.outerWidth()/2 /*+ linkOuterWidth/4*/,
-		$thumb		= $flexslider.find('.slides li:nth-child('+(idx+2)+')').data('thumb'),
-		imageLeft;
+        var $link = $(this),
+            $parent = $link.parent(),
+            listWidth = $parent.parent().width(),
+            idx = $parent.index(),
+            linkOuterWidth = $parent.outerWidth(),
+            left = $link.position().left - $ps_preview_wrapper.width() / 2,
+            $thumb = $flexslider.find('.slides li:nth-child(' + (idx + 1) + ')').data('thumb');
 
 	    //if we are not hovering the current one
 	    if ( currentHovered != idx ) 
 	    {
-		//check if we will animate left->right or right->left
-		if ( currentHovered != -1 )
-		{
-		    if(currentHovered < idx)
-		    {
-			imageLeft = 75;
-		    }
-		    else
-		    {
-			imageLeft = -75;
-		    }
-		}
+
 		//the next thumb image to be shown in the tooltip
 		var $newImage = $('<img/>').css('left','0px').attr('src', $thumb);
 
@@ -77,13 +59,13 @@
 		// if theres 2 images on the tooltip animate the current one out, and the new one in
 		if(tooltip_imgs_count > 1)
 		{
-		    $tooltip_imgs.eq(tooltip_imgs_count-1).stop().animate({
-			left:-imageLeft+'px'
+		    $tooltip_imgs.eq(tooltip_imgs_count-1).css({'position': 'absolute', left: 0}).stop().animate({
+                opacity: 0
 		    }, 150, function() {
 			$(this).remove();
 		    });
-		    $tooltip_imgs.eq(0).css('left', imageLeft + 'px').stop().animate({
-			left:'0px'
+		    $tooltip_imgs.eq(0).css({opacity: 0}).stop().animate({
+                opacity: 1
 		    }, 150);
 		}
 	    }
@@ -91,12 +73,12 @@
 	    //if we are not using a "browser", we just show the tooltip, otherwise we fade it
 	    if( $.browser.msie )
 	    {
-		$tooltip.css('left', left + 'px').show();
+		$tooltip.css('margin-left', left + 'px').show();
 	    }
 	    else 
 	    {
 		$tooltip.stop().animate({
-		    left	: left + 'px',
+            marginLeft	: left + 'px',
 		    opacity	: 1
 		}, 150);
 	    }
@@ -116,7 +98,7 @@
 	    }
 	}
 	    
-        $tooltip.css('left', $flexnav.children().first().position().left - $tooltip.outerWidth()/2).appendTo($flexnav);
+        $tooltip.appendTo($flexnav);
         $flexslider.find('.flex-control-nav a').on('mouseenter', showTooltip).on('mouseout', hideTooltip);
     }
 
