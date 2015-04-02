@@ -1,0 +1,37 @@
+/**
+ * NOVIUS OS - Web OS for digital communication
+ *
+ * @copyright  2011 Novius
+ * @license    GNU Affero General Public License v3 or (at your option) any later version
+ *             http://www.gnu.org/licenses/agpl-3.0.html
+ * @link http://www.novius-os.org
+ */
+
+li.ps_preview{
+	display:none;
+    bottom   : 20px;
+    z-index  : 10;
+    width    : 140px;
+	position:absolute;
+}
+li.ps_preview span{
+	background:transparent url(../img/triangle.png) no-repeat top center;
+	width:15px;
+	height:6px;
+    position   : relative;
+    display    : inline-block;
+}
+.ps_preview_wrapper{
+    width              : auto;
+    height             : auto;
+	border:5px solid #fff;
+	overflow:hidden;
+	position:relative;
+	-moz-box-shadow:0px 0px 5px #999;
+	-webkit-box-shadow:0px 0px 5px #999;
+	box-shadow:0px 0px 5px #999;
+	background: white;
+}
+.ps_preview_wrapper img {
+    max-width : 130px;
+}
