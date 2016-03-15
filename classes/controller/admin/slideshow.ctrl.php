@@ -32,7 +32,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         );
 
         foreach ($images_data as $img_id => $image_data) {
-            if (empty($image_data['media_id'])) {
+            if (empty($image_data['media_id']) && empty($image_data['slidimg__onlinemedia_onme_id'])) {
                 // Only unset, don't delete because it's still shown in the interface and the user can pick another image instead
                 unset($item->images[$img_id]);
                 continue;
