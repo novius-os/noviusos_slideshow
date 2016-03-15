@@ -105,7 +105,7 @@ return array(
             'label' => __('Links to:'),
             'renderer' => 'Nos\Slideshow\Renderer_Page',
         ),
-        'slidimg__onlinemedia_onme_id' => array(
+        'slidimg_onlinemedia_onme_id' => array(
             'label' => __('Or online media:'),
             'renderer' => 'Novius\OnlineMediaFiles\Renderer_Media',
             'template' => '<div>{label}{field}</div>',
