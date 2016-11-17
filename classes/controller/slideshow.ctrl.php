@@ -54,18 +54,18 @@ class Controller_Slideshow extends Controller_Front_Application
             $size_key = $format === 'flexslider-small' ? 'petit' : 'grand';
             return \View::forge($this->config['views']['index'], array(
                 'slideshow' => $slideshow,
-                'size_key'  => $size_key,
-                'class'		=> \Arr::get(
+                'size_key' => $size_key,
+                'class' => \Arr::get(
                     $config,
                     'sizes.'.$size_key.'.class',
                     \Arr::get($format_config, 'config.class', 'slide-home')
                 ),
-                'height'	=> \Arr::get(
+                'height' => \Arr::get(
                     $config,
                     'sizes.'.$size_key.'.img_height',
                     \Arr::get($format_config, 'config.height', '600')
                 ),
-                'width'		=> \Arr::get(
+                'width' => \Arr::get(
                     $config,
                     'sizes.'.$size_key.'.img_width',
                     \Arr::get($format_config, 'config.width', '800')
