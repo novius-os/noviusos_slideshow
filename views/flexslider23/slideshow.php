@@ -12,9 +12,9 @@ try {
     $old_view = (string) \View::forge('noviusos_slideshow::slideshow', array(
         'slideshow' => $slideshow,
         'size_key'  => $format === 'flexslider-small' ? 'petit' : 'grand',
-        'class'		=> \Arr::get($config, 'class', 'slide-home'),
-        'height'	=> \Arr::get($config, 'height', '600'),
-        'width'		=> \Arr::get($config, 'width', '800'),
+        'class' => \Arr::get($config, 'class', 'slide-home'),
+        'height' => \Arr::get($config, 'height', '600'),
+        'width' => \Arr::get($config, 'width', '800'),
         'show_link' => \Arr::get($config, 'slides_with_link', true),
         'slides_preview' => \Arr::get($config, 'slides_preview', true),
     ));

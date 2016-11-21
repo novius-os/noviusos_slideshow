@@ -35,7 +35,7 @@ return array(
         ),
     ),
     'fields' => array(
-        'slideshow_id' => array (
+        'slideshow_id' => array(
             'label' => 'ID: ',
             'form' => array(
                 'type' => 'hidden',
