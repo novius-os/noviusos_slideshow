@@ -78,5 +78,19 @@ return array(
         'Nos\Slideshow\Model_Slideshow.add' => array(
             'label' => __('Add a slideshow'),
         ),
+        'Nos\Slideshow\Model_Slideshow.duplicate' => array(
+            'action' => array(
+                'action' => 'nosAjax',
+                'params' => array(
+                    'url' => '{{controller_base_url}}duplicate/{{_id}}',
+                ),
+            ),
+            'label' => __('Duplicate'),
+            'primary' => false,
+            'icon' => 'circle-plus',
+            'targets' => array(
+                'grid' => true,
+            ),
+        ),
     ),
 );

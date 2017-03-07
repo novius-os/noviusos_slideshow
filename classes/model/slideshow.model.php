@@ -90,4 +90,51 @@ class Model_Slideshow extends Model
             'property' => 'slideshow_updated_at'
         )
     );
+
+    /**
+     * @param $targetContext : the context target wanted for the duplicated slideshow
+     * @throws \Exception
+     */
+    public function duplicate($targetContext)
+    {
+        $clone = clone $this;
+        $try = 1;
+        do {
+            try {
+                $title_append = strtr(__(' (copy {{count}})'), array(
+                    '{{count}}' => $try,
+                ));
+                $clone->slideshow_title = $this->title_item().$title_append;
+                $clone->slideshow_context = $targetContext;
+                if ($clone->save()) {
+                    $this->duplicateSlideImages($this, $clone);
+                }
+                break;
+            } catch (\Nos\BehaviourDuplicateException $e) {
+                $try++;
+                if ($try > 5) {
+                    throw new \Exception(__(
+                        'Slow down, slow down. You have duplicated this slideshow 5 times already. '.
+                        'Edit them first before creating more duplicates.'
+                    ));
+                }
+            }
+        } while ($try <= 5);
+    }
+
+    /**
+     * @param Model_Slideshow $slider : The original slideShow, images will be duplicated FROM
+     * @param Model_Slideshow $duplicatedSlider : The duplicated slideShow, images will be duplicated TO
+     */
+    protected function duplicateSlideImages(Model_Slideshow $slider, Model_Slideshow $duplicatedSlider)
+    {
+        foreach ($slider->images as $image) {
+            /**
+             * @var $field Model_Image
+             */
+            $clonedImage = clone $image;
+            $clonedImage->slidimg_slideshow_id = $duplicatedSlider->slideshow_id;
+            $clonedImage->save();
+        }
+    }
 }
