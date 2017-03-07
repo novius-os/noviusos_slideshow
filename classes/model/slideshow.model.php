@@ -11,6 +11,7 @@
 namespace Nos\Slideshow;
 
 use Nos\Orm\Model;
+use Nos\Page\Model_Page;
 
 class Model_Slideshow extends Model
 {
@@ -134,6 +135,27 @@ class Model_Slideshow extends Model
              */
             $clonedImage = clone $image;
             $clonedImage->slidimg_slideshow_id = $duplicatedSlider->slideshow_id;
+
+            /*
+             * For any given image containing a link to another site's page
+             * we find out if a translated page already exists on the target context.
+             * If so, we update the id of the linked page before save.
+             */
+            if ($clonedImage->slidimg_link_to_page_id) {
+
+                $pageLinked = Model_Page::find($clonedImage->slidimg_link_to_page_id);
+                $targetContextPage = null;
+                $clonedImage->slidimg_link_to_page_id = null;
+
+                if (!empty($pageLinked)) {
+                    $targetContextPage = $pageLinked->find_context($duplicatedSlider->slideshow_context);
+                }
+
+                if ($targetContextPage) {
+                    $clonedImage->slidimg_link_to_page_id = $targetContextPage->page_id;
+                }
+            }
+
             $clonedImage->save();
         }
     }
