@@ -77,7 +77,7 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
              */
             $slider = $this->crud_item($id);
             $contexts = Permission::contexts();
-            $duplicateContext = (string)\Input::post('duplicate_context');
+            $duplicateContext = (string) \Input::post('duplicate_context');
             // Check context permission with selected context target
             if (!empty($duplicateContext) && !array_key_exists($duplicateContext, $contexts)) {
                 throw new \Exception(__('Invalid context selected.'));
