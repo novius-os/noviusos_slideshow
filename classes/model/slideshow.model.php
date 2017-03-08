@@ -124,6 +124,10 @@ class Model_Slideshow extends Model
     }
 
     /**
+     * For any given image containing a link to another site's page
+     * we find out if a translated page already exists on the target context.
+     * If so, we update the id of the linked page before save. Otherwise is null.
+     *
      * @param Model_Slideshow $slider : The original slideShow, images will be duplicated FROM
      * @param Model_Slideshow $duplicatedSlider : The duplicated slideShow, images will be duplicated TO
      */
@@ -136,26 +140,13 @@ class Model_Slideshow extends Model
             $clonedImage = clone $image;
             $clonedImage->slidimg_slideshow_id = $duplicatedSlider->slideshow_id;
 
-            /*
-             * For any given image containing a link to another site's page
-             * we find out if a translated page already exists on the target context.
-             * If so, we update the id of the linked page before save.
-             */
-            if ($clonedImage->slidimg_link_to_page_id) {
-
-                $pageLinked = Model_Page::find($clonedImage->slidimg_link_to_page_id);
-                $targetContextPage = null;
+            if ($clonedImage->page) {
                 $clonedImage->slidimg_link_to_page_id = null;
-
-                if (!empty($pageLinked)) {
-                    $targetContextPage = $pageLinked->find_context($duplicatedSlider->slideshow_context);
-                }
-
-                if ($targetContextPage) {
-                    $clonedImage->slidimg_link_to_page_id = $targetContextPage->page_id;
+                $newContextPage = $clonedImage->page->find_context($duplicatedSlider->slideshow_context) ?: null;
+                if($newContextPage) {
+                    $clonedImage->slidimg_link_to_page_id = $newContextPage->page_id;
                 }
             }
-
             $clonedImage->save();
         }
     }
