@@ -10,6 +10,8 @@
 
 namespace Nos\Slideshow;
 
+use Nos\User\Permission;
+
 class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
 {
     protected $to_delete = array();
@@ -65,6 +67,72 @@ class Controller_Admin_Slideshow extends \Nos\Controller_Admin_Crud
         }
         $this->to_delete = array();
         return $return;
+    }
+
+    public function action_duplicate($id = null)
+    {
+        try {
+            /**
+             * @var $slider Model_Slideshow
+             */
+            $slider = $this->crud_item($id);
+            $contexts = Permission::contexts();
+            $duplicateContext = (string) \Input::post('duplicate_context');
+            // Check context permission with selected context target
+            if (!empty($duplicateContext) && !array_key_exists($duplicateContext, $contexts)) {
+                throw new \Exception(__('Invalid context selected.'));
+            }
+            // No asking popup if only 1 context / duplicate if valid target context was chosen
+            if (count($contexts) === 1 || !empty($duplicateContext)) {
+                $context = !empty($duplicateContext) ? $duplicateContext : $slider->slideshow_context;
+                $slider->duplicate($context);
+                \Response::json(array(
+                    'dispatchEvent' => array(
+                        'name' => Model_Slideshow::class,
+                        'action' => 'insert',
+                        'context' => $context,
+                    ),
+                    'notify' => __('Here you are! The slideshow has just been duplicated.'),
+                ));
+            } else {
+                \Response::json(array(
+                    'action' => array(
+                        'action' => 'nosDialog',
+                        'dialog' => array(
+                            'ajax' => true,
+                            'contentUrl' => 'admin/noviusos_slideshow/slideshow/popup_duplicate/'.$id,
+                            'title' => strtr(__('Duplicating the slideshow "{{title}}"'), array(
+                                '{{title}}' => \Str::truncate($slider->title_item(), 40),
+                            )),
+                            'width' => 500,
+                            'height' => 200,
+                        ),
+                    ),
+                ));
+            }
+        } catch (\Exception $e) {
+            $this->send_error($e);
+        }
+    }
+
+    /**
+     * Return popup content to ask the target context of duplication
+     *
+     * @param null $id : the ID of Model_Slideshow to duplicate
+     * @return \Fuel\Core\View
+     */
+    public function action_popup_duplicate($id = null)
+    {
+        /**
+         * @var $slider Model_Slideshow
+         */
+        $slider = $this->crud_item($id);
+        $contexts_list = array_keys(Permission::contexts());
+        return \View::forge('noviusos_slideshow::admin/popup_duplicate', array(
+            'item' => $slider,
+            'action' => 'admin/noviusos_slideshow/slideshow/duplicate/'.$id,
+            'contexts_list' => $contexts_list,
+        ), false);
     }
 
     public function action_image_fields()

@@ -142,4 +142,14 @@ return array(
     #: views/admin/enhancer/preview.view.php:17
     '(format: {{format}})' => '(format&nbsp;: {{format}})',
 
+
+    'Slow down, slow down. You have duplicated this slideshow 5 times already. Edit them first before creating more duplicates.' => 'Mollo&nbsp;! Vous avez dupliqué ce diaporama cinq fois déjà. Modifiez les copies existantes avant d\'en créer de nouvelles.',
+    'Here you are! The slideshow has just been duplicated.' => 'C’est parti&nbsp;! Le diaporama a été dupliqué.',
+    'The slideshow was not found.' => 'Le diaporama n\'a pas été trouvé.',
+    ' (copy {{count}})' => ' (copie {{count}})',
+    'Duplication target :' => 'Cible de la duplication :',
+    'Duplicate' => 'Dupliquer',
+    'Invalid context selected.' => 'Contexte sélectionné invalide.',
+    'Duplicating the slideshow "{{title}}"' => 'Duplication du diaporama "{{title}}"',
+
 );
