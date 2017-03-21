@@ -17,6 +17,9 @@ return array(
     ),
     'permission' => array(
     ),
+    'require' => array(
+        'novius_onlinemediafiles',
+    ),
     'i18n_file' => 'noviusos_slideshow::metadata',
     'launchers' => array(
         'noviusos_slideshow' => array(
