@@ -113,6 +113,7 @@ class Controller_Slideshow extends Controller_Front_Application
                 'slideshow' => $slideshow,
                 'format' => $format,
                 'config' => \Arr::get($format_config, 'config', array()),
+                'args' => $args,
             ), false);
         }
     }
